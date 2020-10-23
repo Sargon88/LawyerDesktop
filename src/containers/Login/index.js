@@ -26,9 +26,6 @@ const Login = () => {
       password: password,
     }).then(response => {
       // Handle success.
-      console.log('Well done!');
-      console.log('User profile', response.data.user); //
-      console.log('User token', response.data.jwt);
       setErrorMessage("");
       localStorage.setItem(process.env.REACT_APP_LOCALSTORAGE_KEY, response.data.jwt);
       localStorage.setItem(process.env.REACT_APP_LOCALSTORAGE_APPUSER, JSON.stringify(response.data.user));
