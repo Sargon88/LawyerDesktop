@@ -8,6 +8,7 @@ import Turns from "../Turn";
 import Doctors from "../Doctor";
 import Login from "../Login";
 import NotFound from "../NotFound";
+import Home from "../Test";
 
 
 function App() {
@@ -21,7 +22,6 @@ function App() {
   async function onLoad() {
     try {
       if(localStorage.getItem(process.env.REACT_APP_LOCALSTORAGE_KEY)){
-        userHasAuthenticated(true);  
       } else {
         userHasAuthenticated(false);  
       }
@@ -57,7 +57,7 @@ function App() {
         <div className="App container-fluid">
           <AppNav />
           <Switch>
-              <Route path="/" component={Turns} exact />
+              <Route path="/" component={Home} exact />
               <Route path="/turns/" component={Turns} exact />
               <Route path="/turns/:id" component={Turns} exact />
               <Route path="/doctors" component={Doctors} exact />
