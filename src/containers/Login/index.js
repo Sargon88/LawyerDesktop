@@ -73,7 +73,7 @@ const Login = () => {
           : ""
         }
       </form>
-      <div>Var {process.env.REACT_APP_LOCALSTORAGE_KEY}</div>
+      <div>Var {process.env.REACT_APP_BACKEND_URL}</div>
     </div>
   );
 }
