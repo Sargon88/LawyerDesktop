@@ -7,10 +7,10 @@ const Card = ({ test }) => {
       <div className="uk-card uk-card-muted"> 
         <div className="uk-card-body">
           <p id="test" className="uk-text-uppercase">          
-            {test.test_relazione !== null ? test.test_relazione.nome : ""}
+            {test.test !== null ? test.test : ""}
           </p>
           <p id="title" className="uk-text-large">
-            {test.nome}
+            {test.test}
           </p>
         </div>
       </div>
