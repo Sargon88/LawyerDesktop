@@ -14,12 +14,14 @@ function App() {
 
   useEffect(() => {
     onLoad();
+
   }, []);
 
+//https://serverless-stack.com/chapters/configure-aws-amplify.html
   async function onLoad() {
     try {
       if(localStorage.getItem(process.env.REACT_APP_LOCALSTORAGE_KEY)){
-        console.log("AUTH: " + isAuthenticated)
+        userHasAuthenticated(true);
       } else {
         userHasAuthenticated(false);  
       }
