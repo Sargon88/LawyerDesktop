@@ -1,0 +1,10 @@
+navbar
+	clienti
+		lista dei clienti
+		se clicchi sul cliente apri la scheda cliente contenente i fascicoli del cliente
+	contabilità
+		dashboard:
+			pagamenti entranti e uscenti
+	da fare
+	ricerche
+	calendario
