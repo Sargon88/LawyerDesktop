@@ -34,10 +34,15 @@ const Login = () => {
       userHasAuthenticated(true);
     })
     .catch(err => {
-      // Handle error.
-      if(err.response && err.response.status === "400"){
+      // Handle error
+      if(err.response && (err.response.status === "400" || err.response.status === 400)){
         var msg = err.response.data.message[0].messages[0].message;
         setErrorMessage(msg);
+
+        setTimeout(function(){
+          setErrorMessage("");
+        }, 5000);
+
       } else {
         setErrorMessage(err);
       }
@@ -73,7 +78,6 @@ const Login = () => {
           : ""
         }
       </form>
-      <div>Var {process.env.REACT_APP_BACKEND_URL}</div>
     </div>
   );
 }
