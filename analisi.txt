@@ -7,4 +7,4 @@ navbar
 			pagamenti entranti e uscenti
 	da fare
 	ricerche
-	calendario
+	calendario (home)

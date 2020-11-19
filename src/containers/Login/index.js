@@ -28,8 +28,8 @@ const Login = () => {
       // Handle success.
       setErrorMessage("");
       localStorage.setItem(process.env.REACT_APP_LOCALSTORAGE_KEY, response.data.jwt);
-      localStorage.setItem(process.env.REACT_APP_LOCALSTORAGE_APPUSER, JSON.stringify(response.data.user));
-      
+      localStorage.setItem(process.env.REACT_APP_LOCALSTORAGE_APPUSER, JSON.stringify(response.data.user));      
+
       history.push("/");
       userHasAuthenticated(true);
     })

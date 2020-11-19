@@ -27,9 +27,10 @@ const AppNav = () => {
           <Nav className="mr-auto"></Nav>
           :
           <Nav className="mr-auto">
-            <Nav.Link href="/turns">Turns</Nav.Link>
-            <Nav.Link href="/doctors">Doctors</Nav.Link>
-            <Nav.Link href="/hospitals">Hospitals</Nav.Link>
+            <Nav.Link href="/clienti">Clienti</Nav.Link>
+            <Nav.Link href="/contabilita">Contabilità</Nav.Link>
+            <Nav.Link href="/dafare">Da fare</Nav.Link>
+            <Nav.Link href="/ricerche">Ricerche</Nav.Link>
           </Nav>
         }
 

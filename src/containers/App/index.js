@@ -1,11 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { AppContext } from "../../utils/contextLib";
-
 import { Switch, Route } from "react-router-dom";
-
 import AppNav from "../../components/Nav";
-import Turns from "../Turn";
-import Doctors from "../Doctor";
+import Clients from "../Clients";
 import Login from "../Login";
 import NotFound from "../NotFound";
 import Home from "../Test";
@@ -22,6 +19,7 @@ function App() {
   async function onLoad() {
     try {
       if(localStorage.getItem(process.env.REACT_APP_LOCALSTORAGE_KEY)){
+        console.log("AUTH: " + isAuthenticated)
       } else {
         userHasAuthenticated(false);  
       }
@@ -38,7 +36,6 @@ function App() {
 
 
   if(!isAuthenticated){
-
     return( 
       <AppContext.Provider value={{ isAuthenticated, userHasAuthenticated }}>
         <div className="App container-fluid">
@@ -58,9 +55,7 @@ function App() {
           <AppNav />
           <Switch>
               <Route path="/" component={Home} exact />
-              <Route path="/turns/" component={Turns} exact />
-              <Route path="/turns/:id" component={Turns} exact />
-              <Route path="/doctors" component={Doctors} exact />
+              <Route path="/clienti" component={Clients} exact />
               <Route path="/login" component={Login} exact />
               <Route path="" component={NotFound} />
           </Switch>
