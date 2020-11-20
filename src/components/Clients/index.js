@@ -3,9 +3,6 @@ import { Row, Col, Container, Table } from 'react-bootstrap';
 
 const Clients = ({ data }) => {
 
-	console.log("DATA")
-	console.log(data)
-	console.log("DATA")
 	return (
 	    <Row>
 	    	<Col>
@@ -50,8 +47,8 @@ const Clients = ({ data }) => {
 										<td>{c.pp_surname}</td>
 										<td>{c.pp_name}</td>
 										<td>{c.pp_fiscalcode}</td>
-										<td>{c.pp_mobilephone.phone_number}</td>
-										<td>{c.pp_phone.phone_number}</td>
+										<td>{c.pp_mobilephone != null ? c.pp_mobilephone.phone_number : ""}</td>
+										<td>{c.pp_phone != null ? c.pp_phone.phone_number : ""}</td>
 										<td>{c.pp_email}</td>
 										<td>{c.pp_pec}</td>
 									</tr>

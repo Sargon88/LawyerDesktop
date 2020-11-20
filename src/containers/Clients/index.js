@@ -85,6 +85,27 @@ const Clients = () => {
                       }
 
                       let filteredClients = ppClients.concat(lpClients);
+                      filteredClients.sort(function(a, b){
+
+                        var n = "";
+                        var m = "";
+
+                        if(a.client_legal_person){
+                          n = a.client_legal_person.lp_name;
+                        } else {
+                          n = a.client_physical_person.pp_surname;
+                        }
+
+                        if(b.client_legal_person){
+                          m = b.client_legal_person.lp_name;
+                        } else {
+                          m = b.client_physical_person.pp_surname;
+                        }                        
+
+                        if(n < m) { return -1; }
+                        if(n > m) { return 1; }
+                        return 0;
+                      });
 
                       return <Client data={ filteredClients }/>;
                     }}
