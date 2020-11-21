@@ -1,64 +1,34 @@
 import React from "react";
 import { Row, Col, Container, Table } from 'react-bootstrap';
+import BootstrapTable from 'react-bootstrap-table-next';
+import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
 
 const Clients = ({ data }) => {
+
+console.log("DATA")
+console.log(data)
+console.log("DATA")
+
+//build plain array
+
+//https://react-bootstrap-table.github.io/react-bootstrap-table2/
+const columns = [{
+	  dataField: 'id',
+	  text: ''
+	}, {
+	  dataField: 'customer_name',
+	  text: 'Nome'
+	},
+	{
+	  dataField: 'customer_customer.physical_person != null ? \"customer_customer.physical_person.pp_surname\" : \"customer_customer.legal_person.lp_name\"',
+	  text: 'Cognome Customer'
+	}];
+
 
 	return (
 	    <Row>
 	    	<Col>
-
-				<Table striped bordered hover size="sm">
-					<thead>
-						<tr>
-							<th></th>
-							<th>Cognome/Ragione Sociale</th>
-							<th>Nome</th>
-							<th>Codice Fiscale</th>
-							<th>Cellulare</th>
-							<th>Telefono</th>
-							<th>Email</th>
-							<th>Pec</th>
-						</tr>
-					</thead>
-					<tbody>
-						{data.map((client, i) => {
-						
-							if(client.client_legal_person){
-								var c = client.client_legal_person;
-								return(
-									<tr>
-										<td>{client.id}</td>
-										<td>{c.lp_name}</td>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
-									</tr>
-								)
-							}
-
-							if(client.client_physical_person){
-								var c = client.client_physical_person;
-								return(
-									<tr>
-										<td>{client.id}</td>
-										<td>{c.pp_surname}</td>
-										<td>{c.pp_name}</td>
-										<td>{c.pp_fiscalcode}</td>
-										<td>{c.pp_mobilephone != null ? c.pp_mobilephone.phone_number : ""}</td>
-										<td>{c.pp_phone != null ? c.pp_phone.phone_number : ""}</td>
-										<td>{c.pp_email}</td>
-										<td>{c.pp_pec}</td>
-									</tr>
-								)
-							}
-						})}
-					</tbody>
-				</Table>
-
-	          
+				<BootstrapTable keyField='id' data={ data } columns={ columns } />	          
 	      	</Col>  
 	    </Row>
 	);

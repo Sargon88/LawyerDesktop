@@ -70,6 +70,8 @@ const Clients = () => {
                 <Col>
                   <Query query={ALL_CLIENTS_PREVIEW_QUERY}>
                     {({ data: { clients } }) => {
+                      
+/*
                       let ppClients = [];
                       let lpClients = [];
 
@@ -106,8 +108,8 @@ const Clients = () => {
                         if(n > m) { return 1; }
                         return 0;
                       });
-
-                      return <Client data={ filteredClients }/>;
+*/
+                      return <Client data={ clients }/>;
                     }}
                   </Query>
                 </Col>
