@@ -1,46 +1,71 @@
 import React from "react";
 import { Row, Col, Container, Table } from 'react-bootstrap';
 import BootstrapTable from 'react-bootstrap-table-next';
+import paginationFactory from 'react-bootstrap-table2-paginator';
+import filterFactory, { textFilter } from 'react-bootstrap-table2-filter';
 import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
+import 'react-bootstrap-table2-paginator/dist/react-bootstrap-table2-paginator.min.css';
 
 const Clients = ({ data }) => {
 
-
-
-//build plain array
-data.forEach(function(e){
-	//costruire un oggetto apposta sulla base del contenuto dell'array
-	if(e.customer_type == "Fisico"){
-		e.customer_customer = e.customer_customer[0].physical_person;
-
-	} else if(e.customer_type == "Giuridico"){
-		e.customer_customer = e.customer_customer[0].legal_person;
-	}
-
-});
-
-console.log("DATA")
-console.log(data)
-console.log("DATA")
-
 //https://react-bootstrap-table.github.io/react-bootstrap-table2/
+const selectRow = {
+  mode: 'radio', // single row selection
+  bgColo: '#007bff33',
+  clickToSelect: true,
+};
+
+const rowEvents = {
+  onClick: (e, row, rowIndex) => {
+    console.log(`clicked on row with index: ${rowIndex}`);
+  }
+};
+
 const columns = [{
 	  dataField: 'id',
 	  text: ''
-	}, {
-	  dataField: 'customer_name',
-	  text: 'Nome'
 	},
 	{
-	  dataField: 'customer_customer.lp_name || customer_customer.pp_surname',
-	  text: 'Cognome Customer'
-	}];
-
+	  dataField: 'person.surname',
+	  text: 'Cognome/Ragione Sociale',
+	  sort: true
+	},
+	{
+	  dataField: 'person.name',
+	  text: 'Nome',
+	  sort: true
+	},
+	{
+	  dataField: 'person.code',
+	  text: 'Codie Fiscale/Partita iva'
+	},
+	{
+	  dataField: 'person.contact.cnn_phone.phone_number',
+	  text: 'Telefono'
+	},
+	{
+	  dataField: 'person.contact.cnn_mail',
+	  text: 'Mail'
+	},
+	{
+	  dataField: 'person.contact.cnn_pec',
+	  text: 'Pec'
+	},
+	];
 
 	return (
 	    <Row>
 	    	<Col>
-				<BootstrapTable keyField='id' data={ data } columns={ columns } />	          
+				<BootstrapTable keyField='id' 
+								data={ data } 
+								columns={ columns }
+								selectRow={ selectRow }
+								bootstrap4='true'
+								hover='true'
+								condensed='true'
+								pagination={ paginationFactory() }
+								filter={ filterFactory() }
+								filterPosition='top' />	 
 	      	</Col>  
 	    </Row>
 	);

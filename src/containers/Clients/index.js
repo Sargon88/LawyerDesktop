@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Row, Col, Container, Form, InputGroup, FormControl } from 'react-bootstrap';
-import { Link } from "react-router-dom";
 import Query from "../../components/Query";
 import Client from "../../components/Clients";
 import SideBar from "../../components/Bootstrap/SideBar";
@@ -70,46 +69,33 @@ const Clients = () => {
                 <Col>
                   <Query query={ALL_CLIENTS_PREVIEW_QUERY}>
                     {({ data: { clients } }) => {
-                      
-/*
+
+                      console.log("CLIENTS")
+                      console.log(clients)
+                      console.log("CLIENTS")
+
                       let ppClients = [];
                       let lpClients = [];
 
                       if(ppvalue){
-                        ppClients = clients.filter(i => i.client_physical_person != null ? true : false);
-                        ppClients = ppClients.filter(i => i.client_physical_person.pp_name.toLowerCase().includes(value.toLowerCase()) || 
-                                                          i.client_physical_person.pp_surname.toLowerCase().includes(value.toLowerCase()))
+                        ppClients = clients.filter(i => i.customer_customer[0].__typename  == "ComponentCustomerPhysicalPerson" ? true : false);
+                        ppClients = ppClients.filter(i => i.customer_customer[0].person.name.toLowerCase().includes(value.toLowerCase()) || 
+                                                          i.customer_customer[0].person.surname.toLowerCase().includes(value.toLowerCase()))
                       }
 
                       if(lpvalue){
-                        lpClients = clients.filter(i => i.client_legal_person != null ? true : false);
-                        lpClients = lpClients.filter(i => i.client_legal_person.lp_name.toLowerCase().includes(value.toLowerCase()))
+                        lpClients = clients.filter(i => i.customer_customer[0].__typename  == "ComponentCustomerLegalPerson"  ? true : false);
+                        lpClients = lpClients.filter(i => i.customer_customer[0].person.surname.toLowerCase().includes(value.toLowerCase()))
                       }
 
                       let filteredClients = ppClients.concat(lpClients);
-                      filteredClients.sort(function(a, b){
 
-                        var n = "";
-                        var m = "";
-
-                        if(a.client_legal_person){
-                          n = a.client_legal_person.lp_name;
-                        } else {
-                          n = a.client_physical_person.pp_surname;
-                        }
-
-                        if(b.client_legal_person){
-                          m = b.client_legal_person.lp_name;
-                        } else {
-                          m = b.client_physical_person.pp_surname;
-                        }                        
-
-                        if(n < m) { return -1; }
-                        if(n > m) { return 1; }
-                        return 0;
+                      //build plain array
+                      filteredClients.forEach(function(e){
+                        e.person = e.customer_customer[0].person;
                       });
-*/
-                      return <Client data={ clients }/>;
+
+                      return <Client data={ filteredClients }/>;
                     }}
                   </Query>
                 </Col>
