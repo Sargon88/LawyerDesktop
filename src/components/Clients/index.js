@@ -6,7 +6,7 @@ import filterFactory, { textFilter } from 'react-bootstrap-table2-filter';
 import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
 import 'react-bootstrap-table2-paginator/dist/react-bootstrap-table2-paginator.min.css';
 
-const Clients = ({ data }) => {
+const Clients = ({ data, setSidebarData }) => {
 
 //https://react-bootstrap-table.github.io/react-bootstrap-table2/
 const selectRow = {
@@ -17,7 +17,11 @@ const selectRow = {
 
 const rowEvents = {
   onClick: (e, row, rowIndex) => {
-    console.log(`clicked on row with index: ${rowIndex}`);
+  	setSidebarData({
+  		edit: true,
+    	selectedId: row.id
+  	});
+    
   }
 };
 
@@ -65,7 +69,8 @@ const columns = [{
 								condensed='true'
 								pagination={ paginationFactory() }
 								filter={ filterFactory() }
-								filterPosition='top' />	 
+								filterPosition='top'
+								rowEvents={ rowEvents } />	 
 	      	</Col>  
 	    </Row>
 	);

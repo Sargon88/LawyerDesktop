@@ -11,6 +11,10 @@ const Clients = () => {
   const [ppvalue, setPPValue] = useState(true);
   const [lpvalue, setLPValue] = useState(true);
   const [selectedClient, setSelectedClient] = useState(null);
+  const [sidebarData, setSidebarData] = useState({
+    edit: false,
+    selectedId: null,
+  });
 
   function onChangePP(e){
     setPPValue(!ppvalue);
@@ -32,7 +36,7 @@ const Clients = () => {
       return (
         <Container fluid>
           <Row id="row_container">
-            <SideBar page="clients" />
+            <SideBar page="clients" sidebarData={ sidebarData }/>
 
             <Col id="content-wrapper">
               <br />
@@ -95,7 +99,7 @@ const Clients = () => {
                         e.person = e.customer_customer[0].person;
                       });
 
-                      return <Client data={ filteredClients }/>;
+                      return <Client data={ filteredClients } setSidebarData={ setSidebarData } />;
                     }}
                   </Query>
                 </Col>

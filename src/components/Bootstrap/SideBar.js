@@ -6,7 +6,7 @@ import {ic_add} from 'react-icons-kit/md/ic_add';
 import {ic_mode_edit} from 'react-icons-kit/md/ic_mode_edit'
 import './SideBar.css';
 
-const SideBar = ({ page }) => {
+const SideBar = ({ page, sidebarData }) => {
 	const [value, setValue] = useState('');
 
 
@@ -21,7 +21,7 @@ const SideBar = ({ page }) => {
 								<Nav.Link href="/clienti/nuovo"><Icon icon={ic_add} size={40} /></Nav.Link>
 							</Nav.Item>
 							<Nav.Item>
-								<Nav.Link href="/clienti/edit"><Icon icon={ic_mode_edit} size={30} /></Nav.Link>
+								<Nav.Link href="/clienti/edit" disabled={!sidebarData.edit}><Icon icon={ic_mode_edit} size={30} /></Nav.Link>
 							</Nav.Item>							
 						</Nav>
 					</Col>
