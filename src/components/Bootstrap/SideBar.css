@@ -5,9 +5,16 @@
     left: 0;
     min-height: 100vh !important;
     z-index: 100;
-    padding: 48px 0 0;
+    padding-top: 48px;
+    padding-right: 0px !important;
     box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
+    width: 5vw !important;
 }
+
+.sidebar.nav-item {
+    width: 3.8vw !important;
+}
+
 #sidebar-wrapper{
     min-height: 100vh !important;
     width: 100vw;
