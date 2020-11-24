@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Row, Col, Form } from 'react-bootstrap';
 import CustomerType from "./CustomerType";
 
-const Clients = () => {
+const NewCustomer = ({ customerModel }) => {
 	const [customerType, setCustomerType] = useState(null);
 
 	function selectCustomerType(event){
@@ -27,7 +27,7 @@ const Clients = () => {
 		</Row>
 		<Row>
 			<Col>
-				<CustomerType type={customerType} />
+				<CustomerType type={customerType} customerModel={customerModel} />
 			</Col>
 		</Row>
 		</>
@@ -36,4 +36,4 @@ const Clients = () => {
 	
 };
 
-export default Clients;
+export default NewCustomer;
