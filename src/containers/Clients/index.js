@@ -73,10 +73,6 @@ const Clients = () => {
                   <Query query={ALL_CLIENTS_PREVIEW_QUERY}>
                     {({ data: { clients } }) => {
 
-                      console.log("CLIENTS")
-                      console.log(clients)
-                      console.log("CLIENTS")
-
                       let ppClients = [];
                       let lpClients = [];
 

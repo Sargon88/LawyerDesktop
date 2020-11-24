@@ -4,7 +4,6 @@ import SideBar from "../../components/Bootstrap/SideBar";
 import NewCustomer from "../../components/NewCustomer";
 
 const NewClient = () => {
-	const [customerType, setCustomerType] = useState("pp");
 	const [sidebarData, setSidebarData] = useState({
 		});
 	
