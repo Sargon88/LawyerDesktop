@@ -1,36 +1,63 @@
-import React, { useState } from "react";
-import { Row, Col, Container, Form } from 'react-bootstrap';
+import React, { useReducer, useState } from "react";
+import { Row, Col, Container } from 'react-bootstrap';
 import SideBar from "../../components/Bootstrap/SideBar";
 import NewCustomer from "../../components/NewCustomer";
 
+const customerModel = {
+    name:"",
+    surname:"",
+    code:"",
+    province:"",
+    cap:"",
+    country:"",
+    mobile:"",
+    phone:"",
+    fax:"",
+    mail:"",
+    pec:"",
+    street:"",
+    number:"",
+    city:"" 
+  };
+
+function reducer(state, {field, value}){
+  return {
+    ...state,
+    [field]: value
+  }
+}
+
 const NewClient = () => {  
-  const customerModel = {}
+  const [state, dispatch] = useReducer(reducer, customerModel);
+  const [error, setError] = useState({});
 
-  function save(){
+  function save(){    
+    console.log("SAVE");
     console.log(customerModel);
+    console.log("SAVE");
+/*
+      var customer = {
+        customer_name: customerModel.name,
+      }
 
-    var customer = {
-      customer_name: customerModel.name,
-    }
+      if(customerModel.type === "pp"){
+        customer_customer:{
 
-    if(customerModel.type === "pp"){
-      customer_customer:{
+        }
+      } else if(customerModel.type === "lp"){
+        
+      }
 
-      },
-    } else if(customerModel.type === "lp"){
-      
-    }
-
-    axios.post(`${process.env.REACT_APP_BACKEND_URL}/clients`, customer)
-        .then(response => console.log(response));
-
+      axios.post(`${process.env.REACT_APP_BACKEND_URL}/clients`, customer)
+          .then(response => console.log(response));
+*/          
   };
 
   const [sidebarData, setSidebarData] = useState({
-      saveFunction: save,
-    });	
+    saveFunction: save
+  });	
   
-  	//manage user login
+  //manage user login
 	var appUser = null;
 
 	if(localStorage.getItem(process.env.REACT_APP_LOCALSTORAGE_APPUSER)){
@@ -46,7 +73,11 @@ const NewClient = () => {
 
           		<Col id="content-wrapper">
 	             		<br />
-             			<NewCustomer customerModel={customerModel} />
+             			<NewCustomer dispatch={dispatch} 
+                               setSidebarData={setSidebarData} 
+                               error={error} 
+                               setError={setError}
+                               state={state} />
   		        </Col>
         		</Row>
       	</Container>
