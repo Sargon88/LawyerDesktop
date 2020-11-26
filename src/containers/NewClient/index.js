@@ -1,41 +1,34 @@
-import React, { useReducer, useState } from "react";
+import React, { useState } from "react";
 import { Row, Col, Container } from 'react-bootstrap';
 import SideBar from "../../components/Bootstrap/SideBar";
 import NewCustomer from "../../components/NewCustomer";
 
-const customerModel = {
-    name:"",
-    surname:"",
-    code:"",
-    province:"",
-    cap:"",
-    country:"",
-    mobile:"",
-    phone:"",
-    fax:"",
-    mail:"",
-    pec:"",
-    street:"",
-    number:"",
-    city:"" 
-  };
-
-function reducer(state, {field, value}){
-  return {
-    ...state,
-    [field]: value
-  }
-}
-
 const NewClient = () => {  
-  const [state, dispatch] = useReducer(reducer, customerModel);
-  const [error, setError] = useState({});
+  var customerModel = useState({});
+  var errorModel = useState({});
 
   function save(){    
     console.log("SAVE");
     console.log(customerModel);
     console.log("SAVE");
-/*
+
+    /*  name:"",
+        surname:"",
+        code:"",
+        province:"",
+        cap:"",
+        country:"",
+        mobile:"",
+        phone:"",
+        fax:"",
+        mail:"",
+        pec:"",
+        street:"",
+        number:"",
+        city:"" 
+    */
+
+    /*
       var customer = {
         customer_name: customerModel.name,
       }
@@ -50,7 +43,7 @@ const NewClient = () => {
 
       axios.post(`${process.env.REACT_APP_BACKEND_URL}/clients`, customer)
           .then(response => console.log(response));
-*/          
+    */          
   };
 
   const [sidebarData, setSidebarData] = useState({
@@ -73,11 +66,9 @@ const NewClient = () => {
 
           		<Col id="content-wrapper">
 	             		<br />
-             			<NewCustomer dispatch={dispatch} 
-                               setSidebarData={setSidebarData} 
-                               error={error} 
-                               setError={setError}
-                               state={state} />
+             			<NewCustomer setSidebarData={setSidebarData} 
+                               customerModel={customerModel}
+                               errorModel={errorModel} />
   		        </Col>
         		</Row>
       	</Container>

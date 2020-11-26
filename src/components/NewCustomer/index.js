@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Row, Col, Form } from 'react-bootstrap';
 import CustomerType from "./CustomerType";
 
-const NewCustomer = ({ dispatch, setSidebarData, error, setError, state }) => {
+const NewCustomer = ({ dispatch, setSidebarData, customerModel, errorModel }) => {
 	const [customerType, setCustomerType] = useState(null);
 
 	function selectCustomerType(event){
@@ -28,11 +28,9 @@ const NewCustomer = ({ dispatch, setSidebarData, error, setError, state }) => {
 		<Row>
 			<Col>
 				<CustomerType type={customerType} 
-							  dispatch={dispatch} 
 							  setSidebarData={setSidebarData}
-							  error={error}
-							  setError={setError}
-							  state={state}
+							  customerModel={customerModel}
+							  errorModel={errorModel}
 							  />
 			</Col>
 		</Row>
