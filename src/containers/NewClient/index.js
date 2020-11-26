@@ -47,7 +47,7 @@ const NewClient = () => {
         break;
       }
 
-      if(rule.regex && !rule.regex.test(customerModel.[rule.field])){
+      if(rule.isMandatory && customerModel.[rule.field].length > 0 && rule.regex && !rule.regex.test(customerModel.[rule.field])){
         console.log(rule.field, "REGEX");
         isValid = false;
         break;
@@ -102,7 +102,8 @@ const NewClient = () => {
 	             		<br />
              			<NewCustomer setSidebarData={setSidebarData} 
                                customerModel={customerModel}
-                               errorModel={errorModel} />
+                               errorModel={errorModel}
+                               validateRules={validateRules} />
   		        </Col>
         		</Row>
       	</Container>

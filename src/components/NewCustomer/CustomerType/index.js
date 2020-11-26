@@ -4,7 +4,7 @@ import './customerType.css';
 
 
 
-const CustomerType = ({ type, customerModel, errorModel }) => {
+const CustomerType = ({ type, customerModel, errorModel, validateRules }) => {
 	const [error, setError] = useState({});
 
 	function handleChange(event){
@@ -13,125 +13,20 @@ const CustomerType = ({ type, customerModel, errorModel }) => {
     	const value = target.value;
 
     	var e = error;
-    	switch(name){
-    		case "name":
-    			if(value.length === 0){
-    				errorModel.[name] = "Campo obbligatorio";
-    			} else if(/^[a-zA-z]*[0-9!@#$%^&*(),.?":{}|<>-]+[a-zA-z]*$/.test(value)){
-    				errorModel.[name] = "Nome non valido";
-    			} else {
-    				errorModel.[name] = "";
-    			}
-    			break;
-    		case "surname":
-    			if(value.length === 0){
-    				errorModel.[name] = "Campo obbligatorio";
-    			} else if(/^[a-zA-z]*[0-9!@#$%^&*(),.?":{}|<>-]+[a-zA-z]*$/.test(value)){
-    				errorModel.[name] = "Cognome non valido";
-    			} else {
-    				errorModel.[name] = "";
-    			}
-    			break;
-    		case "code":
-    			if(value.length === 0){
-    				errorModel.[name] = "Campo obbligatorio";
-    			} else if(!/^[a-z]{6}[0-9]{2}[a-z]{1}[0-9]{2}[a-z]{1}[0-9]{3}[a-z]{1}$/.test(value)){
-    				errorModel.[name] = "Codice fiscale non valido";
-    			} else {
-    				errorModel.[name] = "";
-    			}
-    			break;
-    		case "mobile":
-    			if(value.length === 0){
-    				errorModel.[name] = "Campo obbligatorio";
-    			} else if(!/^(([+]|00)39)?(([03][1-9][0-9]))(\d{7})$/.test(value)){
-    				errorModel.[name] = "Numero non valido";
-    			} else {
-    				errorModel.[name] = "";
-    			}
-    			break;
-    		case "phone":
-    			if(!/^(([+]|00)39)?(([03][1-9][0-9]))(\d{7})$/.test(value)){
-    				errorModel.[name] = "Numero non valido";
-    			} else {
-    				errorModel.[name] = "";
-    			}
-    			break;
-    		case "fax":
-    			if(!/^(([+]|00)39)?(([03][1-9][0-9]))(\d{7})$/.test(value)){
-    				errorModel.[name] = "Numero non valido";
-    			} else {
-    				errorModel.[name] = "";
-    			}
-    			break;
-    		case "mail":
-    			if(value.length === 0){
-    				errorModel.[name] = "Campo obbligatorio";
-    			} else if(!/^[\w-.]+@([\w-]+.)+[\w-]{2,4}$/.test(value)){
-    				errorModel.[name] = "Indirizzo mail non valido";
-    			} else {
-    				errorModel.[name] = "";
-    			}
-    			break;
-    		case "pec":
-    			if(value.length === 0){
-    				errorModel.[name] = "Campo obbligatorio";
-    			} else if(!/^[\w-.]+@([\w-]+.)+[\w-]{2,4}$/.test(value)){
-    				errorModel.[name] = "Indirizzo pec non valido";
-    			} else {
-    				errorModel.[name] = "";
-    			}
-    			break;
-    		case "street":
-    			if(value.length === 0){
-    				errorModel.[name] = "Campo obbligatorio";
-    			} else {
-    				errorModel.[name] = "";
-    			}
-    			break;
-    		case "number":
-    			if(!/^[0-9]+$/.test(value)){
-    				errorModel.[name] = "Civico errato";
-    			} else {
-    				errorModel.[name] = "";
-    			}
-    			break; 
-    		case "city":
-    			if(value.length === 0){
-    				errorModel.[name] = "Campo obbligatorio";
-    			} else if(!/^[a-zA-Z]+$/.test(value)){
-    				errorModel.[name] = "Verificare il valore inserito";
-    			} else {
-    				errorModel.[name] = "";
-    			}
-    			break;
-    		case "province":
-    			if(!/^[a-zA-Z]+$/.test(value)){
-    				errorModel.[name] = "Verificare il valore inserito";
-    			} else {
-    				errorModel.[name] = "";
-    			}
-    			break;
-    		case "cap":
-    			if(value.length === 0){
-    				errorModel.[name] = "Campo obbligatorio";
-    			} else if(!/^[0-9]{5}$/.test(value)){
-    				errorModel.[name] = "Verificare il valore inserito";
-    			} else {
-    				errorModel.[name] = "";
-    			}
-    			break;
-    		case "country":
-    			if(value.length === 0){
-    				errorModel.[name] = "Campo obbligatorio";
-    			} else if(!/^[a-zA-Z]+$/.test(value)){
-    				errorModel.[name] = "Verificare il valore inserito";
-    			} else {
-    				errorModel.[name] = "";
-    			}
-    			break;
-    		default: break;
-    	}    	
+    	var rule = validateRules.find(x => x.field === name);
+
+		if(rule.isMandatory && value.length === 0){
+			console.log(rule.field, "MANDATORY");
+			errorModel.[name] = "Campo obbligatorio";
+			
+		} else if(rule.isMandatory && value.lenght > 0 && rule.regex && !rule.regex.test(value)){
+			console.log(rule.field, "REGEX");
+			errorModel.[name] = "Valore non valido";
+
+		} else {
+			errorModel.[name] = "";
+
+		} 	
     	  
     	customerModel[name]=value;  
     	e.[name] = errorModel.[name];  	
