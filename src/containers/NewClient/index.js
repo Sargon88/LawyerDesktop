@@ -41,13 +41,13 @@ const NewClient = () => {
 
       }
 
-      if(rule.isMandatory && customerModel.[rule.field] && customerModel.[rule.field].length == 0){
+      if(rule.isMandatory && (!customerModel.[rule.field] || customerModel.[rule.field].length === 0)){
         console.log(rule.field, "MANDATORY");
         isValid = false;
         break;
       }
 
-      if(rule.isMandatory && customerModel.[rule.field].length > 0 && rule.regex && !rule.regex.test(customerModel.[rule.field])){
+      if(rule.isMandatory && customerModel.[rule.field] && customerModel.[rule.field].length > 0 && rule.regex && !rule.regex.test(customerModel.[rule.field])){
         console.log(rule.field, "REGEX");
         isValid = false;
         break;
@@ -75,7 +75,7 @@ const NewClient = () => {
     */            
     } else {
       console.log("NOT VALID");
-      alert.error("NOT VALID");
+      alert.error("Verificare i campi prima di procedere");
     }
     
   };
