@@ -41,7 +41,7 @@ const NewClient = () => {
 
       }
 
-      if(rule.isMandatory && customerModel.[rule.field].length == 0){
+      if(rule.isMandatory && customerModel.[rule.field] && customerModel.[rule.field].length == 0){
         console.log(rule.field, "MANDATORY");
         isValid = false;
         break;
@@ -56,7 +56,7 @@ const NewClient = () => {
 
     if(isValid){
       console.log("VALID");
-      alert.show("VALID");
+      alert.success("VALID");
       /*
       var customer = {
         customer_name: customerModel.name,
@@ -75,7 +75,7 @@ const NewClient = () => {
     */            
     } else {
       console.log("NOT VALID");
-      alert.show("NOT VALID");
+      alert.error("NOT VALID");
     }
     
   };
