@@ -5,12 +5,14 @@ import './customerType.css';
 
 
 const CustomerType = ({ type, customerModel, errorModel }) => {
+	const [error, setError] = useState({});
 
 	function handleChange(event){
 		const target = event.target;
     	const name = target.name;
     	const value = target.value;
 
+    	var e = error;
     	switch(name){
     		case "name":
     			if(value.length === 0){
@@ -131,7 +133,12 @@ const CustomerType = ({ type, customerModel, errorModel }) => {
     		default: break;
     	}    	
     	  
-    	customerModel[name]=value;
+    	customerModel[name]=value;  
+    	e.[name] = errorModel.[name];  	
+
+    	setError({
+    		...error,
+    		e});
 	}
 
 
@@ -152,7 +159,7 @@ const CustomerType = ({ type, customerModel, errorModel }) => {
 								    	<Form.Control type="text"  
 								    				  name="name" 
 								    				  onChange={handleChange} />
-								    	<small className="text-danger"></small>
+								    	<small className="text-danger">{error.name}</small>
 								  	</Form.Group>
 								</Col>
 								<Col>
@@ -161,17 +168,16 @@ const CustomerType = ({ type, customerModel, errorModel }) => {
 								    	<Form.Control type="text" 
 								    				  name="surname" 
 								    				  onChange={handleChange} />
-								    	<small className="text-danger"></small>
+								    	<small className="text-danger">{error.surname}</small>
 								  	</Form.Group>
 								</Col>
 								<Col>
 									<Form.Group controlId="newCustomerCode">
 									    <Form.Label>Codice Fiscale</Form.Label>
 								    	<Form.Control type="text" 
-								    				  value={customerModel.code} 
 								    				  name="code" 
 								    				  onChange={handleChange} />
-								    	<small className="text-danger"></small>
+								    	<small className="text-danger">{error.code}</small>
 								  	</Form.Group>
 								</Col>
 							</Row>
@@ -187,22 +193,28 @@ const CustomerType = ({ type, customerModel, errorModel }) => {
 										<Col>
 											<Form.Group controlId="newCustomerMobile">
 											    <Form.Label>Cellulare</Form.Label>
-										    	<Form.Control type="text" value={customerModel.mobile} name="mobile" onChange={handleChange} />
-										    	<small className="text-danger"></small>
+										    	<Form.Control type="text"
+										    				  name="mobile" 
+										    				  onChange={handleChange} />
+										    	<small className="text-danger">{error.mobile}</small>
 										  	</Form.Group>
 										</Col>
 										<Col>
 											<Form.Group controlId="newCustomerPhone">
 											    <Form.Label>Telefono</Form.Label>
-										    	<Form.Control type="text" value={customerModel.phone} name="phone" onChange={handleChange} />
-										    	<small className="text-danger"></small>
+										    	<Form.Control type="text"
+										    				  name="phone" 
+										    				  onChange={handleChange} />
+										    	<small className="text-danger">{error.phone}</small>
 										  	</Form.Group>
 										</Col>
 										<Col>
 											<Form.Group controlId="newCustomerFax">
 											    <Form.Label>Fax</Form.Label>
-										    	<Form.Control type="text" value={customerModel.fax} name="fax" onChange={handleChange} />
-										    	<small className="text-danger"></small>
+										    	<Form.Control type="text"
+										    				  name="fax"
+										    				  onChange={handleChange} />
+										    	<small className="text-danger">{error.fax}</small>
 										  	</Form.Group>
 										</Col>
 									</Row>
@@ -210,15 +222,19 @@ const CustomerType = ({ type, customerModel, errorModel }) => {
 										<Col>
 											<Form.Group controlId="newCustomerMail">
 											    <Form.Label>Mail</Form.Label>
-										    	<Form.Control type="email" value={customerModel.mail} name="mail" onChange={handleChange} />
-										    	<small className="text-danger"></small>
+										    	<Form.Control type="email"
+										    				  name="mail"
+										    				  onChange={handleChange} />
+										    	<small className="text-danger">{error.mail}</small>
 										  	</Form.Group>
 										</Col>
 										<Col>
 											<Form.Group controlId="newCustomerPec">
 											    <Form.Label>Pec</Form.Label>
-										    	<Form.Control type="email" value={customerModel.pec} name="pec" onChange={handleChange} />
-										    	<small className="text-danger"></small>
+										    	<Form.Control type="email"
+										    				  name="pec"
+										    				  onChange={handleChange} />
+										    	<small className="text-danger">{error.pec}</small>
 										  	</Form.Group>
 										</Col>
 									</Row>
@@ -236,22 +252,28 @@ const CustomerType = ({ type, customerModel, errorModel }) => {
 										<Col>
 											<Form.Group controlId="newCustomerStreet">
 											    <Form.Label>Via</Form.Label>
-										    	<Form.Control type="text" value={customerModel.street} name="street" onChange={handleChange} />
-										    	<small className="text-danger"></small>
+										    	<Form.Control type="text"
+										    				  name="street"
+										    				  onChange={handleChange} />
+										    	<small className="text-danger">{error.street}</small>
 										  	</Form.Group>
 										</Col>
 										<Col>
 											<Form.Group controlId="newCustomerNumber">
 											    <Form.Label>Civico</Form.Label>
-										    	<Form.Control type="text" value={customerModel.number} name="number" onChange={handleChange} />
-										    	<small className="text-danger"></small>
+										    	<Form.Control type="text"
+										    		  		  name="number" 
+										    		  		  onChange={handleChange} />
+										    	<small className="text-danger">{error.number}</small>
 										  	</Form.Group>
 										</Col>
 										<Col>
 											<Form.Group controlId="newCustomerCity">
 											    <Form.Label>Città</Form.Label>
-										    	<Form.Control type="text" value={customerModel.city} name="city" onChange={handleChange} />
-										    	<small className="text-danger"></small>
+										    	<Form.Control type="text"
+										    				  name="city" 
+										    				  onChange={handleChange} />
+										    	<small className="text-danger">{error.city}</small>
 										  	</Form.Group>
 										</Col>
 									</Row>
@@ -259,22 +281,28 @@ const CustomerType = ({ type, customerModel, errorModel }) => {
 										<Col>
 											<Form.Group controlId="newCustomerProvince">
 											    <Form.Label>Provincia</Form.Label>
-										    	<Form.Control type="text" value={customerModel.province} name="province" onChange={handleChange} />
-										    	<small className="text-danger"></small>
+										    	<Form.Control type="text"
+										    	 			  name="province" 
+										    	 			  onChange={handleChange} />
+										    	<small className="text-danger">{error.province}</small>
 										  	</Form.Group>
 										</Col>
 										<Col>
 											<Form.Group controlId="newCustomerZip">
 											    <Form.Label>CAP</Form.Label>
-										    	<Form.Control type="text" value={customerModel.cap} name="cap" onChange={handleChange} />
-										    	<small className="text-danger"></small>
+										    	<Form.Control type="text"
+										    				  name="cap" 
+										    				  onChange={handleChange} />
+										    	<small className="text-danger">{error.cap}</small>
 										  	</Form.Group>
 										</Col>
 										<Col>
 											<Form.Group controlId="newCustomerCountry">
 											    <Form.Label>Stato</Form.Label>
-										    	<Form.Control type="text" value={customerModel.country} name="country" onChange={handleChange} />
-										    	<small className="text-danger"></small>
+										    	<Form.Control type="text"
+										    				  name="country" 
+										    				  onChange={handleChange} />
+										    	<small className="text-danger">{error.country}</small>
 										  	</Form.Group>
 										</Col>
 									</Row>
