@@ -22,13 +22,17 @@ var validateRules = [
   {field: "city", isMandatory: true, regex: /^[a-zA-Z]+$/}
 ];
 
+var c = {};
+
 const NewClient = () => {  
   const alert = useAlert()
-  var customerModel = useState({});
+  const [customerModel] = useState(c);
   var errorModel = useState({});
+  const [customerId, setCustomerId] = useState(null)
 
   function save(){    
     var isValid = true;
+    c = customerModel;
 
     for(var rule of validateRules){
       if(errorModel.[rule.field]){
@@ -85,61 +89,56 @@ const NewClient = () => {
               "address_zipcode":customerModel.cap,
             }
           };
+
+          axios.post(`${process.env.REACT_APP_BACKEND_URL}/phisical-people`, customer_customer, {
+            headers: {
+              Authorization:
+                'Bearer ' + localStorage.getItem("JWTtoken")
+            }})
+              .then(response => {
+
+                if(response.status === 200){
+                  console.log("creata persona: ", response.data.id);
+
+                  customer.customer_customer = [{
+                    physical_person: {
+                      id: response.data.id  
+                    },
+                    "__component": "customer.physical-person",
+                  }];              
+
+                  axios.post(`${process.env.REACT_APP_BACKEND_URL}/clients`, customer, {
+                    headers: {
+                      Authorization:
+                        'Bearer ' + localStorage.getItem("JWTtoken")
+                    }})
+                    .then(response => {
+                      if(response.status === 200){
+                        alert.success("Salvato");  
+
+                        setCustomerId(response.data.id);
+                      }
+                    }); 
+
+
+                } else {
+                  alert.error("Errore:" + response.error);
+                  console.log(response);
+                }
+                
+                
+              },
+              response => {
+                  alert.error("Errore: " + response.error + " - " + response.message);
+                  console.log(response)
+              });
       } else if(customerModel.type === "lp"){
       }
-
-      /*
-      axios.post(`${process.env.REACT_APP_BACKEND_URL}/clients`, customer)
-          .then(response => console.log(response));
-      */
-
-      axios.post(`${process.env.REACT_APP_BACKEND_URL}/phisical-people`, customer_customer, {
-        headers: {
-          Authorization:
-            'Bearer ' + localStorage.getItem("JWTtoken")
-        }})
-          .then(response => {
-
-            debugger;
-            if(response.status === 200){
-              console.log("creata persona: ", response.data.id);
-
-              customer.customer_customer = [{
-                physical_person: {
-                  id: response.data.id  
-                },
-                "__component": "customer.physical-person",
-              }];              
-
-              axios.post(`${process.env.REACT_APP_BACKEND_URL}/clients`, customer, {
-                headers: {
-                  Authorization:
-                    'Bearer ' + localStorage.getItem("JWTtoken")
-                }})
-                .then(response => {
-                  if(response.status === 200){
-                    alert.success("Salvato");  
-                  }
-                }); 
-
-
-            } else {
-              alert.error("Errore:" + response.error);
-              console.log(response);
-            }
-            
-            
-          },
-          response => {
-              alert.error("Errore: " + response.error + " - " + response.message);
-              console.log(response)
-          });
     
     } else {
       console.log("NOT VALID");
       alert.error("Verificare i campi prima di procedere");
     }
-    
   };
 
   const [sidebarData, setSidebarData] = useState({
@@ -165,7 +164,8 @@ const NewClient = () => {
              			<NewCustomer setSidebarData={setSidebarData} 
                                customerModel={customerModel}
                                errorModel={errorModel}
-                               validateRules={validateRules} />
+                               validateRules={validateRules}
+                               customerId={customerId} />
   		        </Col>
         		</Row>
       	</Container>
