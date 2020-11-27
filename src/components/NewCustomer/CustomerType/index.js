@@ -19,7 +19,7 @@ const CustomerType = ({ type, customerModel, errorModel, validateRules }) => {
 			console.log(rule.field, "MANDATORY");
 			errorModel.[name] = "Campo obbligatorio";
 			
-		} else if(rule.isMandatory && value.lenght > 0 && rule.regex && !rule.regex.test(value)){
+		} else if(rule.isMandatory && value.length > 0 && rule.regex && !rule.regex.test(value)){
 			console.log(rule.field, "REGEX");
 			errorModel.[name] = "Valore non valido";
 
@@ -29,6 +29,7 @@ const CustomerType = ({ type, customerModel, errorModel, validateRules }) => {
 		} 	
     	  
     	customerModel[name]=value;  
+    	customerModel.type = type;
     	e.[name] = errorModel.[name];  	
 
     	setError({

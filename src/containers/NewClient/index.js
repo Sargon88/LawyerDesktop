@@ -1,6 +1,7 @@
 import React, { useReducer, useState } from "react";
 import { Row, Col, Container } from 'react-bootstrap';
-import { useAlert } from 'react-alert'
+import { useAlert } from 'react-alert';
+import axios from 'axios';
 import SideBar from "../../components/Bootstrap/SideBar";
 import NewCustomer from "../../components/NewCustomer";
 
@@ -27,52 +28,113 @@ const NewClient = () => {
   var errorModel = useState({});
 
   function save(){    
-    console.log("SAVE");
-    console.log(customerModel);
-    console.log("SAVE");
-
     var isValid = true;
 
     for(var rule of validateRules){
       if(errorModel.[rule.field]){
         isValid = false;
-        console.log(rule.field, "INVALID");
         break;
 
       }
 
       if(rule.isMandatory && (!customerModel.[rule.field] || customerModel.[rule.field].length === 0)){
-        console.log(rule.field, "MANDATORY");
         isValid = false;
         break;
       }
 
       if(rule.isMandatory && customerModel.[rule.field] && customerModel.[rule.field].length > 0 && rule.regex && !rule.regex.test(customerModel.[rule.field])){
-        console.log(rule.field, "REGEX");
         isValid = false;
         break;
       }
     }
 
     if(isValid){
-      console.log("VALID");
-      alert.success("VALID");
-      /*
+
+      var customer_customer = {};
       var customer = {
         customer_name: customerModel.name,
+        customer_active: true
       }
 
       if(customerModel.type === "pp"){
-        customer_customer:{
+        customer.customer_type = "Fisico";
 
-        }
+        customer_customer = {
+            "pp_name":customerModel.name,
+            "pp_surname":customerModel.surname,
+            "pp_fiscalcode": customerModel.code,
+            "pp_contact_method": {
+              "cnn_mobile":{
+                "phone_number": customerModel.mobile
+              },
+              "cnn_phone":{
+                "phone_number": customerModel.phone
+              },
+              "cnn_fax":{
+                "phone_number": customerModel.fax
+              },
+              "cnn_mail": customerModel.mail,
+              "cnn_pec": customerModel.pec
+            },
+            "pp_address": {
+              "address_street":customerModel.street,
+              "address_city":customerModel.city,
+              "address_province":customerModel.province,
+              "address_country":customerModel.country,
+              "address_number":customerModel.number,
+              "address_zipcode":customerModel.cap,
+            }
+          };
       } else if(customerModel.type === "lp"){
-        
       }
 
+      /*
       axios.post(`${process.env.REACT_APP_BACKEND_URL}/clients`, customer)
           .then(response => console.log(response));
-    */            
+      */
+
+      axios.post(`${process.env.REACT_APP_BACKEND_URL}/phisical-people`, customer_customer, {
+        headers: {
+          Authorization:
+            'Bearer ' + localStorage.getItem("JWTtoken")
+        }})
+          .then(response => {
+
+            debugger;
+            if(response.status === 200){
+              console.log("creata persona: ", response.data.id);
+
+              customer.customer_customer = [{
+                physical_person: {
+                  id: response.data.id  
+                },
+                "__component": "customer.physical-person",
+              }];              
+
+              axios.post(`${process.env.REACT_APP_BACKEND_URL}/clients`, customer, {
+                headers: {
+                  Authorization:
+                    'Bearer ' + localStorage.getItem("JWTtoken")
+                }})
+                .then(response => {
+                  if(response.status === 200){
+                    alert.success("Salvato");  
+                  }
+                }); 
+
+
+            } else {
+              alert.error("Errore:" + response.error);
+              console.log(response);
+            }
+            
+            
+          },
+          response => {
+              alert.error("Errore: " + response.error + " - " + response.message);
+              console.log(response)
+          });
+    
     } else {
       console.log("NOT VALID");
       alert.error("Verificare i campi prima di procedere");
