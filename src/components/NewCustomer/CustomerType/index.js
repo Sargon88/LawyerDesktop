@@ -40,7 +40,7 @@ const CustomerType = ({ type, customerModel, errorModel, validateRules }) => {
 
 	//https://www.positronx.io/react-form-validation-tutorial-with-example/
 	//https://medium.com/@adostes/validating-a-form-in-react-cc29d47e140f
-	if(type === "pp"){
+	if(type){
 		return (
 			<Row>
 				<Col>
@@ -48,7 +48,8 @@ const CustomerType = ({ type, customerModel, errorModel, validateRules }) => {
 					<Row>
 						<Col>
 							<Row><h4>Anagrafica</h4></Row>
-							<Row className="dataArea">
+							{ type === "pp" ?
+							(<Row className="dataArea">
 								<Col>
 									<Form.Group controlId="newCustomerName">
 									    <Form.Label>Nome</Form.Label>
@@ -76,7 +77,32 @@ const CustomerType = ({ type, customerModel, errorModel, validateRules }) => {
 								    	<small className="text-danger">{error.code}</small>
 								  	</Form.Group>
 								</Col>
-							</Row>
+							</Row>)
+							:
+							type === "lp" ?
+							(<Row className="dataArea">
+								<Col>
+									<Form.Group controlId="newCustomerSurname">
+									    <Form.Label>Ragione Sociale</Form.Label>
+								    	<Form.Control type="text" 
+								    				  name="society" 
+								    				  onChange={handleChange} />
+								    	<small className="text-danger">{error.society}</small>
+								  	</Form.Group>
+								</Col>
+								<Col>
+									<Form.Group controlId="newCustomerCode">
+									    <Form.Label>Partita Iva</Form.Label>
+								    	<Form.Control type="text" 
+								    				  name="vat" 
+								    				  onChange={handleChange} />
+								    	<small className="text-danger">{error.vat}</small>
+								  	</Form.Group>
+								</Col>
+							</Row>)
+							:
+							<Row className="dataArea"><Col></Col></Row>
+							}
 						</Col>
 					</Row>
 					<br />
@@ -207,14 +233,6 @@ const CustomerType = ({ type, customerModel, errorModel, validateRules }) => {
 						</Col>
 					</Row>
 					</Form>
-				</Col>  
-			</Row>
-		);
-	} else if(type === "lp"){
-		return (
-			<Row>
-				<Col>
-					component new TYPE: {type} CustomerType
 				</Col>  
 			</Row>
 		);

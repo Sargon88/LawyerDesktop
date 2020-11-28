@@ -9,13 +9,18 @@ const NewCustomer = ({ setSidebarData, customerModel, errorModel, validateRules,
 		setCustomerType(event.target.value)
 	}
 
+/*	<Row>
+		<Col><h3>{ customerId != null ? (customerModel.name) : "Nuovo Cliente"}</h3></Col>
+	</Row>
+*/
+
 	return (
 		<>
 		<Row>
-			<Col><h3>{ customerId != null ? (customerModel.name) : "Nuovo Cliente"}</h3></Col>
+			<Col><h3>Nuovo Cliente</h3></Col>
 		</Row>
 		<Row>
-			<Col xs={2}>
+			<Col xs={3}>
 				<Form>
 					<Form.Group controlId="newCustomer">
 						<Form.Label>Tipo Cliente</Form.Label>
@@ -31,11 +36,11 @@ const NewCustomer = ({ setSidebarData, customerModel, errorModel, validateRules,
 		<Row>
 			<Col>
 				<CustomerType type={customerType} 
-							  setSidebarData={setSidebarData}
-							  customerModel={customerModel}
-							  errorModel={errorModel}
-							  validateRules={validateRules}
-							  />
+					setSidebarData={setSidebarData}
+					customerModel={customerModel}
+					errorModel={errorModel}
+					validateRules={validateRules}
+					/>
 			</Col>
 		</Row>
 		</>
