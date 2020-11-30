@@ -2,8 +2,6 @@ import React, { useState } from "react";
 import { Row, Col, Form } from 'react-bootstrap';
 import './customerType.css';
 
-
-
 const CustomerType = ({ type, customerModel, errorModel, validateRules }) => {
 	const [error, setError] = useState({});
 

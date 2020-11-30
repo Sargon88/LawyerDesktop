@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import { Row, Col, Container } from 'react-bootstrap';
 import { useAlert } from 'react-alert';
+import { useParams } from "react-router-dom";
+import Query from "../../components/Query";
 import axios from 'axios';
 import SideBar from "../../components/Bootstrap/SideBar";
-import NewCustomer from "../../components/NewCustomer";
+import CustomerComponent from "../../components/Customer";
+import CUSTOMER_DATA_QUERY from "../../queries/customers/customerdata";
 
 var validateRules = [
   {type:"pp", field: "name", isMandatory: true, regex: /^[a-zA-Z]+$/},
@@ -24,11 +27,12 @@ var validateRules = [
   {type:"", field: "city", isMandatory: true, regex: /^[a-zA-Z]+$/}
 ];
 
-const NewClient = () => {  
+const Customer = () => {  
   const alert = useAlert()
   const [customerModel] = useState({});
   var errorModel = useState({});
-  const [customerId] = useState(null)
+  var c = useParams();
+  const [customerId] = useState(c.customerId != null ? c.customerId : null);
 
   function save(){    
     var isValid = true;
@@ -182,22 +186,81 @@ const NewClient = () => {
 
 	if(appUser){
 
-    	return (
-      	<Container fluid>
-        		<Row id="row_container">
-          		<SideBar page="newcustomer" sidebarData={ sidebarData }/>
+    if(customerId){
+      //edit customer
+      return (
+        <Container fluid>
+            <Row id="row_container">
+              <SideBar page="newcustomer" sidebarData={ sidebarData }/>
 
-          		<Col id="content-wrapper">
-	             		<br />
-             			<NewCustomer setSidebarData={setSidebarData} 
-                               customerModel={customerModel}
-                               errorModel={errorModel}
-                               validateRules={validateRules}
-                               customerId={customerId} />
-  		        </Col>
-        		</Row>
-      	</Container>
-    	);
+              <Col id="content-wrapper">
+                  <br />
+                  <Query query={CUSTOMER_DATA_QUERY} variables={{ customerId: customerId }} >
+                      {({ loading, error, data: { client } }) => {
+
+                        console.log(client);
+
+                        customerModel.name = client.customer_customer[0].person.name ? client.customer_customer[0].person.name : "";
+                        customerModel.surname = client.customer_customer[0].person.surname ? client.customer_customer[0].person.surname : "";
+                        customerModel.code = client.customer_customer[0].person.code ? client.customer_customer[0].person.code : "";
+                        customerModel.society = client.customer_customer[0].person.society ? client.customer_customer[0].person.society : "";
+                        customerModel.vat = client.customer_customer[0].person.vat ? client.customer_customer[0].person.vat : "";
+                        customerModel.province = client.customer_customer[0].person.address ? client.customer_customer[0].person.address.province : "";
+                        customerModel.cap = client.customer_customer[0].person.address ? client.customer_customer[0].person.address.cap : "";
+                        customerModel.country = client.customer_customer[0].person.address ? client.customer_customer[0].person.address.country : "";
+                        customerModel.mobile = client.customer_customer[0].person.contact ? client.customer_customer[0].person.contact.cnn_mobile.phone_number : "";
+                        customerModel.mobile_id = client.customer_customer[0].person.contact ? client.customer_customer[0].person.contact.cnn_mobile.id : "";
+                        customerModel.phone = client.customer_customer[0].person.contact ? client.customer_customer[0].person.contact.cnn_phone.phone_number : "";
+                        customerModel.phone_id = client.customer_customer[0].person.contact ? client.customer_customer[0].person.contact.cnn_phone.id : "";
+                        customerModel.fax = client.customer_customer[0].person.contact ? client.customer_customer[0].person.contact.cnn_fax.phone_number : "";
+                        customerModel.fax_id = client.customer_customer[0].person.contact ? client.customer_customer[0].person.contact.cnn_fax.id : "";
+                        customerModel.mail = client.customer_customer[0].person.contact ? client.customer_customer[0].person.contact.mail : "";
+                        customerModel.pec = client.customer_customer[0].person.contact ? client.customer_customer[0].person.contact.pec : "";
+                        customerModel.street = client.customer_customer[0].person.address ? client.customer_customer[0].person.address.street : "";
+                        customerModel.number = client.customer_customer[0].person.address ? client.customer_customer[0].person.address.number : "";
+                        customerModel.city = client.customer_customer[0].person.address ? client.customer_customer[0].person.address.city : "";
+                        customerModel.address_id = client.customer_customer[0].person.address ? client.customer_customer[0].person.address.id : "";
+                        customerModel.contact_id = client.customer_customer[0].person.contact ? client.customer_customer[0].person.contact.id : "";
+                        customerModel.type = client.customer_type === "Fisico" ? "pp" : "lp";
+
+
+                        if (loading) return null;
+                        if (error) return `Error! ${error}`;
+
+                        return <CustomerComponent setSidebarData={setSidebarData} 
+                                                  customerModel={customerModel}
+                                                  errorModel={errorModel}
+                                                  validateRules={validateRules}
+                                                  customerId={customerId} />
+                      }}
+                  </Query>
+              </Col>
+            </Row>
+        </Container>
+      );
+      
+    } else {
+      //new customer
+      return (
+        <Container fluid>
+            <Row id="row_container">
+              <SideBar page="newcustomer" sidebarData={ sidebarData }/>
+
+              <Col id="content-wrapper">
+                  <br />
+                  <CustomerComponent setSidebarData={setSidebarData} 
+                                     customerModel={customerModel}
+                                     errorModel={errorModel}
+                                     validateRules={validateRules}
+                                     customerId={customerId} />
+              </Col>
+            </Row>
+        </Container>
+      );
+    }
+
+
+    	
 
 	}   
 
@@ -214,4 +277,4 @@ const NewClient = () => {
 
 };
 
-export default NewClient;
+export default Customer;

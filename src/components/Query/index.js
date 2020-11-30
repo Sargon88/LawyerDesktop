@@ -1,10 +1,10 @@
 import React from "react";
 import { useQuery } from "react-apollo";
 
-const Query = ({ children, query, id }) => {
+const Query = ({ children, query, variables }) => {
 
 	const { data, loading, error } = useQuery(query, {
-			variables: { id: id }
+			variables: variables
 	});
 
 	if (loading) return <p>Loading...</p>;

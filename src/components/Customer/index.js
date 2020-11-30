@@ -1,25 +1,26 @@
 import React, { useState } from "react";
 import { Row, Col, Form } from 'react-bootstrap';
-import CustomerType from "./CustomerType";
+import CustomerType from "../CustomerType";
 
-const NewCustomer = ({ setSidebarData, customerModel, errorModel, validateRules, customerId }) => {
-	const [customerType, setCustomerType] = useState(null);
+const CustomerComponent = ({ setSidebarData, customerModel, errorModel, validateRules, customerId }) => {
+	const [customerType, setCustomerType] = useState(customerModel.Type != null ? customerModel.type : null);
 
 	function selectCustomerType(event){
-		setCustomerType(event.target.value)
+		setCustomerType(event.target.value);
+		customerModel.type = event.target.value;
 	}
 
 	return (
 		<>
 		<Row>
-			<Col><h3>Nuovo Cliente</h3></Col>
+			<Col><h3>{customerId != null ? (customerModel.surname + " " + customerModel.name) : "Nuovo Cliente"}</h3></Col>
 		</Row>
 		<Row>
 			<Col xs={3}>
 				<Form>
 					<Form.Group controlId="newCustomer">
 						<Form.Label>Tipo Cliente</Form.Label>
-						<Form.Control as="select" onChange={ selectCustomerType } disabled={ customerType != null }>
+						<Form.Control as="select" onChange={ selectCustomerType } disabled={ customerModel.type != null } value={customerModel.type}>
 							<option value=""></option>
 							<option value="pp">Persona Fisica</option>
 							<option value="lp">Persona Giuridica</option>
@@ -30,7 +31,7 @@ const NewCustomer = ({ setSidebarData, customerModel, errorModel, validateRules,
 		</Row>
 		<Row>
 			<Col>
-				<CustomerType type={customerType} 
+				<CustomerType type={customerModel.type} 
 					setSidebarData={setSidebarData}
 					customerModel={customerModel}
 					errorModel={errorModel}
@@ -44,4 +45,4 @@ const NewCustomer = ({ setSidebarData, customerModel, errorModel, validateRules,
 	
 };
 
-export default NewCustomer;
+export default CustomerComponent;
