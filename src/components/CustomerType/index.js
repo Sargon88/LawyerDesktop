@@ -53,7 +53,8 @@ const CustomerType = ({ type, customerModel, errorModel, validateRules }) => {
 									    <Form.Label>Nome</Form.Label>
 								    	<Form.Control type="text"  
 								    				  name="name" 
-								    				  onChange={handleChange} />
+								    				  onChange={handleChange}
+								    				  value={customerModel.name} />
 								    	<small className="text-danger">{error.name}</small>
 								  	</Form.Group>
 								</Col>
@@ -62,7 +63,8 @@ const CustomerType = ({ type, customerModel, errorModel, validateRules }) => {
 									    <Form.Label>Cognome</Form.Label>
 								    	<Form.Control type="text" 
 								    				  name="surname" 
-								    				  onChange={handleChange} />
+								    				  onChange={handleChange}
+								    				  value={customerModel.surname} />
 								    	<small className="text-danger">{error.surname}</small>
 								  	</Form.Group>
 								</Col>
@@ -71,7 +73,8 @@ const CustomerType = ({ type, customerModel, errorModel, validateRules }) => {
 									    <Form.Label>Codice Fiscale</Form.Label>
 								    	<Form.Control type="text" 
 								    				  name="code" 
-								    				  onChange={handleChange} />
+								    				  onChange={handleChange}
+								    				  value={customerModel.code} />
 								    	<small className="text-danger">{error.code}</small>
 								  	</Form.Group>
 								</Col>
@@ -84,7 +87,8 @@ const CustomerType = ({ type, customerModel, errorModel, validateRules }) => {
 									    <Form.Label>Ragione Sociale</Form.Label>
 								    	<Form.Control type="text" 
 								    				  name="society" 
-								    				  onChange={handleChange} />
+								    				  onChange={handleChange}
+								    				  value={customerModel.society} />
 								    	<small className="text-danger">{error.society}</small>
 								  	</Form.Group>
 								</Col>
@@ -93,7 +97,8 @@ const CustomerType = ({ type, customerModel, errorModel, validateRules }) => {
 									    <Form.Label>Partita Iva</Form.Label>
 								    	<Form.Control type="text" 
 								    				  name="vat" 
-								    				  onChange={handleChange} />
+								    				  onChange={handleChange}
+								    				  value={customerModel.vat} />
 								    	<small className="text-danger">{error.vat}</small>
 								  	</Form.Group>
 								</Col>
@@ -115,7 +120,8 @@ const CustomerType = ({ type, customerModel, errorModel, validateRules }) => {
 											    <Form.Label>Cellulare</Form.Label>
 										    	<Form.Control type="text"
 										    				  name="mobile" 
-										    				  onChange={handleChange} />
+										    				  onChange={handleChange}
+										    				  value={customerModel.mobile} />
 										    	<small className="text-danger">{error.mobile}</small>
 										  	</Form.Group>
 										</Col>
@@ -124,7 +130,8 @@ const CustomerType = ({ type, customerModel, errorModel, validateRules }) => {
 											    <Form.Label>Telefono</Form.Label>
 										    	<Form.Control type="text"
 										    				  name="phone" 
-										    				  onChange={handleChange} />
+										    				  onChange={handleChange}
+										    				  value={customerModel.phone} />
 										    	<small className="text-danger">{error.phone}</small>
 										  	</Form.Group>
 										</Col>
@@ -133,7 +140,8 @@ const CustomerType = ({ type, customerModel, errorModel, validateRules }) => {
 											    <Form.Label>Fax</Form.Label>
 										    	<Form.Control type="text"
 										    				  name="fax"
-										    				  onChange={handleChange} />
+										    				  onChange={handleChange}
+										    				  value={customerModel.fax} />
 										    	<small className="text-danger">{error.fax}</small>
 										  	</Form.Group>
 										</Col>
@@ -144,7 +152,8 @@ const CustomerType = ({ type, customerModel, errorModel, validateRules }) => {
 											    <Form.Label>Mail</Form.Label>
 										    	<Form.Control type="email"
 										    				  name="mail"
-										    				  onChange={handleChange} />
+										    				  onChange={handleChange}
+										    				  value={customerModel.mail} />
 										    	<small className="text-danger">{error.mail}</small>
 										  	</Form.Group>
 										</Col>
@@ -153,7 +162,8 @@ const CustomerType = ({ type, customerModel, errorModel, validateRules }) => {
 											    <Form.Label>Pec</Form.Label>
 										    	<Form.Control type="email"
 										    				  name="pec"
-										    				  onChange={handleChange} />
+										    				  onChange={handleChange}
+										    				  value={customerModel.pec} />
 										    	<small className="text-danger">{error.pec}</small>
 										  	</Form.Group>
 										</Col>
@@ -174,7 +184,8 @@ const CustomerType = ({ type, customerModel, errorModel, validateRules }) => {
 											    <Form.Label>Via</Form.Label>
 										    	<Form.Control type="text"
 										    				  name="street"
-										    				  onChange={handleChange} />
+										    				  onChange={handleChange}
+										    				  value={customerModel.street} />
 										    	<small className="text-danger">{error.street}</small>
 										  	</Form.Group>
 										</Col>
@@ -183,7 +194,8 @@ const CustomerType = ({ type, customerModel, errorModel, validateRules }) => {
 											    <Form.Label>Civico</Form.Label>
 										    	<Form.Control type="text"
 										    		  		  name="number" 
-										    		  		  onChange={handleChange} />
+										    		  		  onChange={handleChange}
+										    		  		  value={customerModel.number} />
 										    	<small className="text-danger">{error.number}</small>
 										  	</Form.Group>
 										</Col>
@@ -192,7 +204,8 @@ const CustomerType = ({ type, customerModel, errorModel, validateRules }) => {
 											    <Form.Label>Città</Form.Label>
 										    	<Form.Control type="text"
 										    				  name="city" 
-										    				  onChange={handleChange} />
+										    				  onChange={handleChange}
+										    				  value={customerModel.city} />
 										    	<small className="text-danger">{error.city}</small>
 										  	</Form.Group>
 										</Col>
@@ -203,7 +216,8 @@ const CustomerType = ({ type, customerModel, errorModel, validateRules }) => {
 											    <Form.Label>Provincia</Form.Label>
 										    	<Form.Control type="text"
 										    	 			  name="province" 
-										    	 			  onChange={handleChange} />
+										    	 			  onChange={handleChange}
+										    	 			  value={customerModel.province} />
 										    	<small className="text-danger">{error.province}</small>
 										  	</Form.Group>
 										</Col>
@@ -212,7 +226,8 @@ const CustomerType = ({ type, customerModel, errorModel, validateRules }) => {
 											    <Form.Label>CAP</Form.Label>
 										    	<Form.Control type="text"
 										    				  name="cap" 
-										    				  onChange={handleChange} />
+										    				  onChange={handleChange}
+										    				  value={customerModel.cap} />
 										    	<small className="text-danger">{error.cap}</small>
 										  	</Form.Group>
 										</Col>
@@ -221,7 +236,8 @@ const CustomerType = ({ type, customerModel, errorModel, validateRules }) => {
 											    <Form.Label>Stato</Form.Label>
 										    	<Form.Control type="text"
 										    				  name="country" 
-										    				  onChange={handleChange} />
+										    				  onChange={handleChange}
+										    				  value={customerModel.country} />
 										    	<small className="text-danger">{error.country}</small>
 										  	</Form.Group>
 										</Col>

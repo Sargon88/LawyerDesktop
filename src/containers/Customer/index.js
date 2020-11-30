@@ -206,7 +206,7 @@ const Customer = () => {
                         customerModel.society = client.customer_customer[0].person.society ? client.customer_customer[0].person.society : "";
                         customerModel.vat = client.customer_customer[0].person.vat ? client.customer_customer[0].person.vat : "";
                         customerModel.province = client.customer_customer[0].person.address ? client.customer_customer[0].person.address.province : "";
-                        customerModel.cap = client.customer_customer[0].person.address ? client.customer_customer[0].person.address.cap : "";
+                        customerModel.cap = client.customer_customer[0].person.address ? client.customer_customer[0].person.address.zipcode : "";
                         customerModel.country = client.customer_customer[0].person.address ? client.customer_customer[0].person.address.country : "";
                         customerModel.mobile = client.customer_customer[0].person.contact ? client.customer_customer[0].person.contact.cnn_mobile.phone_number : "";
                         customerModel.mobile_id = client.customer_customer[0].person.contact ? client.customer_customer[0].person.contact.cnn_mobile.id : "";
@@ -214,8 +214,8 @@ const Customer = () => {
                         customerModel.phone_id = client.customer_customer[0].person.contact ? client.customer_customer[0].person.contact.cnn_phone.id : "";
                         customerModel.fax = client.customer_customer[0].person.contact ? client.customer_customer[0].person.contact.cnn_fax.phone_number : "";
                         customerModel.fax_id = client.customer_customer[0].person.contact ? client.customer_customer[0].person.contact.cnn_fax.id : "";
-                        customerModel.mail = client.customer_customer[0].person.contact ? client.customer_customer[0].person.contact.mail : "";
-                        customerModel.pec = client.customer_customer[0].person.contact ? client.customer_customer[0].person.contact.pec : "";
+                        customerModel.mail = client.customer_customer[0].person.contact ? client.customer_customer[0].person.contact.cnn_mail : "";
+                        customerModel.pec = client.customer_customer[0].person.contact ? client.customer_customer[0].person.contact.cnn_pec : "";
                         customerModel.street = client.customer_customer[0].person.address ? client.customer_customer[0].person.address.street : "";
                         customerModel.number = client.customer_customer[0].person.address ? client.customer_customer[0].person.address.number : "";
                         customerModel.city = client.customer_customer[0].person.address ? client.customer_customer[0].person.address.city : "";
