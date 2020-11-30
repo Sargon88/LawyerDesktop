@@ -9,11 +9,6 @@ const NewCustomer = ({ setSidebarData, customerModel, errorModel, validateRules,
 		setCustomerType(event.target.value)
 	}
 
-/*	<Row>
-		<Col><h3>{ customerId != null ? (customerModel.name) : "Nuovo Cliente"}</h3></Col>
-	</Row>
-*/
-
 	return (
 		<>
 		<Row>

@@ -1,4 +1,4 @@
-import React, { useReducer, useState } from "react";
+import React, { useState } from "react";
 import { Row, Col, Container } from 'react-bootstrap';
 import { useAlert } from 'react-alert';
 import axios from 'axios';
@@ -28,7 +28,7 @@ const NewClient = () => {
   const alert = useAlert()
   const [customerModel] = useState({});
   var errorModel = useState({});
-  const [customerId, setCustomerId] = useState(null)
+  const [customerId] = useState(null)
 
   function save(){    
     var isValid = true;

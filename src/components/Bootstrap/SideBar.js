@@ -19,7 +19,7 @@ const SideBar = ({ page, sidebarData }) => {
 								<Nav.Link href="/clienti/nuovo"><Icon icon={ic_add} size={40} /></Nav.Link>
 							</Nav.Item>
 							<Nav.Item>
-								<Nav.Link href="/clienti/edit" disabled={!sidebarData.edit}><Icon icon={ic_mode_edit} size={30} /></Nav.Link>
+								<Nav.Link href={"/customers/" + sidebarData.selectedId} disabled={!sidebarData.edit}><Icon icon={ic_mode_edit} size={30} /></Nav.Link>
 							</Nav.Item>							
 						</Nav>
 					</Col>
@@ -27,6 +27,7 @@ const SideBar = ({ page, sidebarData }) => {
 				</>
 			);
 		case "newcustomer":
+		case "editcustomer":
 			return(  
 				<>
 					<Col xs={1} id="sidebar-wrapper">

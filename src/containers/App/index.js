@@ -4,6 +4,7 @@ import { Switch, Route } from "react-router-dom";
 import AppNav from "../../components/Nav";
 import Clients from "../Clients";
 import NewClient from "../NewClient";
+import EditCustomer from "../EditCustomer";
 import Login from "../Login";
 import NotFound from "../NotFound";
 import Home from "../Test";
@@ -60,6 +61,7 @@ function App() {
               <Route path="/" component={Home} exact />
               <Route path="/clienti" component={Clients} exact />
               <Route path="/clienti/nuovo" component={NewClient} exact />
+              <Route path="/customers/:customerId" component={EditCustomer} exact />
               <Route path="/login" component={Login} exact />
               <Route path="" component={NotFound} />
           </Switch>
