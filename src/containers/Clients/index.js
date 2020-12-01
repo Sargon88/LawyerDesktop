@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Row, Col, Container, Form, InputGroup, FormControl } from 'react-bootstrap';
 import Query from "../../components/Query";
 import Client from "../../components/Clients";
-import SideBar from "../../components/Bootstrap/SideBar";
+import Navbar from "../../components/Nav";
 import ALL_CLIENTS_PREVIEW_QUERY from "../../queries/clients/allclientspreview";
 import './clients.css';
 
@@ -10,7 +10,7 @@ const Clients = () => {
   const [value, setValue] = useState('');
   const [ppvalue, setPPValue] = useState(true);
   const [lpvalue, setLPValue] = useState(true);
-  const [sidebarData, setSidebarData] = useState({
+  const [navbarData, setNavbarData] = useState({
     edit: false,
     selectedId: null,
   });
@@ -35,7 +35,7 @@ const Clients = () => {
       return (
         <Container fluid>
           <Row id="row_container">
-            <SideBar page="clients" sidebarData={ sidebarData }/>
+            <Navbar page="clients" navbarData={ navbarData }/>
 
             <Col id="content-wrapper">
               <br />
@@ -94,7 +94,7 @@ const Clients = () => {
                         e.person = e.customer_customer[0].person;
                       });
 
-                      return <Client data={ filteredClients } setSidebarData={ setSidebarData } />;
+                      return <Client data={ filteredClients } setNavbarData={ setNavbarData } />;
                     }}
                   </Query>
                 </Col>

@@ -4,7 +4,7 @@ import { useAlert } from 'react-alert';
 import { useParams } from "react-router-dom";
 import Query from "../../components/Query";
 import axios from 'axios';
-import SideBar from "../../components/Bootstrap/SideBar";
+import Navbar from "../../components/Nav";
 import CustomerComponent from "../../components/Customer";
 import CUSTOMER_DATA_QUERY from "../../queries/customers/customerdata";
 
@@ -207,7 +207,7 @@ const Customer = () => {
     }
   };
 
-  const [sidebarData, setSidebarData] = useState({
+  const [NavbarData, setNavbarData] = useState({
     saveFunction: save
   });	
   
@@ -225,7 +225,7 @@ const Customer = () => {
       return (
         <Container fluid>
             <Row id="row_container">
-              <SideBar page="newcustomer" sidebarData={ sidebarData }/>
+              <Navbar page="newcustomer" NavbarData={ NavbarData }/>
 
               <Col id="content-wrapper">
                   <br />
@@ -261,7 +261,7 @@ const Customer = () => {
                         if (loading) return null;
                         if (error) return `Error! ${error}`;
 
-                        return <CustomerComponent setSidebarData={setSidebarData} 
+                        return <CustomerComponent setNavbarData={setNavbarData} 
                                                   customerModel={customerModel}
                                                   errorModel={errorModel}
                                                   validateRules={validateRules}
@@ -278,11 +278,11 @@ const Customer = () => {
       return (
         <Container fluid>
             <Row id="row_container">
-              <SideBar page="newcustomer" sidebarData={ sidebarData }/>
+              <Navbar page="newcustomer" NavbarData={ NavbarData }/>
 
               <Col id="content-wrapper">
                   <br />
-                  <CustomerComponent setSidebarData={setSidebarData} 
+                  <CustomerComponent setNavbarData={setNavbarData} 
                                      customerModel={customerModel}
                                      errorModel={errorModel}
                                      validateRules={validateRules}

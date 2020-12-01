@@ -1,29 +1,54 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
+import { Navbar, Nav } from "react-bootstrap"
+import { useAppContext } from "../../utils/contextLib";
 
-const Nav = () => {
+const AppNav = () => {
+  const { isAuthenticated } = useAppContext();
+  const { userHasAuthenticated } = useAppContext();
+  const history = useHistory();
+
+  function handleLogout() {
+    localStorage.clear();
+    userHasAuthenticated(false);
+
+    history.push("/login");
+  }
+
   return (
-    <div>
-      <div>
-        <nav className="uk-navbar-container" data-uk-navbar>
-          <div className="uk-navbar-left">
-            <ul className="uk-navbar-nav">
-              <li>
-                <Link to="/">{process.env.REACT_APP_APPLICATION_NAME}</Link>
-              </li>
-            </ul>
-          </div>
+    <Navbar bg="light" expand="lg">
+      <Navbar.Brand>
+        <Link to="/">{process.env.REACT_APP_APPLICATION_NAME}</Link>
+      </Navbar.Brand>
+      <Navbar.Toggle aria-controls="basic-navbar-nav" />
+      <Navbar.Collapse id="basic-navbar-nav">
+        {isAuthenticated === false
+          ?
+          <Nav className="mr-auto"></Nav>
+          :
+          <Nav className="mr-auto">
+            <Nav.Link href="/clienti">Clienti</Nav.Link>
+            <Nav.Link href="/contabilita">Contabilità</Nav.Link>
+            <Nav.Link href="/dafare">Da fare</Nav.Link>
+            <Nav.Link href="/ricerche">Ricerche</Nav.Link>
+          </Nav>
+        }
 
-          <div className="uk-navbar-right">
-            <ul className="uk-navbar-nav">
-              <li><Link to="/turns">turns</Link></li>
-              <li><Link to="/doctors">doctors</Link></li>
-            </ul>
-          </div>
-        </nav>
-      </div>
-    </div>
+        <Nav className="justify-content-end">
+          {isAuthenticated
+            ? 
+              <Nav.Link onClick={handleLogout}>Logout</Nav.Link>
+            : 
+              <>
+                <Nav.Link href="/signup">Signup</Nav.Link>
+                <Nav.Link href="/login">Login</Nav.Link>
+              </>
+          }
+        </Nav>
+      </Navbar.Collapse>
+      
+    </Navbar>
   );
 };
 
-export default Nav;
+export default AppNav;

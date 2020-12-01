@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { AppContext } from "../../utils/contextLib";
 import { Switch, Route } from "react-router-dom";
-import AppNav from "../../components/Nav";
 import Clients from "../Clients";
 import Customer from "../Customer";
 import Folders from "../Folders";
@@ -43,7 +42,7 @@ function App() {
     return( 
       <AppContext.Provider value={{ isAuthenticated, userHasAuthenticated }}>
         <div className="App container-fluid">
-          <AppNav />
+          
           <Switch>
               <Route path="" component={Login} />
           </Switch>
@@ -56,7 +55,7 @@ function App() {
     return( 
       !isAuthenticating && <AppContext.Provider value={{ isAuthenticated, userHasAuthenticated }}>
         <div className="App container-fluid">
-          <AppNav />
+         
           <Switch>
               <Route path="/" component={Home} exact />
               <Route path="/clienti" component={Clients} exact />

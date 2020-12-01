@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Row, Col, Container } from 'react-bootstrap';
 import { useParams } from "react-router-dom";
-import SideBar from "../../components/Bootstrap/SideBar";
+import Navbar from "../../components/Nav";
 import FoldersComponent from "../../components/Folders";
 import Query from "../../components/Query";
 import CUSTOMER_FOLDERS_QUERY from "../../queries/folders/customerfolders";
@@ -10,7 +10,7 @@ const Folders = () => {
   var c = useParams();
   const [customerId] = useState(c.customerId != null ? c.customerId : null);
 
-  const [sidebarData, setSidebarData] = useState({
+  const [navbarData, setNavbarData] = useState({
   });	
   
   //manage user login
@@ -25,7 +25,7 @@ const Folders = () => {
     return (
       <Container fluid>
           <Row id="row_container">
-            <SideBar page="folders" sidebarData={ sidebarData }/>
+            <Navbar page="folders" navbarData={ navbarData }/>
 
             <Col id="content-wrapper">
                 <br />
