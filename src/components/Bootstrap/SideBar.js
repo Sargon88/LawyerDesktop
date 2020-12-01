@@ -4,6 +4,8 @@ import { Icon } from 'react-icons-kit';
 import {ic_add} from 'react-icons-kit/md/ic_add';
 import {ic_mode_edit} from 'react-icons-kit/md/ic_mode_edit'
 import {ic_save} from 'react-icons-kit/md/ic_save'
+import {eye} from 'react-icons-kit/fa/eye'
+import {folderOpen} from 'react-icons-kit/fa/folderOpen'
 import './SideBar.css';
 
 const SideBar = ({ page, sidebarData }) => {
@@ -20,12 +22,35 @@ const SideBar = ({ page, sidebarData }) => {
 							</Nav.Item>
 							<Nav.Item>
 								<Nav.Link href={"/customers/" + sidebarData.selectedId} disabled={!sidebarData.edit}><Icon icon={ic_mode_edit} size={30} /></Nav.Link>
+							</Nav.Item>
+							<Nav.Item>
+								<Nav.Link href={"/folders/" + sidebarData.selectedId} disabled={!sidebarData.edit}><Icon icon={folderOpen} size={30} /></Nav.Link>
 							</Nav.Item>							
 						</Nav>
 					</Col>
 
 				</>
 			);
+		case "folders":
+			return(  
+				<>
+					<Col xs={1} id="sidebar-wrapper">
+						<Nav className="col-md-12 d-none d-md-block bg-light sidebar" activeKey="/home">
+							<div className="sidebar-sticky"></div>
+							<Nav.Item>
+								<Nav.Link href="/folders/new"><Icon icon={ic_add} size={40} /></Nav.Link>
+							</Nav.Item>
+							<Nav.Item>
+								<Nav.Link href={"/folders/edit" + sidebarData.selectedId} disabled={!sidebarData.edit}><Icon icon={ic_mode_edit} size={30} /></Nav.Link>
+							</Nav.Item>
+							<Nav.Item>
+								<Nav.Link href={"/folders/view" + sidebarData.selectedId} disabled={!sidebarData.edit}><Icon icon={eye} size={30} /></Nav.Link>
+							</Nav.Item>							
+						</Nav>
+					</Col>
+
+				</>
+			);	
 		case "newcustomer":
 		case "editcustomer":
 			return(  
@@ -38,7 +63,10 @@ const SideBar = ({ page, sidebarData }) => {
 							</Nav.Item>
 							<Nav.Item>
 								<Nav.Link href="#" onClick={sidebarData.saveFunction}><Icon icon={ic_save} size={30} /></Nav.Link>
-							</Nav.Item>							
+							</Nav.Item>	
+							<Nav.Item>
+								<Nav.Link href={"/folders/" + sidebarData.selectedId} disabled={!sidebarData.edit}><Icon icon={folderOpen} size={30} /></Nav.Link>
+							</Nav.Item>						
 						</Nav>
 					</Col>
 
