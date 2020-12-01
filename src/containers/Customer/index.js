@@ -9,14 +9,14 @@ import CustomerComponent from "../../components/Customer";
 import CUSTOMER_DATA_QUERY from "../../queries/customers/customerdata";
 
 var validateRules = [
-  {type:"pp", field: "name", isMandatory: true, regex: /^[a-zA-Z]+$/},
-  {type:"pp", field: "surname", isMandatory: true, regex: /^[a-zA-Z]+$/},
+  {type:"pp", field: "name", isMandatory: true, regex: /^[\w ]+$/},
+  {type:"pp", field: "surname", isMandatory: true, regex: /^[\w ]+$/},
   {type:"pp", field: "code", isMandatory: true, regex: /^[a-z]{6}[0-9]{2}[a-z]{1}[0-9]{2}[a-z]{1}[0-9]{3}[a-z]{1}$/},
   {type:"lp", field: "society", isMandatory: true, regex: /^[\w-. ]+$/},
   {type:"lp", field: "vat", isMandatory: true, regex: /^[0-9]{11}$/},
-  {type:"", field: "province", isMandatory: false, regex: /^[a-zA-Z]+$/},
+  {type:"", field: "province", isMandatory: false, regex: /^[\w]+$/},
   {type:"", field: "cap", isMandatory: true, regex: /^[0-9]{5}$/},
-  {type:"", field: "country", isMandatory: true, regex: /^[a-zA-Z]+$/},
+  {type:"", field: "country", isMandatory: true, regex: /^[\w]+$/},
   {type:"", field: "mobile", isMandatory: true, regex: /^(([+]|00)39)?(([3][1-9][0-9]))(\d{7})$/},
   {type:"", field: "phone", isMandatory: false, regex: /^(([+]|00)39)?(([0][1-9][0-9]))(\d{7})$/},
   {type:"", field: "fax", isMandatory: false, regex: /^(([+]|00)39)?(([0][1-9][0-9]))(\d{7})$/},
@@ -24,7 +24,7 @@ var validateRules = [
   {type:"", field: "pec", isMandatory: true, regex: /^[\w-.]+@([\w-]+.)+[\w-]{2,4}$/},
   {type:"", field: "street", isMandatory: true, regex: ""},
   {type:"", field: "number", isMandatory: false, regex: /^[0-9]+$/},
-  {type:"", field: "city", isMandatory: true, regex: /^[a-zA-Z]+$/}
+  {type:"", field: "city", isMandatory: true, regex: /^[\w ]+$/}
 ];
 
 const Customer = () => {  
@@ -34,7 +34,7 @@ const Customer = () => {
   var c = useParams();
   const [customerId] = useState(c.customerId != null ? c.customerId : null);
 
-  function save(){    
+  function save(){ 
     var isValid = true;
     var typerules = validateRules.filter(x => x.type === customerModel.type || x.type === "");
 
@@ -42,15 +42,14 @@ const Customer = () => {
       if(errorModel.[rule.field]){
         isValid = false;
         break;
-
       }
 
-      if(rule.isMandatory && (!customerModel.[rule.field] || customerModel.[rule.field].length === 0)){
+      if(rule.isMandatory && (!customerModel[rule.field] || customerModel[rule.field].length === 0)){
         isValid = false;
         break;
       }
 
-      if(rule.isMandatory && customerModel.[rule.field] && customerModel.[rule.field].length > 0 && rule.regex && !rule.regex.test(customerModel.[rule.field])){
+      if(rule.isMandatory && customerModel[rule.field] && customerModel[rule.field].length > 0 && rule.regex && !rule.regex.test(customerModel[rule.field])){
         isValid = false;
         break;
       }
@@ -111,62 +110,97 @@ const Customer = () => {
           "lp_address": address,
           "lp_contact_method": contacts,
         };
-      }      
+      }
 
-      axios.post(`${process.env.REACT_APP_BACKEND_URL}` + typeEndpoint, customer_customer, {
-        headers: {
-          Authorization:
-            'Bearer ' + localStorage.getItem("JWTtoken")
-        }})
-          .then(response => {
 
-            if(response.status === 200){
-              console.log("Created Person: ", response.data.id);
+      if(customerModel.id){
+        //update an entry
+        axios.put(`${process.env.REACT_APP_BACKEND_URL}` + typeEndpoint + "/" + customerModel.person_id, customer_customer, {
+          headers: {
+            Authorization:
+              'Bearer ' + localStorage.getItem("JWTtoken")
+          }})
+            .then(response => {
 
-              if(customerModel.type === "pp"){
-                customer.customer_customer = [{
-                  physical_person: {
-                    id: response.data.id  
-                  },
-                  "__component": "customer.physical-person",
-                }];
+              if(response.status === 200){
+                console.log("Updated Person: ", response.data.id);
 
-              } else if(customerModel.type === "lp"){
-                customer.customer_customer = [{
-                  legal_person: {
-                    id: response.data.id  
-                  },
-                  "__component": "customer.legal-person",
-                }];                
+                axios.put(`${process.env.REACT_APP_BACKEND_URL}/clients/` + customerModel.id, customer, {
+                  headers: {
+                    Authorization:
+                      'Bearer ' + localStorage.getItem("JWTtoken")
+                  }})
+                  .then(response => {
+                    if(response.status === 200){
+                      alert.success("Salvato");                          
+                    }
+                  }); 
 
-              }           
-
-              axios.post(`${process.env.REACT_APP_BACKEND_URL}/clients`, customer, {
-                headers: {
-                  Authorization:
-                    'Bearer ' + localStorage.getItem("JWTtoken")
-                }})
-                .then(response => {
-                  if(response.status === 200){
-                    alert.success("Salvato");                          
-                  }
-                }); 
-
-            } else {
-              alert.error("Errore:" + response.error);
-              console.log(response);
-            }
-            
-            
-          },
-          response => {
-              alert.error("Errore: " + response.error + " - " + response.message);
-              console.log(response)
+              } else {
+                alert.error("Errore:" + response.error);
+                console.log(response);
+              }
+              
+              
+            },
+            response => {
+                alert.error("Errore: " + response.error + " - " + response.message);
+                console.log(response)
           });
+      } else {
+        //create new entry
+        axios.post(`${process.env.REACT_APP_BACKEND_URL}` + typeEndpoint, customer_customer, {
+          headers: {
+            Authorization:
+              'Bearer ' + localStorage.getItem("JWTtoken")
+          }})
+            .then(response => {
 
+              if(response.status === 200){
+                console.log("Created Person: ", response.data.id);
 
+                if(customerModel.type === "pp"){
+                  customer.customer_customer = [{
+                    physical_person: {
+                      id: response.data.id  
+                    },
+                    "__component": "customer.physical-person",
+                  }];
 
-    
+                } else if(customerModel.type === "lp"){
+                  customer.customer_customer = [{
+                    legal_person: {
+                      id: response.data.id  
+                    },
+                    "__component": "customer.legal-person",
+                  }];                
+
+                }           
+
+                axios.post(`${process.env.REACT_APP_BACKEND_URL}/clients`, customer, {
+                  headers: {
+                    Authorization:
+                      'Bearer ' + localStorage.getItem("JWTtoken")
+                  }})
+                  .then(response => {
+                    if(response.status === 200){
+                      alert.success("Salvato");                          
+                    }
+                  }); 
+
+              } else {
+                alert.error("Errore:" + response.error);
+                console.log(response);
+              }
+              
+              
+            },
+            response => {
+                alert.error("Errore: " + response.error + " - " + response.message);
+                console.log(response)
+            });
+      }
+
     } else {
       console.log("NOT VALID");
       alert.error("Verificare i campi prima di procedere");
@@ -198,8 +232,6 @@ const Customer = () => {
                   <Query query={CUSTOMER_DATA_QUERY} variables={{ customerId: customerId }} >
                       {({ loading, error, data: { client } }) => {
 
-                        console.log(client);
-
                         customerModel.name = client.customer_customer[0].person.name ? client.customer_customer[0].person.name : "";
                         customerModel.surname = client.customer_customer[0].person.surname ? client.customer_customer[0].person.surname : "";
                         customerModel.code = client.customer_customer[0].person.code ? client.customer_customer[0].person.code : "";
@@ -221,6 +253,8 @@ const Customer = () => {
                         customerModel.city = client.customer_customer[0].person.address ? client.customer_customer[0].person.address.city : "";
                         customerModel.address_id = client.customer_customer[0].person.address ? client.customer_customer[0].person.address.id : "";
                         customerModel.contact_id = client.customer_customer[0].person.contact ? client.customer_customer[0].person.contact.id : "";
+                        customerModel.id = customerId;
+                        customerModel.person_id = client.customer_customer[0].person ? client.customer_customer[0].person.id : "";
                         customerModel.type = client.customer_type === "Fisico" ? "pp" : "lp";
 
 
