@@ -1,11 +1,13 @@
 import React from "react";
 import { Row, Col } from 'react-bootstrap';
+import { useAppContext } from "../../utils/contextLib";
 import BootstrapTable from 'react-bootstrap-table-next';
 import paginationFactory from 'react-bootstrap-table2-paginator';
 import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
 import 'react-bootstrap-table2-paginator/dist/react-bootstrap-table2-paginator.min.css';
 
-const Clients = ({ data, setSidebarData }) => {
+const Clients = ({ data }) => {
+	const { setNavbarData } = useAppContext();
 
 	//https://react-bootstrap-table.github.io/react-bootstrap-table2/
 	const selectRow = {
@@ -13,9 +15,10 @@ const Clients = ({ data, setSidebarData }) => {
 		bgColor: '#007bff33',
 		clickToSelect: true,
 		onSelect: (row, isSelect, rowIndex, e) => {
-			setSidebarData({
+			setNavbarData({
 				edit: true,
-				selectedId: row.id
+			    selectedId: row.id,
+			    page:"clients",
 			})
 		} 
 	};
@@ -61,9 +64,9 @@ const Clients = ({ data, setSidebarData }) => {
 					data={ data } 
 					columns={ columns }
 					selectRow={ selectRow }
-					bootstrap4='true'
-					hover='true'
-					condensed='true'
+					bootstrap4= {true}
+					hover={true}
+					condensed={true}
 					pagination={ paginationFactory() }
 					filterPosition='top' />	 
 	      	</Col>  

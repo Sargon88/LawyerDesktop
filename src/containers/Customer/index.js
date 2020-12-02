@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Row, Col, Container } from 'react-bootstrap';
 import { useAlert } from 'react-alert';
 import { useParams } from "react-router-dom";
+import { useAppContext } from "../../utils/contextLib";
 import Query from "../../components/Query";
 import axios from 'axios';
-import Navbar from "../../components/Nav";
+import NavBar from "../../components/Nav";
 import CustomerComponent from "../../components/Customer";
 import CUSTOMER_DATA_QUERY from "../../queries/customers/customerdata";
 
@@ -28,6 +29,7 @@ var validateRules = [
 ];
 
 const Customer = () => {  
+  const { setNavbarData } = useAppContext();
   const alert = useAlert()
   const [customerModel] = useState({});
   var errorModel = useState({});
@@ -207,9 +209,12 @@ const Customer = () => {
     }
   };
 
-  const [NavbarData, setNavbarData] = useState({
-    saveFunction: save
-  });	
+  useEffect(() => {
+    setNavbarData({
+      page:"newcustomer",
+      saveFunction: save
+    });
+  }, []);
   
   //manage user login
 	var appUser = null;
@@ -225,8 +230,6 @@ const Customer = () => {
       return (
         <Container fluid>
             <Row id="row_container">
-              <Navbar page="newcustomer" NavbarData={ NavbarData }/>
-
               <Col id="content-wrapper">
                   <br />
                   <Query query={CUSTOMER_DATA_QUERY} variables={{ customerId: customerId }} >
@@ -261,8 +264,7 @@ const Customer = () => {
                         if (loading) return null;
                         if (error) return `Error! ${error}`;
 
-                        return <CustomerComponent setNavbarData={setNavbarData} 
-                                                  customerModel={customerModel}
+                        return <CustomerComponent customerModel={customerModel}
                                                   errorModel={errorModel}
                                                   validateRules={validateRules}
                                                   customerId={customerId} />
@@ -278,8 +280,6 @@ const Customer = () => {
       return (
         <Container fluid>
             <Row id="row_container">
-              <Navbar page="newcustomer" NavbarData={ NavbarData }/>
-
               <Col id="content-wrapper">
                   <br />
                   <CustomerComponent setNavbarData={setNavbarData} 

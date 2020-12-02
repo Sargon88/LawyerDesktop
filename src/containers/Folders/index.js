@@ -1,16 +1,22 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Row, Col, Container } from 'react-bootstrap';
 import { useParams } from "react-router-dom";
-import Navbar from "../../components/Nav";
+import { useAppContext } from "../../utils/contextLib";
 import FoldersComponent from "../../components/Folders";
 import Query from "../../components/Query";
 import CUSTOMER_FOLDERS_QUERY from "../../queries/folders/customerfolders";
 
-const Folders = () => {  
+const Folders = ({ navbarData }) => {  
+  const { setNavbarData } = useAppContext();
   var c = useParams();
   const [customerId] = useState(c.customerId != null ? c.customerId : null);
-
-  const [navbarData, setNavbarData] = useState({
+  
+  useEffect(() => {
+    setNavbarData({
+      edit: false,
+      selectedId: "",
+      page:"folders",
+    });
   });	
   
   //manage user login
@@ -25,8 +31,6 @@ const Folders = () => {
     return (
       <Container fluid>
           <Row id="row_container">
-            <Navbar page="folders" navbarData={ navbarData }/>
-
             <Col id="content-wrapper">
                 <br />
                 <Query query={CUSTOMER_FOLDERS_QUERY} variables={{ customerId: customerId }} >

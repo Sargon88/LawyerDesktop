@@ -1,7 +1,8 @@
 import React from "react";
-import { Nav, Col } from "react-bootstrap";
+import { Nav, Navbar } from "react-bootstrap";
+import { useAppContext } from "../../utils/contextLib";
 import { Icon } from 'react-icons-kit';
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import {ic_add} from 'react-icons-kit/md/ic_add';
 import {ic_mode_edit} from 'react-icons-kit/md/ic_mode_edit'
 import {ic_save} from 'react-icons-kit/md/ic_save'
@@ -9,9 +10,12 @@ import {eye} from 'react-icons-kit/fa/eye'
 import {folderOpen} from 'react-icons-kit/fa/folderOpen'
 
 
-const Navbar = ({ page, navbarData }) => {
-       
- switch(page){
+const NavBar = () => {    
+  const { navbarData } = useAppContext();
+
+console.log("NavbarData: ", navbarData);
+
+ switch(navbarData.page){
     case "clients":
       return(
         <Navbar bg="light" expand="lg">
@@ -70,16 +74,12 @@ const Navbar = ({ page, navbarData }) => {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="mr-auto">
-              <Nav.Link href="/clienti">Clienti</Nav.Link>
-              <Nav.Link href="/contabilita">Contabilità</Nav.Link>
-              <Nav.Link href="/dafare">Da fare</Nav.Link>
-              <Nav.Link href="/ricerche">Ricerche</Nav.Link>
             </Nav>
           </Navbar.Collapse>
         </Navbar>
-
       );
-  }
+ }
+
 };
 
-export default Navbar;
+export default NavBar;

@@ -1,103 +1,56 @@
 import React from "react";
-import { Nav, Col } from "react-bootstrap";
-import { Icon } from 'react-icons-kit';
-import {ic_add} from 'react-icons-kit/md/ic_add';
-import {ic_mode_edit} from 'react-icons-kit/md/ic_mode_edit'
-import {ic_save} from 'react-icons-kit/md/ic_save'
-import {eye} from 'react-icons-kit/fa/eye'
-import {folderOpen} from 'react-icons-kit/fa/folderOpen'
+import { useHistory } from "react-router-dom";
+import { Nav, Col } from "react-bootstrap"
+import { useAppContext } from "../../utils/contextLib";
 import './SideBar.css';
 
 const SideBar = ({ page, sidebarData }) => {
+	const { isAuthenticated } = useAppContext();
+	const { userHasAuthenticated } = useAppContext();
+	const history = useHistory();
 
-	switch(page){
-		case "clients":
-			return(  
-				<>
-					<Col xs={1} id="sidebar-wrapper">
-						<Nav className="col-md-12 d-none d-md-block bg-light sidebar" activeKey="/home">
-							<div className="sidebar-sticky"></div>
-							<Nav.Item>
-								<Nav.Link href="/clienti/nuovo"><Icon icon={ic_add} size={40} /></Nav.Link>
-							</Nav.Item>
-							<Nav.Item>
-								<Nav.Link href={"/customers/" + sidebarData.selectedId} disabled={!sidebarData.edit}><Icon icon={ic_mode_edit} size={30} /></Nav.Link>
-							</Nav.Item>
-							<Nav.Item>
-								<Nav.Link href={"/folders/" + sidebarData.selectedId} disabled={!sidebarData.edit}><Icon icon={folderOpen} size={30} /></Nav.Link>
-							</Nav.Item>							
-						</Nav>
-					</Col>
+	function handleLogout() {
+		localStorage.clear();
+		userHasAuthenticated(false);
 
-				</>
-			);
-		case "folders":
-			return(  
-				<>
-					<Col xs={1} id="sidebar-wrapper">
-						<Nav className="col-md-12 d-none d-md-block bg-light sidebar" activeKey="/home">
-							<div className="sidebar-sticky"></div>
-							<Nav.Item>
-								<Nav.Link href="/folders/new"><Icon icon={ic_add} size={40} /></Nav.Link>
-							</Nav.Item>
-							<Nav.Item>
-								<Nav.Link href={"/folders/edit" + sidebarData.selectedId} disabled={!sidebarData.edit}><Icon icon={ic_mode_edit} size={30} /></Nav.Link>
-							</Nav.Item>
-							<Nav.Item>
-								<Nav.Link href={"/folders/view" + sidebarData.selectedId} disabled={!sidebarData.edit}><Icon icon={eye} size={30} /></Nav.Link>
-							</Nav.Item>							
-						</Nav>
-					</Col>
+		history.push("/login");
+	}
 
-				</>
-			);	
-		case "newcustomer":
-		case "editcustomer":
-			return(  
-				<>
-					<Col xs={1} id="sidebar-wrapper">
-						<Nav className="col-md-12 d-none d-md-block bg-light sidebar" activeKey="/home">
-							<div className="sidebar-sticky"></div>
-							<Nav.Item>
-								<Nav.Link href="/clienti/nuovo"><Icon icon={ic_add} size={40} /></Nav.Link>
-							</Nav.Item>
-							<Nav.Item>
-								<Nav.Link href="#" onClick={sidebarData.saveFunction}><Icon icon={ic_save} size={30} /></Nav.Link>
-							</Nav.Item>	
-							<Nav.Item>
-								<Nav.Link href={"/folders/" + sidebarData.selectedId} disabled={!sidebarData.edit}><Icon icon={folderOpen} size={30} /></Nav.Link>
-							</Nav.Item>						
-						</Nav>
-					</Col>
-
-				</>
-			);
-		default: 
-			return(  
-				<>
-					<Col xs={1} id="sidebar-wrapper">
-						<Nav className="col-md-12 d-none d-md-block bg-light sidebar" activeKey="/home" onSelect={selectedKey => alert(`selected ${selectedKey}`)}>
-							<div className="sidebar-sticky"></div>
-							<Nav.Item>
-								<Nav.Link href="/home">Active</Nav.Link>
-							</Nav.Item>
-							<Nav.Item>
-								<Nav.Link eventKey="link-1">Link</Nav.Link>
-							</Nav.Item>
-							<Nav.Item>
-								<Nav.Link eventKey="link-2">Link</Nav.Link>
-							</Nav.Item>
-							<Nav.Item>
-								<Nav.Link eventKey="disabled" disabled>
-									Disabled
-								</Nav.Link>
-							</Nav.Item>
-						</Nav>
-					</Col>
-
-				</>
-			);
-	}  
+	return(  
+		<Col xs={1} id="sidebar-wrapper">
+			{isAuthenticated === false
+				?
+				<Nav className="col-md-12 d-none d-md-block bg-light sidebar">
+					<div className="sidebar-sticky"></div>
+					<Nav.Item>
+						<Nav.Link href="/signup">Signup</Nav.Link>
+					</Nav.Item>
+					<Nav.Item>
+						<Nav.Link href="/login">Login</Nav.Link>
+					</Nav.Item>
+				</Nav>
+				:
+				<Nav className="col-md-12 d-none d-md-block bg-light sidebar">
+					<div className="sidebar-sticky"></div>
+					<Nav.Item>
+						<Nav.Link href="/clienti">Clienti</Nav.Link>
+					</Nav.Item>
+					<Nav.Item>
+						<Nav.Link href="/contabilita">Contabilità</Nav.Link>
+					</Nav.Item>
+					<Nav.Item>
+						<Nav.Link href="/dafare">Da fare</Nav.Link>
+					</Nav.Item>
+					<Nav.Item>
+						<Nav.Link href="/ricerche">Ricerche</Nav.Link>
+					</Nav.Item>
+					<Nav.Item>
+						<Nav.Link onClick={handleLogout}>Logout</Nav.Link>
+					</Nav.Item>
+				</Nav>
+			}					
+		</Col>
+	);
   
 };
 

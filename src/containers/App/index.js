@@ -1,17 +1,21 @@
 import React, { useState, useEffect } from "react";
 import { AppContext } from "../../utils/contextLib";
 import { Switch, Route } from "react-router-dom";
+import { Row, Col  } from 'react-bootstrap';
 import Clients from "../Clients";
 import Customer from "../Customer";
 import Folders from "../Folders";
 import Login from "../Login";
 import NotFound from "../NotFound";
 import Home from "../Test";
+import NavBar from "../../components/Nav";
+import SideBar from "../../components/Bootstrap/SideBar";
 
 
 function App() {
   const [isAuthenticated, userHasAuthenticated] = useState(false);
   const [isAuthenticating, setIsAuthenticating] = useState(true);
+  const [navbarData, setNavbarData] = useState({}); 
 
   useEffect(() => {
     onLoad();
@@ -37,15 +41,19 @@ function App() {
     setIsAuthenticating(false);
   }
 
-
   if(!isAuthenticated){
     return( 
-      <AppContext.Provider value={{ isAuthenticated, userHasAuthenticated }}>
+      <AppContext.Provider value={{ isAuthenticated, userHasAuthenticated, navbarData, setNavbarData }}>
         <div className="App container-fluid">
-          
-          <Switch>
-              <Route path="" component={Login} />
-          </Switch>
+          <NavBar navbarData={ navbarData }  />
+          <Row>
+            <SideBar />
+            <Col>
+              <Switch>
+                  <Route path="" component={Login} />
+              </Switch>
+            </Col>
+          </Row>
         </div>
       </AppContext.Provider>
     );
@@ -53,18 +61,23 @@ function App() {
   } else {
 
     return( 
-      !isAuthenticating && <AppContext.Provider value={{ isAuthenticated, userHasAuthenticated }}>
+      !isAuthenticating && <AppContext.Provider value={{ isAuthenticated, userHasAuthenticated, navbarData, setNavbarData }}>
         <div className="App container-fluid">
-         
-          <Switch>
-              <Route path="/" component={Home} exact />
-              <Route path="/clienti" component={Clients} exact />
-              <Route path="/clienti/nuovo" component={Customer} exact />
-              <Route path="/customers/:customerId" component={Customer} exact />
-              <Route path="/folders/:customerId" component={Folders} exact />
-              <Route path="/login" component={Login} exact />
-              <Route path="" component={NotFound} />
-          </Switch>
+          <NavBar navbarData={ navbarData }  />
+          <Row>
+            <SideBar />
+            <Col>
+              <Switch>
+                  <Route path="/" component={Home} exact />
+                  <Route path="/clienti" exact render={(props) => <Clients {...props} /> } />
+                  <Route path="/clienti/nuovo" exact render={(props) => <Customer  {...props} /> } />
+                  <Route path="/customers/:customerId" exact render={(props) => <Customer {...props} /> } />
+                  <Route path="/folders/:customerId" exact render={(props) => <Folders {...props} /> } />
+                  <Route path="/login" component={Login} exact />
+                  <Route path="" component={NotFound} />
+              </Switch>
+            </Col>
+          </Row>
         </div>
       </AppContext.Provider>
     );

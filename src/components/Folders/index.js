@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Row, Col, Form, Button, Collapse } from 'react-bootstrap';
+import { Row, Col, Button, Collapse } from 'react-bootstrap';
 import { Icon } from 'react-icons-kit';
 import {chevronDown} from 'react-icons-kit/fa/chevronDown'
 import {chevronUp} from 'react-icons-kit/fa/chevronUp'
@@ -14,7 +14,7 @@ const FoldersComponent = ({ data }) => {
 		<>
 		<Row>
 			<Col><h3>
-				{ customerData.customer_type == "Fisico" ? 
+				{ customerData.customer_type === "Fisico" ? 
 				  customerData.customer_customer[0].person.name + " " + customerData.customer_customer[0].person.surname + " - Pratiche " :
 				  customerData.customer_customer[0].person.surname + " - Pratiche "
 				}
@@ -23,7 +23,7 @@ const FoldersComponent = ({ data }) => {
 			        onClick={() => setOpenDetail(!openDetails)}
 			        aria-controls="customerData"
 			        aria-expanded={openDetails} >
-			        {openDetails == true ? <Icon icon={chevronUp} /> : <Icon icon={chevronDown} />}
+			        {openDetails === true ? <Icon icon={chevronUp} /> : <Icon icon={chevronDown} />}
 			      </Button>
 			</h3>
 			</Col>
