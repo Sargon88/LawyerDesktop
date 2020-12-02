@@ -3,33 +3,49 @@
     top: 0;
     bottom: 0;
     left: 0;
-    min-height: 100vh !important;
+    height: 100%;
+    overflow: auto;
     z-index: 100;
-    padding-top: 48px;
+    padding-top: 0.5px;
     padding-right: 0px !important;
     box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
-    width: 5vw !important;
 }
 
-.sidebar.nav-item {
-    width: 3.8vw !important;
+.sidebar-close{
+    width: 3vw !important;
 }
 
-#sidebar-wrapper{
-    min-height: 100vh !important;
-    width: 100vw;
-    margin-left: -1rem;
-    -webkit-transition: margin .25s ease-out;
-    -moz-transition: margin .25s ease-out;
-    -o-transition: margin .25s ease-out;
-    transition: margin .25s ease-out;
-}
-#sidebar-wrapper .sidebar-heading {
-    padding: 0.875rem 1.25rem;
-    font-size: 1.2rem;
+.sidebar-open{
+    width: 8vw !important;
 }
 
-#page-content-wrapper {
-    min-width: 0;
+.sidebar-wrapper-open{
+    width: 8vw !important;
+}
+.sidebar-wrapper-close{
+    width: 3vw !important;
+}
+
+.sidebar-wrapper-open.col-2 {
+    max-width: 9.666667%;
+    padding-left: 0px;
+}
+.sidebar-wrapper-close.col-2{
+    max-width: 4.666667%;
+    padding-left: 0px;
+}
+
+.sidebarCaret {
+    margin-bottom: 8vh !important;
+}
+
+/* On screens that are less than 700px wide, make the sidebar into a topbar */
+@media screen and (max-width: 700px) {
+  .sidebar {
     width: 100%;
+    height: auto;
+    position: relative;
+  }
+  .sidebar a {float: left;}
+  div.content {margin-left: 0;}
 }

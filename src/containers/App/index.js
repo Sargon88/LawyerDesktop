@@ -16,6 +16,7 @@ function App() {
   const [isAuthenticated, userHasAuthenticated] = useState(false);
   const [isAuthenticating, setIsAuthenticating] = useState(true);
   const [navbarData, setNavbarData] = useState({}); 
+  const [sidebarOpen, setSidebarOpen] = useState(true); 
 
   useEffect(() => {
     onLoad();
@@ -43,9 +44,9 @@ function App() {
 
   if(!isAuthenticated){
     return( 
-      <AppContext.Provider value={{ isAuthenticated, userHasAuthenticated, navbarData, setNavbarData }}>
+      <AppContext.Provider value={{ isAuthenticated, userHasAuthenticated, navbarData, setNavbarData, sidebarOpen, setSidebarOpen }}>
         <div className="App container-fluid">
-          <NavBar navbarData={ navbarData }  />
+          <NavBar />
           <Row>
             <SideBar />
             <Col>
@@ -61,9 +62,9 @@ function App() {
   } else {
 
     return( 
-      !isAuthenticating && <AppContext.Provider value={{ isAuthenticated, userHasAuthenticated, navbarData, setNavbarData }}>
-        <div className="App container-fluid">
-          <NavBar navbarData={ navbarData }  />
+      !isAuthenticating && <AppContext.Provider value={{ isAuthenticated, userHasAuthenticated, navbarData, setNavbarData, sidebarOpen, setSidebarOpen }}>
+        <div className="App container-fluid full-height">
+          <NavBar />
           <Row>
             <SideBar />
             <Col>

@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Row, Col, Button, Collapse } from 'react-bootstrap';
 import { Icon } from 'react-icons-kit';
-import {chevronDown} from 'react-icons-kit/fa/chevronDown'
-import {chevronUp} from 'react-icons-kit/fa/chevronUp'
+import {ic_keyboard_arrow_down} from 'react-icons-kit/md/ic_keyboard_arrow_down'
+import {ic_keyboard_arrow_up} from 'react-icons-kit/md/ic_keyboard_arrow_up'
 
 const FoldersComponent = ({ data }) => {
 	const [customerData] = useState(data);
@@ -23,7 +23,7 @@ const FoldersComponent = ({ data }) => {
 			        onClick={() => setOpenDetail(!openDetails)}
 			        aria-controls="customerData"
 			        aria-expanded={openDetails} >
-			        {openDetails === true ? <Icon icon={chevronUp} /> : <Icon icon={chevronDown} />}
+			        {openDetails === true ? <Icon icon={ic_keyboard_arrow_up} /> : <Icon icon={ic_keyboard_arrow_down} />}
 			      </Button>
 			</h3>
 			</Col>
