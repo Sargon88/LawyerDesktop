@@ -13,8 +13,6 @@ import {folderOpen} from 'react-icons-kit/fa/folderOpen'
 const NavBar = () => {    
   const { navbarData } = useAppContext();
 
-console.log("NavbarData: ", navbarData);
-
  switch(navbarData.page){
     case "clients":
       return(

@@ -8,8 +8,6 @@ const FoldersComponent = ({ data }) => {
 	const [customerData] = useState(data);
 	const [openDetails, setOpenDetail] = useState(false);
 
-	console.log(data);
-
 	return (
 		<>
 		<Row>
@@ -34,24 +32,26 @@ const FoldersComponent = ({ data }) => {
 					<div id="customerData" style={{backgroundColor: '#8080801f', border: '1px solid #007bff33', padding: '5px'}}>
 						{customerData.customer_customer.map((value, index) => {
 							return(
-								<>
-								<Row>
-									<Col><strong>{value.person.name ? value.person.name : ""} {value.person.surname}</strong></Col>
+								<Row key={index}>
+									<Col>
+										<Row>
+											<Col><strong>{value.person.name ? value.person.name : ""} {value.person.surname}</strong></Col>
+										</Row>
+										<Row>
+											<Col><strong>Codice Fiscale:</strong> <span className="text-uppercase">{value.person.code}</span></Col>
+										</Row>
+										<Row>
+											{value.person.contact.cnn_mobile.phone_number ? <Col><strong>Mobile:</strong> {value.person.contact.cnn_mobile.phone_number}</Col> : ""}
+											{value.person.contact.cnn_phone.phone_number ? <Col><strong>Telefono:</strong> {value.person.contact.cnn_phone.phone_number}</Col> : ""}
+											{value.person.contact.cnn_fax.phone_number ? <Col><strong>Fax:</strong> {value.person.contact.cnn_fax.phone_number}</Col> : ""}
+										</Row>
+										<Row>
+											{value.person.contact.cnn_mail ? <Col><strong>Mail:</strong> {value.person.contact.cnn_mail}</Col> : ""}
+											{value.person.contact.cnn_pec ? <Col><strong>PEC:</strong> {value.person.contact.cnn_pec}</Col> : ""}
+										</Row>
+										<br />
+									</Col>
 								</Row>
-								<Row>
-									<Col><strong>Codice Fiscale:</strong> <span className="text-uppercase">{value.person.code}</span></Col>
-								</Row>
-								<Row>
-									{value.person.contact.cnn_mobile.phone_number ? <Col><strong>Mobile:</strong> {value.person.contact.cnn_mobile.phone_number}</Col> : ""}
-									{value.person.contact.cnn_phone.phone_number ? <Col><strong>Telefono:</strong> {value.person.contact.cnn_phone.phone_number}</Col> : ""}
-									{value.person.contact.cnn_fax.phone_number ? <Col><strong>Fax:</strong> {value.person.contact.cnn_fax.phone_number}</Col> : ""}
-								</Row>
-								<Row>
-									{value.person.contact.cnn_mail ? <Col><strong>Mail:</strong> {value.person.contact.cnn_mail}</Col> : ""}
-									{value.person.contact.cnn_pec ? <Col><strong>PEC:</strong> {value.person.contact.cnn_pec}</Col> : ""}
-								</Row>
-								<br />
-								</>
 							);
 						})}
 					</div>

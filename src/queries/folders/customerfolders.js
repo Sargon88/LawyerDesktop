@@ -9,6 +9,7 @@ const CUSTOMER_FOLDERS_QUERY = gql`
 				__typename
 				... on ComponentCustomerLegalPerson{
 					person:legal_person{
+						id
 						surname: lp_name
 						code: lp_vatcode
 						contact: lp_contact_method{
@@ -28,6 +29,7 @@ const CUSTOMER_FOLDERS_QUERY = gql`
 				}
 				... on ComponentCustomerPhysicalPerson{
 					person:physical_person{
+						id
 						surname:pp_surname
 						name:pp_name
 						code:pp_fiscalcode

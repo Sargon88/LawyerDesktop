@@ -14,11 +14,9 @@ const CustomerType = ({ type, customerModel, errorModel, validateRules }) => {
     	var rule = validateRules.find(x => x.field === name);
 
 		if(rule.isMandatory && value.length === 0){
-			console.log(rule.field, "MANDATORY");
 			errorModel.[name] = "Campo obbligatorio";
 			
 		} else if(rule.isMandatory && value.length > 0 && rule.regex && !rule.regex.test(value)){
-			console.log(rule.field, "REGEX");
 			errorModel.[name] = "Valore non valido";
 
 		} else {
@@ -35,6 +33,7 @@ const CustomerType = ({ type, customerModel, errorModel, validateRules }) => {
     		e});
 	}
 
+	console.log("CUSTOMERMODEL", customerModel);
 
 	//https://www.positronx.io/react-form-validation-tutorial-with-example/
 	//https://medium.com/@adostes/validating-a-form-in-react-cc29d47e140f
@@ -45,7 +44,7 @@ const CustomerType = ({ type, customerModel, errorModel, validateRules }) => {
 					<Form>
 					<Row>
 						<Col>
-							<Row><h4>Anagrafica</h4></Row>
+							<Row><Col><h4>Anagrafica</h4></Col></Row>
 							{ type === "pp" ?
 							(<Row className="dataArea">
 								<Col>
@@ -111,9 +110,12 @@ const CustomerType = ({ type, customerModel, errorModel, validateRules }) => {
 					<br />
 					<Row>
 						<Col>
-							<Row><h4>Contatti</h4></Row>
-							<Row className="dataArea">
-								<Col>
+							<Row>
+								<Col><h4>Contatti</h4></Col>
+								<Col><h4>Indirizzo</h4></Col>
+							</Row>
+							<Row>
+								<Col className="dataArea">
 									<Row>
 										<Col>
 											<Form.Group controlId="newCustomerMobile">
@@ -169,15 +171,7 @@ const CustomerType = ({ type, customerModel, errorModel, validateRules }) => {
 										</Col>
 									</Row>
 								</Col>
-							</Row>	
-						</Col>
-					</Row>
-					<br />
-					<Row>
-						<Col>
-							<Row><h4>Indirizzo</h4></Row>
-							<Row className="dataArea">
-								<Col>
+								<Col className="dataArea">
 									<Row>
 										<Col>
 											<Form.Group controlId="newCustomerStreet">
@@ -243,9 +237,36 @@ const CustomerType = ({ type, customerModel, errorModel, validateRules }) => {
 										</Col>
 									</Row>
 								</Col>
-							</Row>
+							</Row>	
 						</Col>
 					</Row>
+					<br />
+
+					{(type !== "lp" || customerModel.referents.length == 0 ) ?
+						<></>
+						:
+						<Row>
+							<Col>
+								<Row><Col><h4>Referenti</h4></Col></Row>
+								<Row>
+								{customerModel.referents.map((value, index) => {
+									return(	
+										<Col xs={3} key={index}>
+											<Row><Col className="dataArea">
+											<Row><Col><h6>{value.name} {value.surname}</h6></Col></Row>
+											<Row><Col>Cellulare: {value.mobile}</Col></Row>
+											<Row><Col>Telefono: {value.phone}</Col></Row>
+											<Row><Col>Fax {value.fax}</Col></Row>
+											<Row><Col>Mail {value.mail}</Col></Row>
+											<Row><Col>Pec {value.pec}</Col></Row>
+											</Col></Row>
+										</Col>
+									);
+								})}
+								</Row>
+							</Col>
+						</Row>
+					}
 					</Form>
 				</Col>  
 			</Row>

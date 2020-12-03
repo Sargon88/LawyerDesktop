@@ -1,4 +1,18 @@
 .dataArea{
 	background-color: #8080801f;
 	border: 1px solid #007bff33;
+
+	margin-left: 7.5px;
+    margin-right: 7.5px;
+    padding-top: 15px;
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+}
+
+.referentsArea{
+	margin-left: 7.5px;
+    margin-right: 7.5px;
+    padding-top: 15px;
+    margin-bottom: 15px;
+    padding-bottom: 15px;
 }

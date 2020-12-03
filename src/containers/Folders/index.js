@@ -17,7 +17,7 @@ const Folders = ({ navbarData }) => {
       selectedId: "",
       page:"folders",
     });
-  });	
+  }, []);	
   
   //manage user login
 	var appUser = null;

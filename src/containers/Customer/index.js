@@ -125,7 +125,6 @@ const Customer = () => {
             .then(response => {
 
               if(response.status === 200){
-                console.log("Updated Person: ", response.data.id);
 
                 axios.put(`${process.env.REACT_APP_BACKEND_URL}/clients/` + customerModel.id, customer, {
                   headers: {
@@ -159,8 +158,6 @@ const Customer = () => {
             .then(response => {
 
               if(response.status === 200){
-                console.log("Created Person: ", response.data.id);
-
                 if(customerModel.type === "pp"){
                   customer.customer_customer = [{
                     physical_person: {
@@ -204,7 +201,6 @@ const Customer = () => {
       }
 
     } else {
-      console.log("NOT VALID");
       alert.error("Verificare i campi prima di procedere");
     }
   };
@@ -238,8 +234,8 @@ const Customer = () => {
                         customerModel.name = client.customer_customer[0].person.name ? client.customer_customer[0].person.name : "";
                         customerModel.surname = client.customer_customer[0].person.surname ? client.customer_customer[0].person.surname : "";
                         customerModel.code = client.customer_customer[0].person.code ? client.customer_customer[0].person.code : "";
-                        customerModel.society = client.customer_customer[0].person.society ? client.customer_customer[0].person.society : "";
-                        customerModel.vat = client.customer_customer[0].person.vat ? client.customer_customer[0].person.vat : "";
+                        customerModel.society = client.customer_customer[0].person.surname ? client.customer_customer[0].person.surname : "";
+                        customerModel.vat = client.customer_customer[0].person.code ? client.customer_customer[0].person.code : "";
                         customerModel.province = client.customer_customer[0].person.address ? client.customer_customer[0].person.address.province : "";
                         customerModel.cap = client.customer_customer[0].person.address ? client.customer_customer[0].person.address.zipcode : "";
                         customerModel.country = client.customer_customer[0].person.address ? client.customer_customer[0].person.address.country : "";
@@ -259,6 +255,24 @@ const Customer = () => {
                         customerModel.id = customerId;
                         customerModel.person_id = client.customer_customer[0].person ? client.customer_customer[0].person.id : "";
                         customerModel.type = client.customer_type === "Fisico" ? "pp" : "lp";
+                        customerModel.referents = [];
+
+                        if(client.customer_customer.length > 1){
+                          for(var i = 1; i < client.customer_customer.length; i++){
+                            var c = client.customer_customer[i].person;
+                            customerModel.referents.push({
+                              name: c.name,
+                              surname: c.surname,
+                              code: c.code,
+                              mobile: c.contact && c.contact.cnn_mobile ? c.contact.cnn_mobile.phone_number : "",
+                              phone: c.contact && c.contact.cnn_phone ? c.contact.cnn_phone.phone_number : "",
+                              fax: c.contact && c.contact.cnn_fax ? c.contact.cnn_fax.phone_number : "",
+                              mail: c.contact && c.contact.cnn_mail ? c.contact.cnn_mail : "",
+                              pec: c.contact && c.contact.cnn_pec ? c.contact.cnn_pec : "",
+                            });
+                          }
+                          
+                        }
 
 
                         if (loading) return null;
