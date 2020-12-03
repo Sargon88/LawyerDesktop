@@ -242,7 +242,7 @@ const CustomerType = ({ type, customerModel, errorModel, validateRules }) => {
 					</Row>
 					<br />
 
-					{(type !== "lp" || customerModel.referents.length == 0 ) ?
+					{type !== "lp" ?
 						<></>
 						:
 						<Row>
