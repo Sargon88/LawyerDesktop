@@ -269,6 +269,7 @@ const Customer = () => {
                               fax: c.contact && c.contact.cnn_fax ? c.contact.cnn_fax.phone_number : "",
                               mail: c.contact && c.contact.cnn_mail ? c.contact.cnn_mail : "",
                               pec: c.contact && c.contact.cnn_pec ? c.contact.cnn_pec : "",
+                              id: c.id,
                             });
                           }
                           
