@@ -34,10 +34,10 @@ const Folders = ({ navbarData }) => {
             <Col id="content-wrapper">
                 <br />
                 <Query query={CUSTOMER_FOLDERS_QUERY} variables={{ customerId: customerId }} >
-                      {({ loading, error, data: { client } }) => {
+                      {({ loading, error, data: { person } }) => {
 
                         return(
-                          <FoldersComponent data={ client } />
+                          <FoldersComponent data={ person } />
                         );
                       }}
                 </Query>

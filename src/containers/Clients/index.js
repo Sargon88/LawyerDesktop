@@ -74,28 +74,25 @@ const Clients = () => {
               <Row>
                 <Col>
                   <Query query={ALL_CLIENTS_PREVIEW_QUERY}>
-                    {({ data: { clients } }) => {
+                    {({ data: { people } }) => {
+
+                      console.log("PEOPLE", people);
 
                       let ppClients = [];
                       let lpClients = [];
 
                       if(ppvalue){
-                        ppClients = clients.filter(i => i.customer_customer[0].__typename  === "ComponentCustomerPhysicalPerson" ? true : false);
-                        ppClients = ppClients.filter(i => i.customer_customer[0].person.name.toLowerCase().includes(value.toLowerCase()) || 
-                                                          i.customer_customer[0].person.surname.toLowerCase().includes(value.toLowerCase()))
+                        ppClients = people.filter(i => i.type  === "Fisico" ? true : false);
+                        ppClients = ppClients.filter(i => i.name.toLowerCase().includes(value.toLowerCase()) || 
+                                                          i.surname.toLowerCase().includes(value.toLowerCase()))
                       }
 
                       if(lpvalue){
-                        lpClients = clients.filter(i => i.customer_customer[0].__typename  === "ComponentCustomerLegalPerson"  ? true : false);
-                        lpClients = lpClients.filter(i => i.customer_customer[0].person.surname.toLowerCase().includes(value.toLowerCase()))
+                        lpClients = people.filter(i => i.type  === "Giuridico"  ? true : false);
+                        lpClients = lpClients.filter(i => i.surname.toLowerCase().includes(value.toLowerCase()))
                       }
 
                       let filteredClients = ppClients.concat(lpClients);
-
-                      //build plain array
-                      filteredClients.forEach(function(e){
-                        e.person = e.customer_customer[0].person;
-                      });
 
                       return <Client data={ filteredClients } />;
                     }}

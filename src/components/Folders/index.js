@@ -7,14 +7,15 @@ import {ic_keyboard_arrow_up} from 'react-icons-kit/md/ic_keyboard_arrow_up'
 const FoldersComponent = ({ data }) => {
 	const [customerData] = useState(data);
 	const [openDetails, setOpenDetail] = useState(false);
+console.log("data", data);
 
 	return (
 		<>
 		<Row>
 			<Col><h3>
-				{ customerData.customer_type === "Fisico" ? 
-				  customerData.customer_customer[0].person.name + " " + customerData.customer_customer[0].person.surname + " - Pratiche " :
-				  customerData.customer_customer[0].person.surname + " - Pratiche "
+				{ customerData.type === "Fisico" ? 
+				  customerData.name + " " + customerData.surname + " - Pratiche " :
+				  customerData.surname + " - Pratiche "
 				}
 				<Button
 					variant="link"
@@ -30,7 +31,27 @@ const FoldersComponent = ({ data }) => {
 			<Col>
 				<Collapse in={openDetails}>
 					<div id="customerData" style={{backgroundColor: '#8080801f', border: '1px solid #007bff33', padding: '5px'}}>
-						{customerData.customer_customer.map((value, index) => {
+						<Row>
+							<Col>
+								<Row>
+									<Col><strong>{customerData.name ? customerData.name : ""} {customerData.surname}</strong></Col>
+								</Row>
+								<Row>
+									<Col><strong>{customerData.type === 'pp' ? "Codice Fiscale:" : "Partita Iva:"}</strong> <span className="text-uppercase">{customerData.code}</span></Col>
+								</Row>
+								<Row>
+									{customerData.contact.cnn_mobile.phone_number ? <Col><strong>Mobile:</strong> {customerData.contact.cnn_mobile.phone_number}</Col> : ""}
+									{customerData.contact.cnn_phone.phone_number ? <Col><strong>Telefono:</strong> {customerData.contact.cnn_phone.phone_number}</Col> : ""}
+									{customerData.contact.cnn_fax.phone_number ? <Col><strong>Fax:</strong> {customerData.contact.cnn_fax.phone_number}</Col> : ""}
+								</Row>
+								<Row>
+									{customerData.contact.cnn_mail ? <Col><strong>Mail:</strong> {customerData.contact.cnn_mail}</Col> : ""}
+									{customerData.contact.cnn_pec ? <Col><strong>PEC:</strong> {customerData.contact.cnn_pec}</Col> : ""}
+								</Row>
+								<br />
+							</Col>
+						</Row>
+						{customerData.referents.map((value, index) => {
 							return(
 								<Row key={index}>
 									<Col>

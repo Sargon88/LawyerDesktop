@@ -59,65 +59,43 @@ const Customer = () => {
 
     if(isValid){
 
-      var typeEndpoint = "";
-      var customer_customer = {};
-      var customer = {
-        customer_active: true
+
+
+      var person = {
+        id: customerModel.id,
+        person_type: customerModel.type === "pp" ? "Fisico" : "Giuridico",
+        person_surname: customerModel.surname,
+        person_name: customerModel.name,
+        person_code: customerModel.code,
+        person_active: true,
+        person_contact: {
+            cnn_phone: {
+              phone_number: customerModel.phone
+            },
+            cnn_mobile: {
+              phone_number: customerModel.mobile
+            },
+            cnn_fax: {
+              phone_number: customerModel.fax
+            },
+            cnn_mail: customerModel.mail,
+            cnn_pec: customerModel.pec
+          },
+          person_address: {
+            address_street:customerModel.street,
+            address_city:customerModel.city,
+            address_province:customerModel.province,
+            address_country:customerModel.country,
+            address_number:customerModel.number,
+            address_zipcode:customerModel.cap,
+          },
+
+        
       }
-
-      var contacts = {
-        "cnn_mobile":{
-          "phone_number": customerModel.mobile
-        },
-        "cnn_phone":{
-          "phone_number": customerModel.phone
-        },
-        "cnn_fax":{
-          "phone_number": customerModel.fax
-        },
-        "cnn_mail": customerModel.mail,
-        "cnn_pec": customerModel.pec
-      };
-
-      var address = {
-        "address_street":customerModel.street,
-        "address_city":customerModel.city,
-        "address_province":customerModel.province,
-        "address_country":customerModel.country,
-        "address_number":customerModel.number,
-        "address_zipcode":customerModel.cap,
-      };
-
-      if(customerModel.type === "pp"){
-        typeEndpoint = "/phisical-people";
-        customer.customer_type = "Fisico";
-        customer.customer_name = customerModel.name;
-
-        customer_customer = {
-          "pp_name":customerModel.name,
-          "pp_surname":customerModel.surname,
-          "pp_fiscalcode": customerModel.code,
-          "pp_address": address,
-          "pp_contact_method": contacts,
-        };
-          
-      } else if(customerModel.type === "lp"){
-        typeEndpoint = "/legal-people";
-        customer.customer_type = "Giuridico";
-        customer.customer_name = customerModel.society;
-
-        customer_customer = {
-          "lp_name":customerModel.society,
-          "lp_vatcode": customerModel.vat,
-          "lp_address": address,
-          "lp_contact_method": contacts,
-        };
-      }
-
 
       if(customerModel.id){
         //update an entry
-        axios.put(`${process.env.REACT_APP_BACKEND_URL}` + typeEndpoint + "/" + customerModel.person_id, customer_customer, {
+        axios.put(`${process.env.REACT_APP_BACKEND_URL}/people/` + customerModel.id, person, {
           headers: {
             Authorization:
               'Bearer ' + localStorage.getItem("JWTtoken")
@@ -125,17 +103,7 @@ const Customer = () => {
             .then(response => {
 
               if(response.status === 200){
-
-                axios.put(`${process.env.REACT_APP_BACKEND_URL}/clients/` + customerModel.id, customer, {
-                  headers: {
-                    Authorization:
-                      'Bearer ' + localStorage.getItem("JWTtoken")
-                  }})
-                  .then(response => {
-                    if(response.status === 200){
-                      alert.success("Salvato");                          
-                    }
-                  }); 
+                alert.success("Salvato");                          
 
               } else {
                 alert.error("Errore:" + response.error);
@@ -147,10 +115,11 @@ const Customer = () => {
             response => {
                 alert.error("Errore: " + response.error + " - " + response.message);
                 console.log(response)
-          });
+            });
+
       } else {
         //create new entry
-        axios.post(`${process.env.REACT_APP_BACKEND_URL}` + typeEndpoint, customer_customer, {
+        axios.post(`${process.env.REACT_APP_BACKEND_URL}/people`, person, {
           headers: {
             Authorization:
               'Bearer ' + localStorage.getItem("JWTtoken")
@@ -158,34 +127,7 @@ const Customer = () => {
             .then(response => {
 
               if(response.status === 200){
-                if(customerModel.type === "pp"){
-                  customer.customer_customer = [{
-                    physical_person: {
-                      id: response.data.id  
-                    },
-                    "__component": "customer.physical-person",
-                  }];
-
-                } else if(customerModel.type === "lp"){
-                  customer.customer_customer = [{
-                    legal_person: {
-                      id: response.data.id  
-                    },
-                    "__component": "customer.legal-person",
-                  }];                
-
-                }           
-
-                axios.post(`${process.env.REACT_APP_BACKEND_URL}/clients`, customer, {
-                  headers: {
-                    Authorization:
-                      'Bearer ' + localStorage.getItem("JWTtoken")
-                  }})
-                  .then(response => {
-                    if(response.status === 200){
-                      alert.success("Salvato");                          
-                    }
-                  }); 
+                alert.success("Salvato");                          
 
               } else {
                 alert.error("Errore:" + response.error);
@@ -229,37 +171,39 @@ const Customer = () => {
               <Col id="content-wrapper">
                   <br />
                   <Query query={CUSTOMER_DATA_QUERY} variables={{ customerId: customerId }} >
-                      {({ loading, error, data: { client } }) => {
+                      {({ loading, error, data: { person } }) => {
 
-                        customerModel.name = client.customer_customer[0].person.name ? client.customer_customer[0].person.name : "";
-                        customerModel.surname = client.customer_customer[0].person.surname ? client.customer_customer[0].person.surname : "";
-                        customerModel.code = client.customer_customer[0].person.code ? client.customer_customer[0].person.code : "";
-                        customerModel.society = client.customer_customer[0].person.surname ? client.customer_customer[0].person.surname : "";
-                        customerModel.vat = client.customer_customer[0].person.code ? client.customer_customer[0].person.code : "";
-                        customerModel.province = client.customer_customer[0].person.address ? client.customer_customer[0].person.address.province : "";
-                        customerModel.cap = client.customer_customer[0].person.address ? client.customer_customer[0].person.address.zipcode : "";
-                        customerModel.country = client.customer_customer[0].person.address ? client.customer_customer[0].person.address.country : "";
-                        customerModel.mobile = client.customer_customer[0].person.contact ? client.customer_customer[0].person.contact.cnn_mobile.phone_number : "";
-                        customerModel.mobile_id = client.customer_customer[0].person.contact ? client.customer_customer[0].person.contact.cnn_mobile.id : "";
-                        customerModel.phone = client.customer_customer[0].person.contact ? client.customer_customer[0].person.contact.cnn_phone.phone_number : "";
-                        customerModel.phone_id = client.customer_customer[0].person.contact ? client.customer_customer[0].person.contact.cnn_phone.id : "";
-                        customerModel.fax = client.customer_customer[0].person.contact ? client.customer_customer[0].person.contact.cnn_fax.phone_number : "";
-                        customerModel.fax_id = client.customer_customer[0].person.contact ? client.customer_customer[0].person.contact.cnn_fax.id : "";
-                        customerModel.mail = client.customer_customer[0].person.contact ? client.customer_customer[0].person.contact.cnn_mail : "";
-                        customerModel.pec = client.customer_customer[0].person.contact ? client.customer_customer[0].person.contact.cnn_pec : "";
-                        customerModel.street = client.customer_customer[0].person.address ? client.customer_customer[0].person.address.street : "";
-                        customerModel.number = client.customer_customer[0].person.address ? client.customer_customer[0].person.address.number : "";
-                        customerModel.city = client.customer_customer[0].person.address ? client.customer_customer[0].person.address.city : "";
-                        customerModel.address_id = client.customer_customer[0].person.address ? client.customer_customer[0].person.address.id : "";
-                        customerModel.contact_id = client.customer_customer[0].person.contact ? client.customer_customer[0].person.contact.id : "";
+                        console.log("CLIENT", person);
+
+                        customerModel.name = person.name ? person.name : "";
+                        customerModel.surname = person.surname ? person.surname : "";
+                        customerModel.code = person.code ? person.code : "";
+                        customerModel.society = person.surname ? person.surname : "";
+                        customerModel.vat = person.code ? person.code : "";
+                        customerModel.province = person.address ? person.address.province : "";
+                        customerModel.cap = person.address ? person.address.zipcode : "";
+                        customerModel.country = person.address ? person.address.country : "";
+                        customerModel.mobile = person.contact ? person.contact.cnn_mobile.phone_number : "";
+                        customerModel.mobile_id = person.contact ? person.contact.cnn_mobile.id : "";
+                        customerModel.phone = person.contact ? person.contact.cnn_phone.phone_number : "";
+                        customerModel.phone_id = person.contact ? person.contact.cnn_phone.id : "";
+                        customerModel.fax = person.contact ? person.contact.cnn_fax.phone_number : "";
+                        customerModel.fax_id = person.contact ? person.contact.cnn_fax.id : "";
+                        customerModel.mail = person.contact ? person.contact.cnn_mail : "";
+                        customerModel.pec = person.contact ? person.contact.cnn_pec : "";
+                        customerModel.street = person.address ? person.address.street : "";
+                        customerModel.number = person.address ? person.address.number : "";
+                        customerModel.city = person.address ? person.address.city : "";
+                        customerModel.address_id = person.address ? person.address.id : "";
+                        customerModel.contact_id = person.contact ? person.contact.id : "";
                         customerModel.id = customerId;
-                        customerModel.person_id = client.customer_customer[0].person ? client.customer_customer[0].person.id : "";
-                        customerModel.type = client.customer_type === "Fisico" ? "pp" : "lp";
+                        customerModel.person_id = person ? person.id : "";
+                        customerModel.type = person.type === "Fisico" ? "pp" : "lp";
                         customerModel.referents = [];
 
-                        if(client.customer_customer.length > 1){
-                          for(var i = 1; i < client.customer_customer.length; i++){
-                            var c = client.customer_customer[i].person;
+                        if(person.referents.length > 0){
+                          for(var i = 0; i < person.referents.length; i++){
+                            var c = person.referents[i].person;
                             customerModel.referents.push({
                               name: c.name,
                               surname: c.surname,

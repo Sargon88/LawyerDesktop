@@ -8,6 +8,7 @@ import 'react-bootstrap-table2-paginator/dist/react-bootstrap-table2-paginator.m
 
 const Clients = ({ data }) => {
 	const { setNavbarData } = useAppContext();
+	console.log("DATA", data);
 
 	//https://react-bootstrap-table.github.io/react-bootstrap-table2/
 	const selectRow = {
@@ -29,29 +30,29 @@ const Clients = ({ data }) => {
 		  text: ''
 		},
 		{
-		  dataField: 'person.surname',
+		  dataField: 'surname',
 		  text: 'Cognome/Ragione Sociale',
 		  sort: true
 		},
 		{
-		  dataField: 'person.name',
+		  dataField: 'name',
 		  text: 'Nome',
 		  sort: true
 		},
 		{
-		  dataField: 'person.code',
+		  dataField: 'code',
 		  text: 'Codie Fiscale/Partita iva'
 		},
 		{
-		  dataField: 'person.contact.cnn_phone.phone_number',
+		  dataField: 'contact.cnn_phone.phone_number',
 		  text: 'Telefono'
 		},
 		{
-		  dataField: 'person.contact.cnn_mail',
+		  dataField: 'contact.cnn_mail',
 		  text: 'Mail'
 		},
 		{
-		  dataField: 'person.contact.cnn_pec',
+		  dataField: 'contact.cnn_pec',
 		  text: 'Pec'
 		},
 	];
