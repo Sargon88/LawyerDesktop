@@ -4,7 +4,7 @@ import { useAppContext } from "../../utils/contextLib";
 import { Icon } from 'react-icons-kit';
 import { Link } from "react-router-dom";
 import {ic_add} from 'react-icons-kit/md/ic_add';
-import {ic_mode_edit} from 'react-icons-kit/md/ic_mode_edit'
+import {ic_mode_edit} from 'react-icons-kit/md/ic_mode_edit';
 import {ic_save} from 'react-icons-kit/md/ic_save'
 import {eye} from 'react-icons-kit/fa/eye'
 import {folderOpen} from 'react-icons-kit/fa/folderOpen'

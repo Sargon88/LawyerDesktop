@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import { Row, Col, Form } from 'react-bootstrap';
+import {ic_add} from 'react-icons-kit/md/ic_add';
+import {ic_mode_edit} from 'react-icons-kit/md/ic_mode_edit';
+import { Icon } from 'react-icons-kit';
 import './customerType.css';
 
 const CustomerType = ({ type, customerModel, errorModel, validateRules }) => {
@@ -247,19 +250,29 @@ const CustomerType = ({ type, customerModel, errorModel, validateRules }) => {
 						:
 						<Row>
 							<Col>
-								<Row><Col><h4>Referenti</h4></Col></Row>
+								<Row><Col><h4>Referenti <Icon icon={ic_add} xs={35} /></h4></Col></Row>
 								<Row>
 								{customerModel.referents.map((value, index) => {
+									console.log("VALUE", value);
 									return(	
 										<Col xs={3} key={index}>
-											<Row><Col className="dataArea">
-											<Row><Col><h6>{value.name} {value.surname}</h6></Col></Row>
-											<Row><Col>Cellulare: {value.mobile}</Col></Row>
-											<Row><Col>Telefono: {value.phone}</Col></Row>
-											<Row><Col>Fax {value.fax}</Col></Row>
-											<Row><Col>Mail {value.mail}</Col></Row>
-											<Row><Col>Pec {value.pec}</Col></Row>
-											</Col></Row>
+											<Row>
+												<Col className="dataArea">
+													<Row>
+														<Col xs={10}>
+															<h6>{value.name} {value.surname}</h6>
+														</Col>
+														<Col xs={2}>
+															<a href={"referente/"+ value.id } ><Icon icon={ic_mode_edit} xs={35} /></a>
+														</Col>
+													</Row>
+													<Row><Col>Cellulare: {value.mobile}</Col></Row>
+													<Row><Col>Telefono: {value.phone}</Col></Row>
+													<Row><Col>Fax {value.fax}</Col></Row>
+													<Row><Col>Mail {value.mail}</Col></Row>
+													<Row><Col>Pec {value.pec}</Col></Row>
+												</Col>
+											</Row>
 										</Col>
 									);
 								})}
