@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Row, Col, Form } from 'react-bootstrap';
+import { Row, Col, Form, Modal, Button,  } from 'react-bootstrap';
 import {ic_add} from 'react-icons-kit/md/ic_add';
 import {ic_mode_edit} from 'react-icons-kit/md/ic_mode_edit';
 import { Icon } from 'react-icons-kit';
@@ -36,7 +36,20 @@ const CustomerType = ({ type, customerModel, errorModel, validateRules }) => {
     		e});
 	}
 
-	console.log("CUSTOMERMODEL", customerModel);
+	//MODAL
+	 const [show, setShow] = useState(false);
+	 const [selectedReferent, setSelectedReferent] = useState(null);
+
+	  const handleClose = () => setShow(false);
+	  const handleShow = () => openModal();
+
+	  function openModal(referent){
+	  	console.log("MODAL ID", referent);
+	  	setSelectedReferent(referent);
+	  	setShow(true);
+	  	
+	  }
+	//MODAL
 
 	//https://www.positronx.io/react-form-validation-tutorial-with-example/
 	//https://medium.com/@adostes/validating-a-form-in-react-cc29d47e140f
@@ -248,37 +261,56 @@ const CustomerType = ({ type, customerModel, errorModel, validateRules }) => {
 					{type !== "lp" ?
 						<></>
 						:
-						<Row>
-							<Col>
-								<Row><Col><h4>Referenti <a href={"/referente" } ><Icon icon={ic_add} xs={35} /></a></h4></Col></Row>
-								<Row>
-								{customerModel.referents.map((value, index) => {
-									console.log("VALUE", value);
-									return(	
-										<Col xs={3} key={index}>
-											<Row>
-												<Col className="dataArea">
-													<Row>
-														<Col xs={10}>
-															<h6>{value.name} {value.surname}</h6>
-														</Col>
-														<Col xs={2}>
-															<a href={"(/referente/"+ value.id } ><Icon icon={ic_mode_edit} xs={35} /></a>
-														</Col>
-													</Row>
-													<Row><Col>Cellulare: {value.mobile}</Col></Row>
-													<Row><Col>Telefono: {value.phone}</Col></Row>
-													<Row><Col>Fax {value.fax}</Col></Row>
-													<Row><Col>Mail {value.mail}</Col></Row>
-													<Row><Col>Pec {value.pec}</Col></Row>
-												</Col>
-											</Row>
-										</Col>
-									);
-								})}
-								</Row>
-							</Col>
-						</Row>
+						<>
+							<Row>
+								<Col>
+									<Row><Col><h4>Referenti <a value={""} onClick={() => openModal(null)} ><Icon icon={ic_add} xs={35} /></a></h4></Col></Row>
+									<Row>
+									{customerModel.referents.map((value, index) => {
+										console.log("VALUE", value);
+										return(	
+											<Col xs={3} key={index}>
+												<Row>
+													<Col className="dataArea">
+														<Row>
+															<Col xs={10}>
+																<h6>{value.name} {value.surname}</h6>
+															</Col>
+															<Col xs={2}>
+																<a onClick={() => openModal(value)} ><Icon icon={ic_mode_edit} xs={35} /></a>
+															</Col>
+														</Row>
+														<Row><Col>Cellulare: {value.mobile}</Col></Row>
+														<Row><Col>Telefono: {value.phone}</Col></Row>
+														<Row><Col>Fax {value.fax}</Col></Row>
+														<Row><Col>Mail {value.mail}</Col></Row>
+														<Row><Col>Pec {value.pec}</Col></Row>
+													</Col>
+												</Row>
+											</Col>
+										);
+									})}
+									</Row>
+								</Col>
+							</Row>
+
+							<Modal show={show} onHide={handleClose}>
+								<Modal.Header closeButton>
+									<Modal.Title>{selectedReferent == null ? "Aggiungi Referente" : "Modifica Referente"}</Modal.Title>
+								</Modal.Header>
+								<Modal.Body>
+								{selectedReferent == null ? <></> : "prova "+ selectedReferent.name}								
+								</Modal.Body>
+								<Modal.Footer>
+									<Button variant="secondary" onClick={handleClose}>
+										Close
+									</Button>
+									<Button variant="primary" onClick={handleClose}>
+										Save Changes
+									</Button>
+								</Modal.Footer>
+							</Modal>
+						</>	
 					}
 					</Form>
 				</Col>  
