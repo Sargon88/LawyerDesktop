@@ -250,7 +250,7 @@ const CustomerType = ({ type, customerModel, errorModel, validateRules }) => {
 						:
 						<Row>
 							<Col>
-								<Row><Col><h4>Referenti <Icon icon={ic_add} xs={35} /></h4></Col></Row>
+								<Row><Col><h4>Referenti <a href={"/referente" } ><Icon icon={ic_add} xs={35} /></a></h4></Col></Row>
 								<Row>
 								{customerModel.referents.map((value, index) => {
 									console.log("VALUE", value);
@@ -263,7 +263,7 @@ const CustomerType = ({ type, customerModel, errorModel, validateRules }) => {
 															<h6>{value.name} {value.surname}</h6>
 														</Col>
 														<Col xs={2}>
-															<a href={"referente/"+ value.id } ><Icon icon={ic_mode_edit} xs={35} /></a>
+															<a href={"(/referente/"+ value.id } ><Icon icon={ic_mode_edit} xs={35} /></a>
 														</Col>
 													</Row>
 													<Row><Col>Cellulare: {value.mobile}</Col></Row>

@@ -36,6 +36,8 @@ const Customer = () => {
   var c = useParams();
   const [customerId] = useState(c.customerId != null ? c.customerId : null);
 
+  console.log("C", c);
+
   function save(){ 
     var isValid = true;
     var typerules = validateRules.filter(x => x.type === customerModel.type || x.type === "");
@@ -89,8 +91,6 @@ const Customer = () => {
             address_number:customerModel.number,
             address_zipcode:customerModel.cap,
           },
-
-        
       }
 
       if(customerModel.id){
