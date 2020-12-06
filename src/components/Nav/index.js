@@ -16,7 +16,7 @@ const NavBar = () => {
  switch(navbarData.page){
     case "clients":
       return(
-        <Navbar bg="light" expand="lg">
+        <Navbar fixed="top" bg="light" expand="lg">
           <Navbar.Brand>
             <Link to="/">{process.env.REACT_APP_APPLICATION_NAME}</Link>
           </Navbar.Brand>
@@ -32,7 +32,7 @@ const NavBar = () => {
       );
     case "folders":
       return(
-        <Navbar bg="light" expand="lg">
+        <Navbar fixed="top" bg="light" expand="lg">
           <Navbar.Brand>
             <Link to="/">{process.env.REACT_APP_APPLICATION_NAME}</Link>
           </Navbar.Brand>
@@ -49,7 +49,7 @@ const NavBar = () => {
     case "newcustomer":
     case "editcustomer":
       return(  
-        <Navbar bg="light" expand="lg">
+        <Navbar fixed="top"  bg="light" expand="lg">
           <Navbar.Brand>
             <Link to="/">{process.env.REACT_APP_APPLICATION_NAME}</Link>
           </Navbar.Brand>
@@ -58,14 +58,14 @@ const NavBar = () => {
             <Nav className="mr-auto">
               <Nav.Link href="/clienti/nuovo"><Icon icon={ic_add} size={40} /></Nav.Link>
               <Nav.Link href="#" onClick={navbarData.saveFunction}><Icon icon={ic_save} size={30} /></Nav.Link>
-              <Nav.Link href={"/folders/" + navbarData.selectedId} disabled={!navbarData.edit}><Icon icon={folderOpen} size={30} /></Nav.Link>
+              <Nav.Link href={"/folders/" + navbarData.selectedId} disabled={!navbarData.selectedId}><Icon icon={folderOpen} size={30} /></Nav.Link>
             </Nav>
           </Navbar.Collapse>
         </Navbar>
       );  
     default:
       return(
-        <Navbar bg="light" expand="lg">
+        <Navbar fixed="top"  bg="light" expand="lg">
           <Navbar.Brand>
             <Link to="/">{process.env.REACT_APP_APPLICATION_NAME}</Link>
           </Navbar.Brand>

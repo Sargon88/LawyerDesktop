@@ -38,7 +38,7 @@ const Clients = () => {
   if(appUser){
 
       return (
-        <Container fluid>
+        <>
           <Row id="row_container">
             <Col id="content-wrapper">
               <br />
@@ -101,7 +101,7 @@ const Clients = () => {
               </Row>
             </Col>
           </Row>
-        </Container>
+        </>
       );
 
 

@@ -47,7 +47,7 @@ function App() {
       <AppContext.Provider value={{ isAuthenticated, userHasAuthenticated, navbarData, setNavbarData, sidebarOpen, setSidebarOpen }}>
         <div className="App container-fluid">
           <NavBar />
-          <Row>
+          <Row className="content-container">
             <SideBar />
             <Col>
               <Switch>
@@ -64,8 +64,10 @@ function App() {
     return( 
       !isAuthenticating && <AppContext.Provider value={{ isAuthenticated, userHasAuthenticated, navbarData, setNavbarData, sidebarOpen, setSidebarOpen }}>
         <div className="App container-fluid full-height">
-          <NavBar />
           <Row>
+            <NavBar />
+          </Row>
+          <Row className="content-container">
             <SideBar />
             <Col>
               <Switch>

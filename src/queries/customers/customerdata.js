@@ -40,7 +40,16 @@ const CUSTOMER_DATA_QUERY = gql`
 					surname:person_surname
 					code:person_code
 					contact: person_contact{
+						cnn_phone{
+							id
+							phone_number
+						}
 						cnn_mobile{
+							id
+							phone_number
+						}
+						cnn_fax{
+							id
 							phone_number
 						}
 						cnn_mail

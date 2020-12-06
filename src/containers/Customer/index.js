@@ -36,8 +36,6 @@ const Customer = () => {
   var c = useParams();
   const [customerId] = useState(c.customerId != null ? c.customerId : null);
 
-  console.log("C", c);
-
   function save(){ 
     var isValid = true;
     var typerules = validateRules.filter(x => x.type === customerModel.type || x.type === "");
@@ -150,7 +148,8 @@ const Customer = () => {
   useEffect(() => {
     setNavbarData({
       page:"newcustomer",
-      saveFunction: save
+      saveFunction: save,
+      selectedId: customerId
     });
   }, []);
   
@@ -166,14 +165,12 @@ const Customer = () => {
     if(customerId){
       //edit customer
       return (
-        <Container fluid>
+        <>
             <Row id="row_container">
               <Col id="content-wrapper">
                   <br />
                   <Query query={CUSTOMER_DATA_QUERY} variables={{ customerId: customerId }} >
                       {({ loading, error, data: { person } }) => {
-
-                        console.log("CLIENT", person);
 
                         customerModel.name = person.name ? person.name : "";
                         customerModel.surname = person.surname ? person.surname : "";
@@ -219,7 +216,6 @@ const Customer = () => {
                           
                         }
 
-
                         if (loading) return null;
                         if (error) return `Error! ${error}`;
 
@@ -231,13 +227,13 @@ const Customer = () => {
                   </Query>
               </Col>
             </Row>
-        </Container>
+        </>
       );
       
     } else {
       //new customer
       return (
-        <Container fluid>
+        <>
             <Row id="row_container">
               <Col id="content-wrapper">
                   <br />
@@ -248,7 +244,7 @@ const Customer = () => {
                                      customerId={customerId} />
               </Col>
             </Row>
-        </Container>
+        </>
       );
     }
 
