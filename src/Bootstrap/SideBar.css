@@ -1,0 +1,51 @@
+.sidebar {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    height: 100%;
+    overflow: auto;
+    z-index: 100;
+    padding-top: 0.5px;
+    padding-right: 0px !important;
+    box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
+}
+
+.sidebar-close{
+    width: 3vw !important;
+}
+
+.sidebar-open{
+    width: 8vw !important;
+}
+
+.sidebar-wrapper-open{
+    width: 8vw !important;
+}
+.sidebar-wrapper-close{
+    width: 3vw !important;
+}
+
+.sidebar-wrapper-open.col-2 {
+    max-width: 9.666667%;
+    padding-left: 0px;
+}
+.sidebar-wrapper-close.col-2{
+    max-width: 4.666667%;
+    padding-left: 0px;
+}
+
+.sidebarCaret {
+    margin-bottom: 8vh !important;
+}
+
+/* On screens that are less than 700px wide, make the sidebar into a topbar */
+@media screen and (max-width: 700px) {
+  .sidebar {
+    width: 100%;
+    height: auto;
+    position: relative;
+  }
+  .sidebar a {float: left;}
+  div.content {margin-left: 0;}
+}

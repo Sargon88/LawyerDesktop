@@ -6,7 +6,6 @@ import { Icon } from 'react-icons-kit';
 import {ic_save} from 'react-icons-kit/md/ic_save'
 import axios from 'axios';
 import { useAlert } from 'react-alert';
-import ReferentType from "./Referent/ReferentType";
 import './customerType.css';
 
 const CustomerType = ({ type, customerModel, errorModel, validateRules }) => {
@@ -83,9 +82,7 @@ const CustomerType = ({ type, customerModel, errorModel, validateRules }) => {
             response => {
                 alert.error("Errore: " + response.error + " - " + response.message);
                 console.log(response)
-            });
-
-	  		
+            });	  		
 	}
 
 	function handleReferentChange(event){
@@ -104,14 +101,8 @@ const CustomerType = ({ type, customerModel, errorModel, validateRules }) => {
 	 const [show, setShow] = useState(false);
 
 	  const handleClose = () => setShow(false);
-	  const handleShow = () => openModal();
+	  const handleShow = () => setShow(true);;
 
-	  function openModal(referent){
-	  	console.log("MODAL ID", referent);
-	  	selectedReferent = referent;
-	  	setShow(true);
-	  	
-	  }
 	//MODAL
 
 	//https://www.positronx.io/react-form-validation-tutorial-with-example/
@@ -125,60 +116,68 @@ const CustomerType = ({ type, customerModel, errorModel, validateRules }) => {
 						<Col>
 							<Row><Col><h4>Anagrafica</h4></Col></Row>
 							{ type === "pp" ?
-							(<Row className="dataArea">
+							(<Row>
 								<Col>
-									<Form.Group controlId="newCustomerName">
-									    <Form.Label>Nome</Form.Label>
-								    	<Form.Control type="text"  
-								    				  name="name" 
-								    				  onChange={handleChange}
-								    				  value={customerModel.name} />
-								    	<small className="text-danger">{error.name}</small>
-								  	</Form.Group>
-								</Col>
-								<Col>
-									<Form.Group controlId="newCustomerSurname">
-									    <Form.Label>Cognome</Form.Label>
-								    	<Form.Control type="text" 
-								    				  name="surname" 
-								    				  onChange={handleChange}
-								    				  value={customerModel.surname} />
-								    	<small className="text-danger">{error.surname}</small>
-								  	</Form.Group>
-								</Col>
-								<Col>
-									<Form.Group controlId="newCustomerCode">
-									    <Form.Label>Codice Fiscale</Form.Label>
-								    	<Form.Control type="text" 
-								    				  name="code" 
-								    				  onChange={handleChange}
-								    				  value={customerModel.code} />
-								    	<small className="text-danger">{error.code}</small>
-								  	</Form.Group>
+									<Row className="dataArea">
+										<Col>
+											<Form.Group controlId="newCustomerName">
+											    <Form.Label>Nome</Form.Label>
+										    	<Form.Control type="text"  
+										    				  name="name" 
+										    				  onChange={handleChange}
+										    				  value={customerModel.name} />
+										    	<small className="text-danger">{error.name}</small>
+										  	</Form.Group>
+										</Col>
+										<Col>
+											<Form.Group controlId="newCustomerSurname">
+											    <Form.Label>Cognome</Form.Label>
+										    	<Form.Control type="text" 
+										    				  name="surname" 
+										    				  onChange={handleChange}
+										    				  value={customerModel.surname} />
+										    	<small className="text-danger">{error.surname}</small>
+										  	</Form.Group>
+										</Col>
+										<Col>
+											<Form.Group controlId="newCustomerCode">
+											    <Form.Label>Codice Fiscale</Form.Label>
+										    	<Form.Control type="text" 
+										    				  name="code" 
+										    				  onChange={handleChange}
+										    				  value={customerModel.code} />
+										    	<small className="text-danger">{error.code}</small>
+										  	</Form.Group>
+										</Col>
+									</Row>
 								</Col>
 							</Row>)
 							:
 							type === "lp" ?
-							(<Row className="dataArea">
+							(<Row>
 								<Col>
-									<Form.Group controlId="newCustomerSurname">
-									    <Form.Label>Ragione Sociale</Form.Label>
-								    	<Form.Control type="text" 
-								    				  name="society" 
-								    				  onChange={handleChange}
-								    				  value={customerModel.society} />
-								    	<small className="text-danger">{error.society}</small>
-								  	</Form.Group>
-								</Col>
-								<Col>
-									<Form.Group controlId="newCustomerCode">
-									    <Form.Label>Partita Iva</Form.Label>
-								    	<Form.Control type="text" 
-								    				  name="vat" 
-								    				  onChange={handleChange}
-								    				  value={customerModel.vat} />
-								    	<small className="text-danger">{error.vat}</small>
-								  	</Form.Group>
+									<Row className="dataArea">
+										<Col>
+											<Form.Group controlId="newCustomerSurname">
+											    <Form.Label>Ragione Sociale</Form.Label>
+										    	<Form.Control type="text" 
+										    				  name="society" 
+										    				  onChange={handleChange}
+										    				  value={customerModel.society} />
+										    	<small className="text-danger">{error.society}</small>
+										  	</Form.Group>
+										</Col>
+										<Col>
+											<Form.Group controlId="newCustomerCode">
+											    <Form.Label>Partita Iva</Form.Label>
+										    	<Form.Control type="text" 
+										    				  name="vat" 
+										    				  onChange={handleChange}
+										    				  value={customerModel.vat} />
+										    	<small className="text-danger">{error.vat}</small>
+										  	</Form.Group>
+										</Col>
+									</Row>
 								</Col>
 							</Row>)
 							:
@@ -327,11 +326,12 @@ const CustomerType = ({ type, customerModel, errorModel, validateRules }) => {
 						<>
 							<Row>
 								<Col>
-									<Row><Col><h4>Referenti <a value={""} onClick={() => openModal(null)} ><Icon icon={ic_add} xs={35} /></a></h4></Col></Row>
+									<Row><Col><h4>Referenti <a value={""} onClick={() => handleShow(null)} ><Icon icon={ic_add} xs={35} /></a></h4></Col></Row>
 									<Row>
 									{customerModel.referents.map((value, index) => {
+										console.log(value);
 										return(	
-											<Col xs={3} key={index}>
+											<Col xs={4} key={index}>
 												<Row>
 													<Col className="dataArea">
 														<Row>
@@ -346,73 +346,89 @@ const CustomerType = ({ type, customerModel, errorModel, validateRules }) => {
 																}
 															</Col>
 														</Row>
+														<Row>
+															<Col xs={10}>
+																<h6>{value.role}</h6>
+															</Col>
+														</Row>
 														{selectedReferent.id != value.id ?
 															(<>
-															<Row><Col>Cellulare: {value.mobile}</Col></Row>
-															<Row><Col>Telefono: {value.phone}</Col></Row>
-															<Row><Col>Fax {value.fax}</Col></Row>
-															<Row><Col>Mail {value.mail}</Col></Row>
-															<Row><Col>Pec {value.pec}</Col></Row>
+															<Row>
+																<Col xs={3}>Cellulare</Col>
+																<Col>{value.mobile}</Col>
+															</Row>
+															<Row>
+																<Col xs={3}>Telefono</Col>
+																<Col>{value.phone}</Col>
+															</Row>
+															<Row>
+																<Col xs={3}>Fax</Col>
+																<Col>{value.fax}</Col>
+															</Row>
+															<Row>
+																<Col xs={3}>Mail</Col>
+																<Col>{value.mail}</Col>
+															</Row>
+															<Row>
+																<Col xs={3}>Pec</Col>
+																<Col>{value.pec}</Col>
+															</Row>
 															</>)
 															:
 															(<>
 															<Row>
 																<Col>
 																	<Form.Group controlId="newCustomerCountry">
-																	    <Form.Label>Cellulare</Form.Label>
-																    	<Form.Control type="text"
-																    				  name="mobile" 
-																    				  onChange={handleReferentChange}
-																    				  value={selectedReferent.mobile} />
-																    	<small className="text-danger">{error.mobile}</small>
-																  	</Form.Group>
-																</Col>
-															</Row>
-															<Row>
-																<Col>
-																	<Form.Group controlId="newCustomerCountry">
-																	    <Form.Label>Telefono</Form.Label>
-																    	<Form.Control type="text"
-																    				  name="phone" 
-																    				  onChange={handleReferentChange}
-																    				  value={selectedReferent.phone} />
-																    	<small className="text-danger">{error.phone}</small>
-																  	</Form.Group>
-																</Col>
-															</Row>
-															<Row>
-																<Col>
-																	<Form.Group controlId="newCustomerCountry">
-																	    <Form.Label>fax</Form.Label>
-																    	<Form.Control type="text"
-																    				  name="fax" 
-																    				  onChange={handleReferentChange}
-																    				  value={selectedReferent.fax} />
-																    	<small className="text-danger">{error.fax}</small>
-																  	</Form.Group>
-																</Col>
-															</Row>
-															<Row>
-																<Col>
-																	<Form.Group controlId="newCustomerCountry">
-																	    <Form.Label>Mail</Form.Label>
-																    	<Form.Control type="text"
-																    				  name="mail" 
-																    				  onChange={handleReferentChange}
-																    				  value={selectedReferent.mail} />
-																    	<small className="text-danger">{error.mail}</small>
-																  	</Form.Group>
-																</Col>
-															</Row>
-															<Row>
-																<Col>
-																	<Form.Group controlId="newCustomerCountry">
-																	    <Form.Label>Pec</Form.Label>
-																    	<Form.Control type="text"
-																    				  name="pec" 
-																    				  onChange={handleReferentChange}
-																    				  value={selectedReferent.pec} />
-																    	<small className="text-danger">{error.pec}</small>
+																		<Form.Row>
+																		    <Form.Label column="sm" xs={3}>Cellulare</Form.Label>
+																	    	<Col>
+																		    	<Form.Control size="sm" type="text"
+																		    				  name="mobile" 
+																		    				  onChange={handleReferentChange}
+																		    				  value={selectedReferent.mobile} />
+																	    		<small className="text-danger">{error.mobile}</small>
+																	    	</Col>
+																	    </Form.Row>	
+																  		<Form.Row>
+																		    <Form.Label column="sm" xs={3}>Telefono</Form.Label>
+																		    <Col>
+																		    	<Form.Control size="sm" type="text"
+																		    				  name="phone" 
+																		    				  onChange={handleReferentChange}
+																		    				  value={selectedReferent.phone} />
+																		    	<small className="text-danger">{error.phone}</small>
+																		    </Col>
+																	    </Form.Row>	
+																  		<Form.Row>
+																		    <Form.Label column="sm" xs={3}>fax</Form.Label>
+																		    <Col>
+																		    	<Form.Control size="sm" type="text"
+																		    				  name="fax" 
+																		    				  onChange={handleReferentChange}
+																		    				  value={selectedReferent.fax} />
+																		    	<small className="text-danger">{error.fax}</small>
+																		    </Col>
+																	    </Form.Row>	
+																  	    <Form.Row>
+																		    <Form.Label column="sm" xs={3}>Mail</Form.Label>
+																	    	<Col>
+																		    	<Form.Control size="sm" type="text"
+																		    				  name="mail" 
+																		    				  onChange={handleReferentChange}
+																		    				  value={selectedReferent.mail} />
+																		    	<small className="text-danger">{error.mail}</small>
+																		    </Col>
+																	    </Form.Row>
+																  	    <Form.Row>
+																		    <Form.Label column="sm" xs={3}>Pec</Form.Label>
+																	    	<Col>
+																		    	<Form.Control size="sm" type="text"
+																		    				  name="pec" 
+																		    				  onChange={handleReferentChange}
+																		    				  value={selectedReferent.pec} />
+																		    	<small className="text-danger">{error.pec}</small>
+																		    </Col>
+																	    </Form.Row>
 																  	</Form.Group>
 																</Col>
 															</Row>
@@ -428,28 +444,15 @@ const CustomerType = ({ type, customerModel, errorModel, validateRules }) => {
 								</Col>
 							</Row>
 
-							<Modal show={show} onHide={handleClose}>
+							<Modal size='xl' show={show} onHide={handleClose}>
 								<Modal.Header closeButton>
-									<Modal.Title>{selectedReferent == null ? "Aggiungi Referente" : "Modifica Referente"}</Modal.Title>
+									<Modal.Title>Aggiungi Referente</Modal.Title>
 								</Modal.Header>
 								<Modal.Body>
-									{selectedReferent == null ? 
-										"Aggiungi Referente" : 
-										
-										<Col>
-											<Row>
-												<Col>
-													<Row>
-														<Col>
-															<h6>{selectedReferent.name} {selectedReferent.surname}</h6>
-														</Col>
-													</Row>
-													
-												</Col>
-											</Row>
-										</Col>
+									
+									<CustomerType type='pp' customerModel={{}} errorModel={{}} validateRules={validateRules} />
 
-									}								
+
 								</Modal.Body>
 								<Modal.Footer>
 									<Button variant="secondary" onClick={handleClose}>

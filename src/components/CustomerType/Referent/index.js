@@ -5,11 +5,66 @@ import {ic_mode_edit} from 'react-icons-kit/md/ic_mode_edit';
 import { Icon } from 'react-icons-kit';
 import {ic_save} from 'react-icons-kit/md/ic_save'
 import axios from 'axios';
-import { useAlert } from 'react-alert';
-import './customerType.css';
-, 
-const ReferentType = ({ selectedReferent, setSelectedReferent, value, handleReferentChange, index, error }) => {
+import '../customerType.css';
+
+
+const Referent = ({ selectedReferent, setSelectedReferent, value, index, customerModel, error }) => {
 	
+//REFERENT
+	function editReferent(referent){
+		setSelectedReferent(referent);
+	}
+
+	function saveReferent(index){
+		console.log("selectedReferent", selectedReferent);
+
+		var person = {
+			id: selectedReferent.id,
+			person_contact: {
+				cnn_mail: selectedReferent.mail, 
+				cnn_pec: selectedReferent.pec,
+				cnn_mobile: {phone_number:selectedReferent.mobile},
+				cnn_fax: {phone_number:selectedReferent.fax},
+				cnn_phone: {phone_number:selectedReferent.phone},
+			}
+		}
+	  	
+		axios.put(`${process.env.REACT_APP_BACKEND_URL}/people/` + selectedReferent.id, person, {
+          headers: {
+            Authorization:
+              'Bearer ' + localStorage.getItem("JWTtoken")
+          }})
+            .then(response => {
+
+              if(response.status === 200){
+                alert.success("Salvato");
+                customerModel.referents[index] = selectedReferent;
+                setSelectedReferent({});                          
+
+              } else {
+                alert.error("Errore:" + response.error);
+                console.log(response);
+              }
+              
+              
+            },
+            response => {
+                alert.error("Errore: " + response.error + " - " + response.message);
+                console.log(response)
+            }); 		
+	}
+
+	function handleReferentChange(event){
+		const target = event.target;
+    	const name = target.name;
+    	const value = target.value;
+
+    	let ref = {... selectedReferent}
+    	ref[name] = value;
+
+    	setSelectedReferent(ref);
+	}
+
 	return (
 		<Col xs={3} key={index}>
 			<Row>
@@ -109,4 +164,4 @@ const ReferentType = ({ selectedReferent, setSelectedReferent, value, handleRefe
 	
 };
 
-export default ReferentType;
+export default Referent;

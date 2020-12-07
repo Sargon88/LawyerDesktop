@@ -36,9 +36,10 @@ const Customer = () => {
   var c = useParams();
   const [customerId] = useState(c.customerId != null ? c.customerId : null);
 
-  function save(){ 
+  function save(inputModel){
+    var cModel = inputModel != null ? inputModel : customerModel; 
     var isValid = true;
-    var typerules = validateRules.filter(x => x.type === customerModel.type || x.type === "");
+    var typerules = validateRules.filter(x => x.type === cModel.type || x.type === "");
 
     for(var rule of typerules){
       if(errorModel.[rule.field]){
@@ -46,54 +47,52 @@ const Customer = () => {
         break;
       }
 
-      if(rule.isMandatory && (!customerModel[rule.field] || customerModel[rule.field].length === 0)){
+      if(rule.isMandatory && (!cModel[rule.field] || cModel[rule.field].length === 0)){
         isValid = false;
         break;
       }
 
-      if(rule.isMandatory && customerModel[rule.field] && customerModel[rule.field].length > 0 && rule.regex && !rule.regex.test(customerModel[rule.field])){
+      if(rule.isMandatory && cModel[rule.field] && cModel[rule.field].length > 0 && rule.regex && !rule.regex.test(cModel[rule.field])){
         isValid = false;
         break;
       }
     }
 
     if(isValid){
-
-
-
+      
       var person = {
-        id: customerModel.id,
-        person_type: customerModel.type === "pp" ? "Fisico" : "Giuridico",
-        person_surname: customerModel.surname,
-        person_name: customerModel.name,
-        person_code: customerModel.code,
+        id: cModel.id,
+        person_type: cModel.type === "pp" ? "Fisico" : "Giuridico",
+        person_surname: cModel.surname,
+        person_name: cModel.name,
+        person_code: cModel.code,
         person_active: true,
         person_contact: {
             cnn_phone: {
-              phone_number: customerModel.phone
+              phone_number: cModel.phone
             },
             cnn_mobile: {
-              phone_number: customerModel.mobile
+              phone_number: cModel.mobile
             },
             cnn_fax: {
-              phone_number: customerModel.fax
+              phone_number: cModel.fax
             },
-            cnn_mail: customerModel.mail,
-            cnn_pec: customerModel.pec
+            cnn_mail: cModel.mail,
+            cnn_pec: cModel.pec
           },
           person_address: {
-            address_street:customerModel.street,
-            address_city:customerModel.city,
-            address_province:customerModel.province,
-            address_country:customerModel.country,
-            address_number:customerModel.number,
-            address_zipcode:customerModel.cap,
+            address_street:cModel.street,
+            address_city:cModel.city,
+            address_province:cModel.province,
+            address_country:cModel.country,
+            address_number:cModel.number,
+            address_zipcode:cModel.cap,
           },
       }
 
-      if(customerModel.id){
+      if(cModel.id){
         //update an entry
-        axios.put(`${process.env.REACT_APP_BACKEND_URL}/people/` + customerModel.id, person, {
+        axios.put(`${process.env.REACT_APP_BACKEND_URL}/people/` + cModel.id, person, {
           headers: {
             Authorization:
               'Bearer ' + localStorage.getItem("JWTtoken")
@@ -210,6 +209,7 @@ const Customer = () => {
                               fax: c.contact && c.contact.cnn_fax ? c.contact.cnn_fax.phone_number : "",
                               mail: c.contact && c.contact.cnn_mail ? c.contact.cnn_mail : "",
                               pec: c.contact && c.contact.cnn_pec ? c.contact.cnn_pec : "",
+                              role: person.referents[i].role,
                               id: c.id,
                             });
                           }
