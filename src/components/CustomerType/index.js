@@ -336,7 +336,7 @@ const CustomerType = ({ type, customerModel, errorModel, validateRules }) => {
 													<Col className="dataArea">
 														<Row>
 															<Col xs={10}>
-																<h6>{value.name} {value.surname}</h6>
+																<a href={"/customers/" + value.id}><h6>{value.name} {value.surname}</h6></a>
 															</Col>
 															<Col xs={2}>
 																{selectedReferent.id != value.id ?
