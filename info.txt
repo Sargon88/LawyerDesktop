@@ -1,0 +1,52 @@
+1) creare il pulsante pratiche sulla sidebar
+2) tabella delle pratiche divise per stato
+  - cliente
+  - nome pratica
+  - tipologia [giudiziale/stragiudiziale]
+  - scadenza
+  - stato
+  - pagamento (? - da rivedere il nome della colonna)
+  - responsabile
+3) navbar:
+    pulsante crea (genera anagrafica della pratica)
+    pulsante apri (visualizzazione della pratica per il lavoro, anagrafica non modificabile, altri dati modificabili)
+    pulsante cambi di stato
+
+
+
+Pratiche (faldone - dossier):
+- cliente di riferimento (person)
+- controparte (person)
+- legale di controparte
+- nome pratica (automatico: [cognome cliente]/[cognome controparte])
+
+Pratiche (fascicolo - issue):
+- stato
+  - (aperta) in corso
+  - chiusa
+  - annullata
+- nome pratica (stringa)
+- tipologia (select: giudiziale, stragiudiziale)
+
+- materia (select: lavoro, societario, contratti, reali)
+- descrizione (long text)
+- tipologia compenso (select: orario, forfettizzato, misura fissa)
+- compenso (number)
+- giudiziale:
+  - competenza (select: gdp, tribunale, corte d'appello, cassazione)
+  - competenza territoriale (select: milano, genova, roma)
+  - registro (select: contenzioso civile, diritto lavoro, volontaria giurisdizione)
+  - rg (alfanumerico)
+  - sezione (string)
+  - giudice (string)
+  - valore (number euro)
+  - esente (boolean default false -> se true: scompare 
+                                                      contributo unificato,
+                                                      contributo unificato pagato,
+                                                      marca da bollo,
+                                                      marca da bollo needed )
+  - contributo unificato pagato (boolean default false)
+  - contributo unificato (number euro)
+  - marca da bollo (number default 27 euro)
+  - marca da bollo needed (boolena dafault false)
+
