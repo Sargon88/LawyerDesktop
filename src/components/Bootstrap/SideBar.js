@@ -10,6 +10,7 @@ import {ic_assessment} from 'react-icons-kit/md/ic_assessment';
 import {ic_assignment} from 'react-icons-kit/md/ic_assignment';
 import {ic_find_in_page} from 'react-icons-kit/md/ic_find_in_page';
 import {ic_exit_to_app} from 'react-icons-kit/md/ic_exit_to_app';
+import {folderOpen} from 'react-icons-kit/fa/folderOpen';
 import './SideBar.css';
 
 const SideBar = ({ page, sidebarData }) => {
@@ -52,6 +53,9 @@ const SideBar = ({ page, sidebarData }) => {
 					<hr className="solid"/>
 					<Nav.Item>
 						<Nav.Link href="/clienti"><Icon icon={ic_supervisor_account} size={25} /> {sidebarOpen ? "Clienti" : "" }</Nav.Link>
+					</Nav.Item>
+					<Nav.Item>
+						<Nav.Link href="/folders"><Icon icon={folderOpen} size={25} /> {sidebarOpen ? "Pratiche" : "" }</Nav.Link>
 					</Nav.Item>
 					<Nav.Item>
 						<Nav.Link href="/contabilita"><Icon icon={ic_assessment} size={25} /> {sidebarOpen ? "Contabilità" : "" }</Nav.Link>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button, FormGroup, FormControl, Alert } from "react-bootstrap";
 import axios from 'axios';
 import { useAppContext } from "../../utils/contextLib";
@@ -10,8 +10,13 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const { userHasAuthenticated } = useAppContext();
+  const { setNavbarData } = useAppContext();
   const history = useHistory();
   
+
+  useEffect(() => {
+    setNavbarData({});
+  }, []);
 
   function validateForm() {
     return email.length > 0 && password.length > 0;

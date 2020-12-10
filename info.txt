@@ -1,4 +1,4 @@
-1) creare il pulsante pratiche sulla sidebar
+1) creare il pulsante pratiche sulla sidebar -> OK
 2) tabella delle pratiche divise per stato
   - cliente
   - nome pratica
