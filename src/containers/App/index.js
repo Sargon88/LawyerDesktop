@@ -5,6 +5,7 @@ import { Row, Col  } from 'react-bootstrap';
 import Clients from "../Clients";
 import Customer from "../Customer";
 import Folders from "../Folders";
+import FoldersPreview from "../FoldersPreview";
 import Login from "../Login";
 import NotFound from "../NotFound";
 import Home from "../Test";
@@ -75,6 +76,7 @@ function App() {
                   <Route path="/clienti" exact render={(props) => <Clients {...props} /> } />
                   <Route path="/clienti/nuovo" exact render={(props) => <Customer  {...props} /> } />
                   <Route path="/customers/:customerId" exact render={(props) => <Customer {...props} /> } />
+                  <Route path="/folders" exact render={(props) => <FoldersPreview {...props} /> } />
                   <Route path="/folders/:customerId" exact render={(props) => <Folders {...props} /> } />
                   <Route path="/login" component={Login} exact />
                   <Route path="" component={NotFound} />

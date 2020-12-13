@@ -100,9 +100,15 @@ const CustomerType = ({ type, customerModel, errorModel, validateRules }) => {
 	//MODAL
 	 const [show, setShow] = useState(false);
 
-	  const handleClose = () => setShow(false);
-	  const handleShow = () => setShow(true);;
+	  const handleClose = function() {
+	  	setShow(false);
+	  	setSelectedReferent({});
+	  }
 
+	  const handleShow = function() {
+	  	setShow(true);
+	  	setSelectedReferent({});
+	  }
 	//MODAL
 
 	//https://www.positronx.io/react-form-validation-tutorial-with-example/
@@ -450,6 +456,8 @@ const CustomerType = ({ type, customerModel, errorModel, validateRules }) => {
 								</Modal.Header>
 								<Modal.Body>
 									
+
+									<hr className="solid"/>
 									<CustomerType type='pp' customerModel={{}} errorModel={{}} validateRules={validateRules} />
 
 
