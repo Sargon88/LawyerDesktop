@@ -64,7 +64,23 @@ const NavBar = () => {
             </Nav>
           </Navbar.Collapse>
         </Navbar>
-      );  
+      );
+    case "folderspreview":
+      return(
+        <Navbar fixed="top" bg="light" expand="lg">
+          <Navbar.Brand>
+            <Link to="/">{process.env.REACT_APP_APPLICATION_NAME}</Link>
+          </Navbar.Brand>
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Collapse id="basic-navbar-nav">
+            <Nav className="mr-auto">
+              <Nav.Link href="/clienti/nuovo"><Icon icon={ic_add} size={40} /></Nav.Link>
+              <Nav.Link href={"/customers/" + navbarData.selectedId} disabled={!navbarData.edit}><Icon icon={ic_mode_edit} size={30} /></Nav.Link>
+              <Nav.Link href={"/folders/" + navbarData.selectedId} disabled={!navbarData.edit}><Icon icon={folderOpen} size={30} /></Nav.Link>
+            </Nav>
+          </Navbar.Collapse>
+        </Navbar>
+      );    
     default:
       return(
         <Navbar fixed="top"  bg="light" expand="lg">

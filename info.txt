@@ -48,5 +48,5 @@ Pratiche (fascicolo - issue):
   - contributo unificato pagato (boolean default false)
   - contributo unificato (number euro)
   - marca da bollo (number default 27 euro)
-  - marca da bollo needed (boolena dafault false)
+  - marca da bollo needed (boolean dafault false)
 
