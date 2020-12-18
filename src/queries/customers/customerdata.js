@@ -34,7 +34,6 @@ const CUSTOMER_DATA_QUERY = gql`
 				country: address_country
 			}
 			referents:person_referents{
-				role:referent_role
 				person:person{
 					id
 					name:person_name
