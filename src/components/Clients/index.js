@@ -1,6 +1,7 @@
 import React from "react";
 import { Row, Col } from 'react-bootstrap';
 import { useAppContext } from "../../utils/contextLib";
+import { Redirect } from "react-router-dom";
 import BootstrapTable from 'react-bootstrap-table-next';
 import paginationFactory from 'react-bootstrap-table2-paginator';
 import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
@@ -21,8 +22,16 @@ const Clients = ({ data }) => {
 			    selectedId: row.id,
 			    page:"clients",
 			})
-		} 
+		},
 	};
+
+	const rowEvents = {
+		onDoubleClick: (e, row, rowIndex)=> {
+			console.log(row);
+			var id = row.id;
+			return <Redirect to={"/customers/" + id} />
+		}
+	}
 
 	const columns = [
 		{
@@ -69,7 +78,8 @@ const Clients = ({ data }) => {
 					hover={true}
 					condensed={true}
 					pagination={ paginationFactory() }
-					filterPosition='top' />	 
+					filterPosition='top'
+					rowEvents={ rowEvents } />	 
 	      	</Col>  
 	    </Row>
 	);

@@ -3,6 +3,7 @@ import { Row, Col, Container } from 'react-bootstrap';
 import { useAlert } from 'react-alert';
 import { useParams } from "react-router-dom";
 import { useAppContext } from "../../utils/contextLib";
+import { useHistory } from "react-router-dom";
 import Query from "../../components/Query";
 import axios from 'axios';
 import NavBar from "../../components/Nav";
@@ -35,6 +36,7 @@ const Customer = () => {
   var errorModel = useState({});
   var c = useParams();
   const [customerId] = useState(c.customerId != null ? c.customerId : null);
+  const history = useHistory();
 
   function save(){ 
     var isValid = true;
@@ -63,7 +65,7 @@ const Customer = () => {
 
       var person = {
         id: customerModel.id,
-        person_type: customerModel.type === "pp" ? "Fisico" : "Giuridico",
+        person_type: customerModel.type.toLowerCase() === "pp" ? "fisico" : "giuridico",
         person_surname: customerModel.surname,
         person_name: customerModel.name,
         person_code: customerModel.code,
@@ -151,6 +153,13 @@ const Customer = () => {
       saveFunction: save,
       selectedId: customerId
     });
+
+    if(customerId){
+      history.push("/customers/" + customerId);
+    } else {
+      history.push("/clienti/nuovo");
+    }
+
   }, []);
   
   //manage user login
@@ -195,7 +204,7 @@ const Customer = () => {
                         customerModel.contact_id = person.contact ? person.contact.id : "";
                         customerModel.id = customerId;
                         customerModel.person_id = person ? person.id : "";
-                        customerModel.type = person.type === "Fisico" ? "pp" : "lp";
+                        customerModel.type = person.type.toLowerCase() === "fisico" ? "pp" : "lp";
                         customerModel.referents = [];
 
                         if(person.referents.length > 0){
@@ -231,7 +240,7 @@ const Customer = () => {
       );
       
     } else {
-      //new customer
+      //new customer      
       return (
         <>
             <Row id="row_container">

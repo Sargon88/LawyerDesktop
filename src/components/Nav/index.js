@@ -8,14 +8,17 @@ import {ic_mode_edit} from 'react-icons-kit/md/ic_mode_edit';
 import {ic_save} from 'react-icons-kit/md/ic_save';
 import {eye} from 'react-icons-kit/fa/eye';
 import {folderOpen} from 'react-icons-kit/fa/folderOpen';
+import { useHistory } from "react-router-dom";
 
 import './navbar.css';
 
 
 const NavBar = () => {    
   const { navbarData } = useAppContext();
+  const history = useHistory();
 
-  console.log("NAVBAR", navbarData);
+  console.log("NAVBAR", navbarData, history.length);
+  console.log("history", history.length);
 
  switch(navbarData.page){
     case "clients":
@@ -27,6 +30,7 @@ const NavBar = () => {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="mr-auto">
+              <Nav.Link href="#" onClick={() => history.goBack()}>aaa</Nav.Link>
               <Nav.Link href="/clienti/nuovo"><Icon icon={ic_add} size={40} /></Nav.Link>
               <Nav.Link href={"/customers/" + navbarData.selectedId} disabled={!navbarData.edit}><Icon icon={ic_mode_edit} size={30} /></Nav.Link>
               <Nav.Link href={"/folders/" + navbarData.selectedId} disabled={!navbarData.edit}><Icon icon={folderOpen} size={30} /></Nav.Link>
@@ -43,6 +47,7 @@ const NavBar = () => {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="mr-auto">
+              <Nav.Link href="#" onClick={() => history.goBack()}>aaa</Nav.Link>
               <Nav.Link href="/folders/new"><Icon icon={ic_add} size={40} /></Nav.Link>
               <Nav.Link href={"/folders/edit" + navbarData.selectedId} disabled={!navbarData.edit}><Icon icon={ic_mode_edit} size={30} /></Nav.Link>
               <Nav.Link href={"/folders/view" + navbarData.selectedId} disabled={!navbarData.edit}><Icon icon={eye} size={30} /></Nav.Link>
@@ -60,6 +65,7 @@ const NavBar = () => {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="mr-auto">
+              <Nav.Link href="#" onClick={() => history.goBack()}>aaa</Nav.Link>
               <Nav.Link href="/clienti/nuovo"><Icon icon={ic_add} size={40} /></Nav.Link>
               <Nav.Link href="#" onClick={navbarData.saveFunction}><Icon icon={ic_save} size={30} /></Nav.Link>
               <Nav.Link href={"/folders/" + navbarData.selectedId} disabled={!navbarData.selectedId}><Icon icon={folderOpen} size={30} /></Nav.Link>

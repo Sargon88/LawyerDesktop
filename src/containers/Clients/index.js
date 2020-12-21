@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Row, Col, Container, Form, InputGroup, FormControl } from 'react-bootstrap';
 import { useAppContext } from "../../utils/contextLib";
+import { useHistory } from "react-router-dom";
 import Query from "../../components/Query";
 import Client from "../../components/Clients";
 import ALL_CLIENTS_PREVIEW_QUERY from "../../queries/clients/allclientspreview";
@@ -11,6 +12,7 @@ const Clients = () => {
   const [ ppvalue, setPPValue ] = useState(true);
   const [ lpvalue, setLPValue ] = useState(true);
   const { setNavbarData } = useAppContext();
+  const history = useHistory();
 
   useEffect(() => {
     setNavbarData({
@@ -18,6 +20,11 @@ const Clients = () => {
       selectedId: "",
       page:"clients",
     });
+
+    if(appUser){
+      console.log("AGGIUNTO");
+      history.push("/clienti");
+    }
   }, []);
 
   function onChangePP(e){
@@ -36,7 +43,6 @@ const Clients = () => {
   }
   
   if(appUser){
-
       return (
         <>
           <Row id="row_container">
