@@ -6,7 +6,7 @@ import { Icon } from 'react-icons-kit';
 import {ic_save} from 'react-icons-kit/md/ic_save'
 import axios from 'axios';
 import { useAlert } from 'react-alert';
-import ReferentType from "./Referent/ReferentType";
+import ReferentType from "./Referent";
 import './customerType.css';
 
 const CustomerType = ({ type, customerModel, errorModel, validateRules }) => {
@@ -101,28 +101,17 @@ const CustomerType = ({ type, customerModel, errorModel, validateRules }) => {
 	//REFERENT
 
 	//MODAL
-	 const [show, setShow] = useState(false);
+	const [show, setShow] = useState(false);
 
-<<<<<<< HEAD
-	  const handleClose = function() {
-	  	setShow(false);
-	  	setSelectedReferent({});
-	  }
+	const handleClose = function() {
+		setShow(false);
+		setSelectedReferent({});
+	}
 
-	  const handleShow = function() {
-	  	setShow(true);
-	  	setSelectedReferent({});
-=======
-	  const handleClose = () => setShow(false);
-	  const handleShow = () => openModal();
-
-	  function openModal(referent){
-	  	console.log("MODAL ID", referent);
-	  	selectedReferent = referent;
-	  	setShow(true);
-	  	
->>>>>>> parent of d78b780... verify new save
-	  }
+	const handleShow = function() {
+		setShow(true);
+		setSelectedReferent({});
+	}
 	//MODAL
 
 	//https://www.positronx.io/react-form-validation-tutorial-with-example/
@@ -444,31 +433,8 @@ const CustomerType = ({ type, customerModel, errorModel, validateRules }) => {
 									<Modal.Title>{selectedReferent == null ? "Aggiungi Referente" : "Modifica Referente"}</Modal.Title>
 								</Modal.Header>
 								<Modal.Body>
-<<<<<<< HEAD
-									
-
 									<hr className="solid"/>
 									<CustomerType type='pp' customerModel={{}} errorModel={{}} validateRules={validateRules} />
-
-=======
-									{selectedReferent == null ? 
-										"Aggiungi Referente" : 
-										
-										<Col>
-											<Row>
-												<Col>
-													<Row>
-														<Col>
-															<h6>{selectedReferent.name} {selectedReferent.surname}</h6>
-														</Col>
-													</Row>
-													
-												</Col>
-											</Row>
-										</Col>
->>>>>>> parent of d78b780... verify new save
-
-									}								
 								</Modal.Body>
 								<Modal.Footer>
 									<Button variant="secondary" onClick={handleClose}>

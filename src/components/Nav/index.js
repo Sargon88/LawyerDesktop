@@ -9,6 +9,8 @@ import {ic_save} from 'react-icons-kit/md/ic_save';
 import {eye} from 'react-icons-kit/fa/eye';
 import {folderOpen} from 'react-icons-kit/fa/folderOpen';
 
+import './navbar.css';
+
 
 const NavBar = () => {    
   const { navbarData } = useAppContext();
@@ -18,7 +20,7 @@ const NavBar = () => {
  switch(navbarData.page){
     case "clients":
       return(
-        <Navbar fixed="top" bg="light" expand="lg">
+        <Navbar className="ld-navbar" fixed="top" bg="light" expand="lg">
           <Navbar.Brand>
             <Link to="/">{process.env.REACT_APP_APPLICATION_NAME}</Link>
           </Navbar.Brand>
@@ -34,7 +36,7 @@ const NavBar = () => {
       );
     case "folders":
       return(
-        <Navbar fixed="top" bg="light" expand="lg">
+        <Navbar className="ld-navbar" fixed="top" bg="light" expand="lg">
           <Navbar.Brand>
             <Link to="/">{process.env.REACT_APP_APPLICATION_NAME}</Link>
           </Navbar.Brand>
@@ -51,7 +53,7 @@ const NavBar = () => {
     case "newcustomer":
     case "editcustomer":
       return(  
-        <Navbar fixed="top"  bg="light" expand="lg">
+        <Navbar className="ld-navbar" fixed="top"  bg="light" expand="lg">
           <Navbar.Brand>
             <Link to="/">{process.env.REACT_APP_APPLICATION_NAME}</Link>
           </Navbar.Brand>
@@ -67,7 +69,7 @@ const NavBar = () => {
       );
     case "folderspreview":
       return(
-        <Navbar fixed="top" bg="light" expand="lg">
+        <Navbar className="ld-navbar" fixed="top" bg="light" expand="lg">
           <Navbar.Brand>
             <Link to="/">{process.env.REACT_APP_APPLICATION_NAME}</Link>
           </Navbar.Brand>
@@ -83,7 +85,7 @@ const NavBar = () => {
       );    
     default:
       return(
-        <Navbar fixed="top"  bg="light" expand="lg">
+        <Navbar className="ld-navbar" fixed="top"  bg="light" expand="lg">
           <Navbar.Brand>
             <Link to="/">{process.env.REACT_APP_APPLICATION_NAME}</Link>
           </Navbar.Brand>

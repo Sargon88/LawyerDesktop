@@ -3,13 +3,21 @@ import { Row, Col, Form, Modal, Button,  } from 'react-bootstrap';
 import {ic_add} from 'react-icons-kit/md/ic_add';
 import {ic_mode_edit} from 'react-icons-kit/md/ic_mode_edit';
 import { Icon } from 'react-icons-kit';
-import {ic_save} from 'react-icons-kit/md/ic_save'
+import {ic_save} from 'react-icons-kit/md/ic_save';
 import axios from 'axios';
 import { useAlert } from 'react-alert';
-import './customerType.css';
-, 
+import '../customerType.css';
+ 
 const ReferentType = ({ selectedReferent, setSelectedReferent, value, handleReferentChange, index, error }) => {
 	
+	function editReferent(value){
+		console.log("editReferent", value);
+	}
+
+	function saveReferent(value){
+		console.log("saveReferent", value);
+	}
+
 	return (
 		<Col xs={3} key={index}>
 			<Row>

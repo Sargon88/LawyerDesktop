@@ -82,13 +82,13 @@ const Clients = () => {
                       let lpClients = [];
 
                       if(ppvalue){
-                        ppClients = people.filter(i => i.type  === "Fisico" ? true : false);
+                        ppClients = people.filter(i => i.type.toLowerCase()  === "fisico" ? true : false);
                         ppClients = ppClients.filter(i => i.name.toLowerCase().includes(value.toLowerCase()) || 
                                                           i.surname.toLowerCase().includes(value.toLowerCase()))
                       }
 
                       if(lpvalue){
-                        lpClients = people.filter(i => i.type  === "Giuridico"  ? true : false);
+                        lpClients = people.filter(i => i.type.toLowerCase()  === "giuridico"  ? true : false);
                         lpClients = lpClients.filter(i => i.surname.toLowerCase().includes(value.toLowerCase()))
                       }
 
