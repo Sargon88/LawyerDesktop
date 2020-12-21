@@ -83,9 +83,7 @@ const CustomerType = ({ type, customerModel, errorModel, validateRules }) => {
             response => {
                 alert.error("Errore: " + response.error + " - " + response.message);
                 console.log(response)
-            });
-
-	  		
+            });	  		
 	}
 
 	function handleReferentChange(event){
