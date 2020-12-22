@@ -7,12 +7,20 @@ import Client from "../../components/Clients";
 import ALL_CLIENTS_PREVIEW_QUERY from "../../queries/clients/allclientspreview";
 import './clients.css';
 
+
+var i = 0;
+
 const Clients = () => {
   const [ value, setValue ] = useState('');
   const [ ppvalue, setPPValue ] = useState(true);
   const [ lpvalue, setLPValue ] = useState(true);
   const { setNavbarData } = useAppContext();
   const history = useHistory();
+
+
+  console.log("i:", i);
+  i++;
+
 
   useEffect(() => {
     setNavbarData({
@@ -23,7 +31,12 @@ const Clients = () => {
 
     if(appUser){
       console.log("AGGIUNTO");
-      history.push("/clienti");
+      var pg = "/clienti";
+
+      if(history.push() !== pg){
+        history.push("/clienti");
+      }
+      
     }
   }, []);
 

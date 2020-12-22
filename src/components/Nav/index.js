@@ -19,7 +19,7 @@ const NavBar = () => {
   const history = useHistory();
 
   console.log("NAVBAR", navbarData, history.length);
-  console.log("history", history.length);
+  console.log("history", history);
 
  return(
     <Navbar className="ld-navbar" fixed="top" bg="light" expand="lg">

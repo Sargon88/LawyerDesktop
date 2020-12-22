@@ -1,7 +1,7 @@
 import React from "react";
 import { Row, Col } from 'react-bootstrap';
 import { useAppContext } from "../../utils/contextLib";
-import { Redirect } from "react-router-dom";
+import { Redirect, useHistory } from "react-router-dom";
 import BootstrapTable from 'react-bootstrap-table-next';
 import paginationFactory from 'react-bootstrap-table2-paginator';
 import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
@@ -9,7 +9,7 @@ import 'react-bootstrap-table2-paginator/dist/react-bootstrap-table2-paginator.m
 
 const Clients = ({ data }) => {
 	const { setNavbarData } = useAppContext();
-	console.log("DATA", data);
+	const history = useHistory();
 
 	//https://react-bootstrap-table.github.io/react-bootstrap-table2/
 	const selectRow = {
@@ -29,7 +29,7 @@ const Clients = ({ data }) => {
 		onDoubleClick: (e, row, rowIndex)=> {
 			console.log(row);
 			var id = row.id;
-			return <Redirect to={"/customers/" + id} />
+			history.push("/customers/" + id)
 		}
 	}
 

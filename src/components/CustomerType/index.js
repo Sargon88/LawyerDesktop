@@ -11,7 +11,6 @@ import './customerType.css';
 
 const CustomerType = ({ type, customerModel, errorModel, validateRules }) => {
 	const [error, setError] = useState({});
-	const [selectedReferent, setSelectedReferent] = useState({});
 	const alert = useAlert()
 
 	function handleChange(event){
@@ -100,15 +99,15 @@ const CustomerType = ({ type, customerModel, errorModel, validateRules }) => {
 
 	//MODAL
 	const [show, setShow] = useState(false);
+	const [selectedReferent, setSelectedReferent] = useState({});
 
-	const handleClose = function() {
-		setShow(false);
-		setSelectedReferent({});
-	}
+	const handleClose = () => setShow(false);
+	const handleShow = () => openModal();
 
-	const handleShow = function() {
+	function openModal(referent){
+		console.log("MODAL ID", referent);
+		setSelectedReferent(referent);
 		setShow(true);
-		setSelectedReferent({});
 	}
 	//MODAL
 
