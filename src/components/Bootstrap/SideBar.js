@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import { Nav, Col } from "react-bootstrap"
 import { Icon } from 'react-icons-kit';
 import { useAppContext } from "../../utils/contextLib";
@@ -38,10 +37,10 @@ const SideBar = ({ page, sidebarData }) => {
 				<Nav className="col-md-12 d-none d-md-block bg-light sidebar sidebar-open">
 					<div className="sidebar-sticky"></div>
 					<Nav.Item>
-						<Nav.Link href="/signup">Signup</Nav.Link>
+						<Link className="ld_sidebarlink" to="/signup">Signup</Link>
 					</Nav.Item>
 					<Nav.Item>
-						<Nav.Link href="/login">Login</Nav.Link>
+						<Link className="ld_sidebarlink" to="/login">Login</Link>
 					</Nav.Item>
 				</Nav>
 				:
@@ -53,19 +52,19 @@ const SideBar = ({ page, sidebarData }) => {
 					<hr className="solid"/>			
 					
 					<Nav.Item>
-						<Nav.Link href="/clienti"><Icon icon={ic_supervisor_account} size={25} /> {sidebarOpen ? "Clienti" : "" }</Nav.Link>
+						<Link className="ld_sidebarlink" to="/clienti"><Icon icon={ic_supervisor_account} size={25} /> {sidebarOpen ? "Clienti" : "" }</Link>
 					</Nav.Item>
 					<Nav.Item>
-						<Nav.Link href="/folders"><Icon icon={folderOpen} size={25} /> {sidebarOpen ? "Pratiche" : "" }</Nav.Link>
+						<Link className="ld_sidebarlink" to="/folders"><Icon icon={folderOpen} size={25} /> {sidebarOpen ? "Pratiche" : "" }</Link>
 					</Nav.Item>
 					<Nav.Item>
-						<Nav.Link href="/contabilita"><Icon icon={ic_assessment} size={25} /> {sidebarOpen ? "Contabilità" : "" }</Nav.Link>
+						<Link className="ld_sidebarlink" to="/contabilita"><Icon icon={ic_assessment} size={25} /> {sidebarOpen ? "Contabilità" : "" }</Link>
 					</Nav.Item>
 					<Nav.Item>
-						<Nav.Link href="/dafare"><Icon icon={ic_assignment} size={25} /> {sidebarOpen ? "Da fare" : "" }</Nav.Link>
+						<Link className="ld_sidebarlink" to="/dafare"><Icon icon={ic_assignment} size={25} /> {sidebarOpen ? "Da fare" : "" }</Link>
 					</Nav.Item>
 					<Nav.Item>
-						<Nav.Link href="/ricerche"><Icon icon={ic_find_in_page} size={25} /> {sidebarOpen ? "Ricerche" : "" }</Nav.Link>
+						<Link className="ld_sidebarlink" to="/ricerche"><Icon icon={ic_find_in_page} size={25} /> {sidebarOpen ? "Ricerche" : "" }</Link>
 					</Nav.Item>
 
 					<hr className="solid lastDivider"/>

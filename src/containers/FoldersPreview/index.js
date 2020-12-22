@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { Row, Col, Container } from 'react-bootstrap';
-import { useParams } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Row, Col } from 'react-bootstrap';
 import { useAppContext } from "../../utils/contextLib";
 import FoldersPreviewComponent from "../../components/FoldersPreview";
 import Query from "../../components/Query";

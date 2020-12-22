@@ -6,7 +6,6 @@ import { Icon } from 'react-icons-kit';
 import {ic_save} from 'react-icons-kit/md/ic_save'
 import axios from 'axios';
 import { useAlert } from 'react-alert';
-import ReferentType from "./Referent";
 import './customerType.css';
 
 const CustomerType = ({ type, customerModel, errorModel, validateRules }) => {
@@ -102,7 +101,6 @@ const CustomerType = ({ type, customerModel, errorModel, validateRules }) => {
 	const [selectedReferent, setSelectedReferent] = useState({});
 
 	const handleClose = () => setShow(false);
-	const handleShow = () => openModal();
 
 	function openModal(referent){
 		console.log("MODAL ID", referent);
@@ -324,7 +322,7 @@ const CustomerType = ({ type, customerModel, errorModel, validateRules }) => {
 						<>
 							<Row>
 								<Col>
-									<Row><Col><h4>Referenti <a value={""} onClick={() => openModal(null)} ><Icon icon={ic_add} xs={35} /></a></h4></Col></Row>
+									<Row><Col><h4>Referenti <Button variant="link" value={""} onClick={() => openModal(null)} ><Icon icon={ic_add} xs={35} /></Button></h4></Col></Row>
 									<Row>
 									{customerModel.referents.map((value, index) => {
 										return(	
@@ -336,14 +334,14 @@ const CustomerType = ({ type, customerModel, errorModel, validateRules }) => {
 																<a href={"/customers/" + value.id}><h6>{value.name} {value.surname}</h6></a>
 															</Col>
 															<Col xs={2}>
-																{selectedReferent.id != value.id ?
-																	<a onClick={() => editReferent(value)} ><Icon icon={ic_mode_edit} xs={35} /></a>
+																{selectedReferent.id !== value.id ?
+																	<Button variant="link" onClick={() => editReferent(value)} ><Icon icon={ic_mode_edit} xs={35} /></Button>
 																	:
-																	<a onClick={() => saveReferent(index)} ><Icon icon={ic_save} xs={35} /></a>
+																	<Button variant="link" onClick={() => saveReferent(index)} ><Icon icon={ic_save} xs={35} /></Button>
 																}
 															</Col>
 														</Row>
-														{selectedReferent.id != value.id ?
+														{selectedReferent.id !== value.id ?
 															(<>
 															<Row><Col>Cellulare: {value.mobile}</Col></Row>
 															<Row><Col>Telefono: {value.phone}</Col></Row>
@@ -427,7 +425,7 @@ const CustomerType = ({ type, customerModel, errorModel, validateRules }) => {
 
 							<Modal show={show} onHide={handleClose}>
 								<Modal.Header closeButton>
-									<Modal.Title>{selectedReferent == null ? "Aggiungi Referente" : "Modifica Referente"}</Modal.Title>
+									<Modal.Title>{selectedReferent === null ? "Aggiungi Referente" : "Modifica Referente"}</Modal.Title>
 								</Modal.Header>
 								<Modal.Body>
 									<hr className="solid"/>

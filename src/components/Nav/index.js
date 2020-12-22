@@ -32,7 +32,7 @@ const NavBar = () => {
           <Nav.Link className="ld-backbtn" onClick={() => history.goBack()}><Icon icon={ic_keyboard_backspace} size={30} /></Nav.Link>
 
           {
-            navbarData.page == "clients" ? 
+            navbarData.page === "clients" ? 
               <>
                 <Nav.Link href="/clienti/nuovo"><Icon icon={ic_add} size={40} /></Nav.Link>
                 <Nav.Link href={"/customers/" + navbarData.selectedId} disabled={!navbarData.edit}><Icon icon={ic_mode_edit} size={30} /></Nav.Link>
@@ -40,21 +40,21 @@ const NavBar = () => {
               </>
               
             :
-            navbarData.page == "folders" ?
+            navbarData.page === "folders" ?
               <>
                 <Nav.Link href="/folders/new"><Icon icon={ic_add} size={40} /></Nav.Link>
                 <Nav.Link href={"/folders/edit" + navbarData.selectedId} disabled={!navbarData.edit}><Icon icon={ic_mode_edit} size={30} /></Nav.Link>
                 <Nav.Link href={"/folders/view" + navbarData.selectedId} disabled={!navbarData.edit}><Icon icon={eye} size={30} /></Nav.Link>
               </>
             :
-            navbarData.page == "newcustomer" || navbarData.page == "editcustomer"  ?
+            navbarData.page === "newcustomer" || navbarData.page === "editcustomer"  ?
               <>
                 <Nav.Link href="/clienti/nuovo"><Icon icon={ic_add} size={40} /></Nav.Link>
                 <Nav.Link href="#" onClick={navbarData.saveFunction}><Icon icon={ic_save} size={30} /></Nav.Link>
                 <Nav.Link href={"/folders/" + navbarData.selectedId} disabled={!navbarData.selectedId}><Icon icon={folderOpen} size={30} /></Nav.Link>
               </>
             :
-            navbarData.page == "folderspreview" ?
+            navbarData.page === "folderspreview" ?
               <>
                 <Nav.Link href="/folders/new"><Icon icon={ic_add} size={40} /></Nav.Link>
                 <Nav.Link href={"/customers/" + navbarData.selectedId} disabled={!navbarData.edit}><Icon icon={ic_mode_edit} size={30} /></Nav.Link>

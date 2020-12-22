@@ -1,7 +1,6 @@
 import React from "react";
 import { Row, Col } from 'react-bootstrap';
 import { useAppContext } from "../../utils/contextLib";
-import { Redirect, useHistory } from "react-router-dom";
 import BootstrapTable from 'react-bootstrap-table-next';
 import paginationFactory from 'react-bootstrap-table2-paginator';
 import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';

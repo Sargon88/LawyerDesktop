@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Row, Col, Form } from 'react-bootstrap';
 import CustomerType from "../CustomerType";
 
+
 const CustomerComponent = ({ customerModel, errorModel, validateRules, customerId }) => {
 	const [customerType, setCustomerType] = useState(customerModel.Type != null ? customerModel.type : null);
 

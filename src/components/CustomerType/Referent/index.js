@@ -1,11 +1,7 @@
-import React, { useState } from "react";
-import { Row, Col, Form, Modal, Button,  } from 'react-bootstrap';
-import {ic_add} from 'react-icons-kit/md/ic_add';
+import { Row, Col, Form, Button } from 'react-bootstrap';
 import {ic_mode_edit} from 'react-icons-kit/md/ic_mode_edit';
 import { Icon } from 'react-icons-kit';
 import {ic_save} from 'react-icons-kit/md/ic_save';
-import axios from 'axios';
-import { useAlert } from 'react-alert';
 import '../customerType.css';
  
 const ReferentType = ({ selectedReferent, setSelectedReferent, value, handleReferentChange, index, error }) => {
@@ -27,14 +23,14 @@ const ReferentType = ({ selectedReferent, setSelectedReferent, value, handleRefe
 							<h6>{value.name} {value.surname}</h6>
 						</Col>
 						<Col xs={2}>
-							{selectedReferent.id != value.id ?
-								<a onClick={() => editReferent(value)} ><Icon icon={ic_mode_edit} xs={35} /></a>
+							{selectedReferent.id !== value.id ?
+								<Button variant="link" onClick={() => editReferent(value)} ><Icon icon={ic_mode_edit} xs={35} /></Button>
 								:
-								<a onClick={() => saveReferent(index)} ><Icon icon={ic_save} xs={35} /></a>
+								<Button variant="link" onClick={() => saveReferent(index)} ><Icon icon={ic_save} xs={35} /></Button>
 							}
 						</Col>
 					</Row>
-					{selectedReferent.id != value.id ?
+					{selectedReferent.id !== value.id ?
 						(<>
 						<Row><Col>Cellulare: {value.mobile}</Col></Row>
 						<Row><Col>Telefono: {value.phone}</Col></Row>

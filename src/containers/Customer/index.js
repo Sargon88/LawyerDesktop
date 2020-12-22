@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { Row, Col, Container } from 'react-bootstrap';
+import { Row, Col } from 'react-bootstrap';
 import { useAlert } from 'react-alert';
 import { useParams } from "react-router-dom";
 import { useAppContext } from "../../utils/contextLib";
-import { useHistory } from "react-router-dom";
 import Query from "../../components/Query";
 import axios from 'axios';
-import NavBar from "../../components/Nav";
 import CustomerComponent from "../../components/Customer";
 import CUSTOMER_DATA_QUERY from "../../queries/customers/customerdata";
 
@@ -36,7 +34,6 @@ const Customer = () => {
   var errorModel = useState({});
   var c = useParams();
   const [customerId] = useState(c.customerId != null ? c.customerId : null);
-  const history = useHistory();
 
   function save(){ 
     var isValid = true;
