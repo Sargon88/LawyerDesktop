@@ -7,7 +7,7 @@ import Query from "../../components/Query";
 import ALL_FOLDERS_PREVIEW_QUERY from "../../queries/folders/allfolderspreview";
 
 const FoldersPreview = ({ navbarData }) => {  
-  
+  const { isAuthenticated } = useAppContext();
   const { setNavbarData } = useAppContext();
   
   useEffect(() => {
@@ -18,30 +18,26 @@ const FoldersPreview = ({ navbarData }) => {
     });
   }, []); 
 
-  //manage user login
-  var appUser = null;
-
-  if(localStorage.getItem(process.env.REACT_APP_LOCALSTORAGE_APPUSER)){
-    appUser = JSON.parse(localStorage.getItem(process.env.REACT_APP_LOCALSTORAGE_APPUSER));  
-  }
-
-  if(appUser){
+  if(isAuthenticated){
     return (
-      <Row>
-        <Col>
-            
-          <Query query={ALL_FOLDERS_PREVIEW_QUERY} >
-              {({ loading, error, data: { issues } }) => {
-                
-                return <FoldersPreviewComponent data={{ issues }}/>
-                
+      <>
+        <br />
+        <Row>
+          <Col>
+              
+            <Query query={ALL_FOLDERS_PREVIEW_QUERY} >
+                {({ loading, error, data: { issues } }) => {
+                  
+                  return <FoldersPreviewComponent data={{ issues }}/>
+                  
+                }
               }
-            }
-          </Query>
+            </Query>
 
 
-        </Col>
-      </Row>
+          </Col>
+        </Row>
+      </>
     );
   }
 

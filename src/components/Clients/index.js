@@ -7,9 +7,8 @@ import paginationFactory from 'react-bootstrap-table2-paginator';
 import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
 import 'react-bootstrap-table2-paginator/dist/react-bootstrap-table2-paginator.min.css';
 
-const Clients = ({ data }) => {
+const Clients = ({ data, openCustomer }) => {
 	const { setNavbarData } = useAppContext();
-	const history = useHistory();
 
 	//https://react-bootstrap-table.github.io/react-bootstrap-table2/
 	const selectRow = {
@@ -27,9 +26,7 @@ const Clients = ({ data }) => {
 
 	const rowEvents = {
 		onDoubleClick: (e, row, rowIndex)=> {
-			console.log(row);
-			var id = row.id;
-			history.push("/customers/" + id)
+			openCustomer(row);
 		}
 	}
 

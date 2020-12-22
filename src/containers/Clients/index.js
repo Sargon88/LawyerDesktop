@@ -8,19 +8,16 @@ import ALL_CLIENTS_PREVIEW_QUERY from "../../queries/clients/allclientspreview";
 import './clients.css';
 
 
-var i = 0;
+//history management workaround. to be verified
+var added = false;
 
 const Clients = () => {
+  const { isAuthenticated } = useAppContext();
   const [ value, setValue ] = useState('');
   const [ ppvalue, setPPValue ] = useState(true);
   const [ lpvalue, setLPValue ] = useState(true);
   const { setNavbarData } = useAppContext();
   const history = useHistory();
-
-
-  console.log("i:", i);
-  i++;
-
 
   useEffect(() => {
     setNavbarData({
@@ -29,14 +26,10 @@ const Clients = () => {
       page:"clients",
     });
 
-    if(appUser){
-      console.log("AGGIUNTO");
-      var pg = "/clienti";
+    if(isAuthenticated & !added){
+      history.push("/clienti");
 
-      if(history.push() !== pg){
-        history.push("/clienti");
-      }
-      
+      added = !added;    
     }
   }, []);
 
@@ -48,93 +41,88 @@ const Clients = () => {
     setLPValue(!lpvalue);
   }
 
-  //manage user login
-  var appUser = null;
-
-  if(localStorage.getItem(process.env.REACT_APP_LOCALSTORAGE_APPUSER)){
-    appUser = JSON.parse(localStorage.getItem(process.env.REACT_APP_LOCALSTORAGE_APPUSER));  
+  function openCustomer(row){
+    console.log(row);
+    var id = row.id;
+    history.push("/customers/" + id)
   }
   
-  if(appUser){
-      return (
-        <>
-          <Row id="row_container">
-            <Col id="content-wrapper">
-              <br />
-              <Row className="filters-row">
-                <Col>
+  if(isAuthenticated){
+    return (
+      <>
+        <Row id="row_container">
+          <Col id="content-wrapper">
+            <br />
+            <Row className="filters-row">
+              <Col>
                   
-                  <Form>
-                    <Form.Group as={Row} className="filters-form" controlId="clientsFilters">
-                      <Col xs={4}>
-                        
-                        <InputGroup className="filters-inputgroup" size="sm">
-                          <InputGroup.Prepend>
-                            <InputGroup.Text>
-                              Filtra
-                            </InputGroup.Text>
-                          </InputGroup.Prepend>
-                          <FormControl type="text" value={value} onChange={e => setValue(e.target.value)} />
-                        </InputGroup>
+                <Form>
+                  <Form.Group as={Row} className="filters-form" controlId="clientsFilters">
+                    <Col xs={4}>
+                       
+                      <InputGroup className="filters-inputgroup" size="sm">
+                        <InputGroup.Prepend>
+                          <InputGroup.Text>
+                            Filtra
+                          </InputGroup.Text>
+                        </InputGroup.Prepend>
+                        <FormControl type="text" value={value} onChange={e => setValue(e.target.value)} />
+                      </InputGroup>
 
-                      </Col>
-                      <Col>
-                        <div key="inline-checkbox" className="mb-3">
-                          <Form.Check inline type="checkbox" id="filter-pp" key="filter-pp" label="Persona Fisica" checked={ppvalue} onChange = {e => onChangePP(e)} />
-                          <Form.Check inline type="checkbox" id="filte-lp" key="filter-lp" label="Persona Giuridica" checked={lpvalue} onChange = {e => onChangeLP(e)} />
-                        </div>
-                      </Col>
-                    </Form.Group>
-                  </Form>
+                    </Col>
+                    <Col>
+                      <div key="inline-checkbox" className="mb-3">
+                        <Form.Check inline type="checkbox" id="filter-pp" key="filter-pp" label="Persona Fisica" checked={ppvalue} onChange = {e => onChangePP(e)} />
+                        <Form.Check inline type="checkbox" id="filte-lp" key="filter-lp" label="Persona Giuridica" checked={lpvalue} onChange = {e => onChangeLP(e)} />
+                      </div>
+                    </Col>
+                  </Form.Group>
+                </Form>
 
-                </Col>
-              </Row>
-              <br />
-              <Row>
-                <Col>
-                  <Query query={ALL_CLIENTS_PREVIEW_QUERY}>
-                    {({ data: { people } }) => {
+              </Col>
+            </Row>
+            <br />
+            <Row>
+              <Col>
+                <Query query={ALL_CLIENTS_PREVIEW_QUERY}>
+                  {({ data: { people } }) => {
 
-                      console.log("PEOPLE", people);
+                    let ppClients = [];
+                    let lpClients = [];
 
-                      let ppClients = [];
-                      let lpClients = [];
+                    if(ppvalue){
+                      ppClients = people.filter(i => i.type.toLowerCase()  === "fisico" ? true : false);
+                      ppClients = ppClients.filter(i => i.name.toLowerCase().includes(value.toLowerCase()) || 
+                                                        i.surname.toLowerCase().includes(value.toLowerCase()))
+                    }
 
-                      if(ppvalue){
-                        ppClients = people.filter(i => i.type.toLowerCase()  === "fisico" ? true : false);
-                        ppClients = ppClients.filter(i => i.name.toLowerCase().includes(value.toLowerCase()) || 
-                                                          i.surname.toLowerCase().includes(value.toLowerCase()))
-                      }
+                    if(lpvalue){
+                      lpClients = people.filter(i => i.type.toLowerCase()  === "giuridico"  ? true : false);
+                      lpClients = lpClients.filter(i => i.surname.toLowerCase().includes(value.toLowerCase()))
+                    }
 
-                      if(lpvalue){
-                        lpClients = people.filter(i => i.type.toLowerCase()  === "giuridico"  ? true : false);
-                        lpClients = lpClients.filter(i => i.surname.toLowerCase().includes(value.toLowerCase()))
-                      }
+                    let filteredClients = ppClients.concat(lpClients);
 
-                      let filteredClients = ppClients.concat(lpClients);
-
-                      return <Client data={ filteredClients } />;
-                    }}
-                  </Query>
-                </Col>
-              </Row>
-            </Col>
-          </Row>
-        </>
-      );
-
-
+                    return <Client data={ filteredClients } openCustomer={ openCustomer } />;
+                  }}
+                </Query>
+              </Col>
+            </Row>
+          </Col>
+        </Row>
+      </>
+    );
   }   
 
   return (
-      <div>
-        <div className="uk-section">
-          <div className="uk-container uk-container-large">
-            You are not logged in. Logout and log in again.          
-          </div>
+    <div>
+      <div className="uk-section">
+        <div className="uk-container uk-container-large">
+          You are not logged in. Logout and log in again.          
         </div>
       </div>
-    );  
+    </div>
+  );  
 
   
 };

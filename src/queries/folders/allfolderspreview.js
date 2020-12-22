@@ -4,8 +4,8 @@ const ALL_FOLDERS_PREVIEW_QUERY = gql`
 	query Issues{
 	  issues{
 	    id
-	    name:issue_name
-	    dossier:issue_dossier{
+	    name:iss_name
+	    dossier:iss_dossier{
 	      id
 	      dossier_customer{
 	        id
@@ -13,9 +13,9 @@ const ALL_FOLDERS_PREVIEW_QUERY = gql`
 	        person_surname
 	      }
 	    }
-	    type:issue_type
-	    deadline:issue_deadline
-	    status:issue_status
+	    type:iss_type
+	    deadline:iss_deadline
+	    status:iss_status
 	    
 	  }
 	}

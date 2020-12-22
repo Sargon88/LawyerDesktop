@@ -50,7 +50,8 @@ const SideBar = ({ page, sidebarData }) => {
 					<Nav.Item className="sidebarCaret">
 						<Nav.Link onClick={toggleSidebar}>{sidebarOpen ? <Icon icon={ic_keyboard_arrow_left} size={25} /> : <Icon icon={ic_keyboard_arrow_right} size={25} />}</Nav.Link>
 					</Nav.Item>
-					<hr className="solid"/>
+					<hr className="solid"/>			
+					
 					<Nav.Item>
 						<Nav.Link href="/clienti"><Icon icon={ic_supervisor_account} size={25} /> {sidebarOpen ? "Clienti" : "" }</Nav.Link>
 					</Nav.Item>
@@ -66,6 +67,7 @@ const SideBar = ({ page, sidebarData }) => {
 					<Nav.Item>
 						<Nav.Link href="/ricerche"><Icon icon={ic_find_in_page} size={25} /> {sidebarOpen ? "Ricerche" : "" }</Nav.Link>
 					</Nav.Item>
+
 					<hr className="solid lastDivider"/>
 					<Nav.Item>
 						<Nav.Link onClick={handleLogout}><Icon icon={ic_exit_to_app} size={25} /> {sidebarOpen ? "Logout" : "" }</Nav.Link>
