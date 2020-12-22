@@ -3,7 +3,8 @@ import { Row, Col, Form, Modal, Button,  } from 'react-bootstrap';
 import {ic_add} from 'react-icons-kit/md/ic_add';
 import {ic_mode_edit} from 'react-icons-kit/md/ic_mode_edit';
 import { Icon } from 'react-icons-kit';
-import {ic_save} from 'react-icons-kit/md/ic_save'
+import {ic_save} from 'react-icons-kit/md/ic_save';
+import {ic_clear} from 'react-icons-kit/md/ic_clear'
 import axios from 'axios';
 import { useAlert } from 'react-alert';
 import './customerType.css';
@@ -102,9 +103,8 @@ const CustomerType = ({ type, customerModel, errorModel, validateRules }) => {
 
 	const handleClose = () => setShow(false);
 
-	function openModal(referent){
-		console.log("MODAL ID", referent);
-		setSelectedReferent(referent);
+	function openModal(){
+		setSelectedReferent({});
 		setShow(true);
 	}
 	//MODAL
@@ -335,9 +335,12 @@ const CustomerType = ({ type, customerModel, errorModel, validateRules }) => {
 															</Col>
 															<Col xs={2}>
 																{selectedReferent.id !== value.id ?
-																	<Button variant="link" onClick={() => editReferent(value)} ><Icon icon={ic_mode_edit} xs={35} /></Button>
+																	<Button variant="link" className="ld_microbtn" onClick={() => editReferent(value)} ><Icon icon={ic_mode_edit} xs={35} /></Button>
 																	:
-																	<Button variant="link" onClick={() => saveReferent(index)} ><Icon icon={ic_save} xs={35} /></Button>
+																	<>
+																	<Button variant="link" className="ld_microbtn" onClick={() => saveReferent(index)} ><Icon icon={ic_save} xs={35} /></Button>
+																	<Button variant="link" className="ld_microbtn" onClick={() => setSelectedReferent({})} ><Icon icon={ic_clear} xs={35} /></Button>
+																	</>
 																}
 															</Col>
 														</Row>
@@ -429,6 +432,7 @@ const CustomerType = ({ type, customerModel, errorModel, validateRules }) => {
 								</Modal.Header>
 								<Modal.Body>
 									<hr className="solid"/>
+
 									<CustomerType type='pp' customerModel={{}} errorModel={{}} validateRules={validateRules} />
 								</Modal.Body>
 								<Modal.Footer>

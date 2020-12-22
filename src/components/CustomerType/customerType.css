@@ -16,3 +16,10 @@
     margin-bottom: 15px;
     padding-bottom: 15px;
 }
+
+.ld_microbtn{
+    padding-right: 0.5px !important;
+    padding-left: 0.5px !important;
+    padding-top: 0px !important;
+    border: 0px !important;
+}
