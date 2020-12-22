@@ -56,7 +56,7 @@ const NavBar = () => {
             :
             navbarData.page == "folderspreview" ?
               <>
-                <Nav.Link href="/clienti/nuovo"><Icon icon={ic_add} size={40} /></Nav.Link>
+                <Nav.Link href="/folders/new"><Icon icon={ic_add} size={40} /></Nav.Link>
                 <Nav.Link href={"/customers/" + navbarData.selectedId} disabled={!navbarData.edit}><Icon icon={ic_mode_edit} size={30} /></Nav.Link>
                 <Nav.Link href={"/folders/" + navbarData.selectedId} disabled={!navbarData.edit}><Icon icon={folderOpen} size={30} /></Nav.Link>
               </>

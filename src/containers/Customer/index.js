@@ -154,11 +154,13 @@ const Customer = () => {
       selectedId: customerId
     });
 
+/*
     if(customerId){
       history.push("/customers/" + customerId);
     } else {
       history.push("/clienti/nuovo");
     }
+*/
 
   }, []);
   

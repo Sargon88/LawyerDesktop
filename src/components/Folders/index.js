@@ -7,7 +7,7 @@ import {ic_keyboard_arrow_up} from 'react-icons-kit/md/ic_keyboard_arrow_up'
 const FoldersComponent = ({ data }) => {
 	const [customerData] = useState(data);
 	const [openDetails, setOpenDetail] = useState(false);
-console.log("data", data);
+	console.log("data", data);
 
 	return (
 		<>

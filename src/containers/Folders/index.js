@@ -2,12 +2,14 @@ import React, { useState, useEffect } from "react";
 import { Row, Col, Container } from 'react-bootstrap';
 import { useParams } from "react-router-dom";
 import { useAppContext } from "../../utils/contextLib";
+import { useHistory } from "react-router-dom";
 import FoldersComponent from "../../components/Folders";
 import Query from "../../components/Query";
 import CUSTOMER_FOLDERS_QUERY from "../../queries/folders/customerfolders";
 
 const Folders = ({ navbarData }) => {  
   const { setNavbarData } = useAppContext();
+  const history = useHistory();
   var c = useParams();
   const [customerId] = useState(c.customerId != null ? c.customerId : null);
   
@@ -17,6 +19,12 @@ const Folders = ({ navbarData }) => {
       selectedId: "",
       page:"folders",
     });
+
+    if(customerId){
+      history.push("/folders/" + customerId);
+    } else {
+      history.push("/folders/new");
+    }
   }, []);	
   
   //manage user login

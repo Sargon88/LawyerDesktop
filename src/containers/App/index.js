@@ -77,6 +77,7 @@ function App() {
                   <Route path="/clienti/nuovo" exact render={(props) => <Customer  {...props} /> } />
                   <Route path="/customers/:customerId" exact render={(props) => <Customer {...props} /> } />
                   <Route path="/folders" exact render={(props) => <FoldersPreview {...props} /> } />
+                  <Route path="/folders/new" exact render={(props) => <Folders {...props} /> } />
                   <Route path="/folders/:customerId" exact render={(props) => <Folders {...props} /> } />
                   <Route path="/login" component={Login} exact />
                   <Route path="" component={NotFound} />
