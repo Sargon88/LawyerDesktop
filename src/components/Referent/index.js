@@ -9,6 +9,7 @@ import {ic_mode_edit} from 'react-icons-kit/md/ic_mode_edit';
 import {ic_save} from 'react-icons-kit/md/ic_save';
 import {ic_add} from 'react-icons-kit/md/ic_add';
 import {ic_clear} from 'react-icons-kit/md/ic_clear';
+import {ic_delete} from 'react-icons-kit/md/ic_delete'
 
 import './referent.css';
  
@@ -73,8 +74,50 @@ const ReferentType = ({ customerModel, selectedReferent, setSelectedReferent, va
 
 	function addReferent(){
 		setSelectedReferent({});
-		
-		;
+	}
+
+	function removeReferent(index){
+
+		console.log("MODEL", customerModel);
+		var customerId = customerModel.id;
+		var referents = customerModel.referents;
+
+		referents.splice(index, 1);
+		var ref = [];
+		referents.forEach(function(item, index){
+			ref.push({person:{id: item.id}});
+		});
+
+
+		var person = {
+			id: customerId,
+			person_referents: ref
+		}
+
+		axios.put(`${process.env.REACT_APP_BACKEND_URL}/people/` + customerId, person, {
+          headers: {
+            Authorization:
+              'Bearer ' + localStorage.getItem("JWTtoken")
+          }})
+            .then(response => {
+
+              if(response.status === 200){
+                alert.success("Salvato");
+                customerModel.referents = referents;
+                setSelectedReferent({});                          
+
+              } else {
+                alert.error("Errore:" + response.error);
+                console.log(response);
+              }
+              
+              
+            },
+            response => {
+                alert.error("Errore: " + response.error + " - " + response.message);
+                console.log(response)
+            });	  
+
 	}
 
 	return (
@@ -94,7 +137,10 @@ const ReferentType = ({ customerModel, selectedReferent, setSelectedReferent, va
 											</Col>
 											<Col xs={2}>
 												{selectedReferent.id !== value.id ?
+													<>
 													<Button variant="link" className="ld_microbtn" onClick={() => editReferent(value)} ><Icon icon={ic_mode_edit} xs={35} /></Button>
+													<Button variant="link" className="ld_microbtn" onClick={() => removeReferent(index)} ><Icon icon={ic_delete} xs={35} /></Button>
+													</>
 													:
 													<>
 													<Button variant="link" className="ld_microbtn" onClick={() => saveReferent(index)} ><Icon icon={ic_save} xs={35} /></Button>
