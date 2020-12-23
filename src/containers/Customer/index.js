@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Row, Col } from 'react-bootstrap';
 import { useAlert } from 'react-alert';
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import { useAppContext } from "../../utils/contextLib";
+import { useQuery } from "react-apollo";
 import Query from "../../components/Query";
 import axios from 'axios';
 import CustomerComponent from "../../components/Customer";
@@ -29,11 +30,14 @@ var validateRules = [
 
 const Customer = () => {  
   const { setNavbarData } = useAppContext();
+  const { isAuthenticated } = useAppContext();
   const alert = useAlert()
   const [customerModel] = useState({});
   var errorModel = useState({});
   var c = useParams();
   const [customerId] = useState(c.customerId != null ? c.customerId : null);
+  const [societyId] = useState(c.societyId != null ? c.societyId : null);
+  const history = useHistory();
 
   function save(){ 
     var isValid = true;
@@ -124,7 +128,60 @@ const Customer = () => {
             .then(response => {
 
               if(response.status === 200){
-                alert.success("Salvato");                          
+
+                if(isNewReferent && response.data){
+                  //get society referente
+                  var referentId = response.data.id;
+                  axios.get(`${process.env.REACT_APP_BACKEND_URL}/people/` + societyId, {
+                    headers: {
+                      Authorization:
+                        'Bearer ' + localStorage.getItem("JWTtoken")
+                    }})
+                      .then(response => {
+
+                        if(response.status === 200 && response.data){
+                          
+                          var ref = response.data.person_referents;
+                          ref.push({
+                              referent_role: "legale",
+                              person: {
+                                id: referentId
+                              }
+                            });
+
+                          //update society  
+                          var society = {
+                            id: societyId,
+                            person_referents: ref,
+                          }
+
+                          axios.put(`${process.env.REACT_APP_BACKEND_URL}/people/` + societyId, society, {
+                            headers: {
+                              Authorization:
+                                'Bearer ' + localStorage.getItem("JWTtoken")
+                            }})
+                              .then(response => {
+
+                                if(response.status === 200){
+                                  alert.success("Salvato");
+                                  
+                                  setTimeout(history.goBack(), 5000);
+
+                                } else {
+                                  alert.error("Errore:" + response.error);
+                                  console.log(response);
+
+                                }
+
+                              });
+                        }
+
+                      });
+
+                } else{
+                  alert.success("Salvato");
+
+                }
 
               } else {
                 alert.error("Errore:" + response.error);
@@ -151,24 +208,15 @@ const Customer = () => {
       selectedId: customerId
     });
 
-/*
-    if(customerId){
-      history.push("/customers/" + customerId);
-    } else {
-      history.push("/clienti/nuovo");
-    }
-*/
-
   }, []);
+
+  const isNewReferent = societyId !== null;
+
+  if(isNewReferent){
+    customerModel.type = "pp";
+  }
   
-  //manage user login
-	var appUser = null;
-
-	if(localStorage.getItem(process.env.REACT_APP_LOCALSTORAGE_APPUSER)){
-  	appUser = JSON.parse(localStorage.getItem(process.env.REACT_APP_LOCALSTORAGE_APPUSER));  
-	}
-
-	if(appUser){
+	if(isAuthenticated){
 
     if(customerId){
       //edit customer
@@ -230,7 +278,8 @@ const Customer = () => {
                         return <CustomerComponent customerModel={customerModel}
                                                   errorModel={errorModel}
                                                   validateRules={validateRules}
-                                                  customerId={customerId} />
+                                                  customerId={customerId}
+                                                  isNewReferent={isNewReferent} />
                       }}
                   </Query>
               </Col>
@@ -249,7 +298,8 @@ const Customer = () => {
                                      customerModel={customerModel}
                                      errorModel={errorModel}
                                      validateRules={validateRules}
-                                     customerId={customerId} />
+                                     customerId={customerId}
+                                     isNewReferent={isNewReferent} />
               </Col>
             </Row>
         </>

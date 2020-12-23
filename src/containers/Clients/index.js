@@ -26,7 +26,7 @@ const Clients = () => {
       page:"clients",
     });
 
-    if(isAuthenticated & !added){
+    if(isAuthenticated && !added){
       history.push("/clienti");
 
       added = !added;    
