@@ -37,6 +37,7 @@ const Customer = () => {
   var c = useParams();
   const [customerId] = useState(c.customerId != null ? c.customerId : null);
   const [societyId] = useState(c.societyId != null ? c.societyId : null);
+  const [referentType, setReferentType] = useState(null);
   const history = useHistory();
 
   function save(){ 
@@ -142,8 +143,9 @@ const Customer = () => {
                         if(response.status === 200 && response.data){
                           
                           var ref = response.data.person_referents;
+                          debugger;
                           ref.push({
-                              referent_role: "legale",
+                              referent_role: referentType,
                               person: {
                                 id: referentId
                               }
@@ -258,6 +260,7 @@ const Customer = () => {
                           for(var i = 0; i < person.referents.length; i++){
                             var c = person.referents[i].person;
                             customerModel.referents.push({
+                              role: person.referents[i].role,
                               name: c.name,
                               surname: c.surname,
                               code: c.code,
@@ -275,11 +278,15 @@ const Customer = () => {
                         if (loading) return null;
                         if (error) return `Error! ${error}`;
 
+                        console.log("MODEL", customerModel);
+
                         return <CustomerComponent customerModel={customerModel}
                                                   errorModel={errorModel}
                                                   validateRules={validateRules}
                                                   customerId={customerId}
-                                                  isNewReferent={isNewReferent} />
+                                                  isNewReferent={isNewReferent}
+                                                  referentType={referentType}
+                                                  setReferentType={setReferentType} />
                       }}
                   </Query>
               </Col>
@@ -299,7 +306,9 @@ const Customer = () => {
                                      errorModel={errorModel}
                                      validateRules={validateRules}
                                      customerId={customerId}
-                                     isNewReferent={isNewReferent} />
+                                     isNewReferent={isNewReferent}
+                                     referentType={referentType}
+                                     setReferentType={setReferentType} />
               </Col>
             </Row>
         </>

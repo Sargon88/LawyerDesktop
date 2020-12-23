@@ -77,8 +77,6 @@ const ReferentType = ({ customerModel, selectedReferent, setSelectedReferent, va
 	}
 
 	function removeReferent(index){
-
-		console.log("MODEL", customerModel);
 		var customerId = customerModel.id;
 		var referents = customerModel.referents;
 
@@ -149,6 +147,7 @@ const ReferentType = ({ customerModel, selectedReferent, setSelectedReferent, va
 												}
 											</Col>
 										</Row>
+										<Row><Col>Ruolo: {value.role}</Col></Row>
 										{selectedReferent.id !== value.id ?
 											(<>
 											<Row><Col>Cellulare: {value.mobile}</Col></Row>

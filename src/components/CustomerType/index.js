@@ -10,7 +10,7 @@ import { useAlert } from 'react-alert';
 import ReferentType from '../Referent';
 import './customerType.css';
 
-const CustomerType = ({ type, customerModel, errorModel, validateRules, isNewReferent }) => {
+const CustomerType = ({ type, customerModel, errorModel, validateRules, isNewReferent, referentType }) => {
 	const [error, setError] = useState({});
 	const alert = useAlert()
 
@@ -255,7 +255,7 @@ const CustomerType = ({ type, customerModel, errorModel, validateRules, isNewRef
 					{type !== "lp" ?
 						<></>
 						:
-						<ReferentType customerModel={ customerModel } selectedReferent={ selectedReferent } setSelectedReferent={ setSelectedReferent } validateRules={ validateRules }/>
+						<ReferentType customerModel={ customerModel } selectedReferent={ selectedReferent } setSelectedReferent={ setSelectedReferent } validateRules={ validateRules } />
 					}
 					</Form>
 				</Col>  
