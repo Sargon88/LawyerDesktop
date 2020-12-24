@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Row, Col, Form, Button } from 'react-bootstrap';
+import { Row, Col, Form, Button, Modal } from 'react-bootstrap';
 import { useAlert } from 'react-alert';
 import { useHistory, Link } from "react-router-dom";
 import axios from 'axios';
@@ -10,6 +10,8 @@ import {ic_save} from 'react-icons-kit/md/ic_save';
 import {ic_add} from 'react-icons-kit/md/ic_add';
 import {ic_clear} from 'react-icons-kit/md/ic_clear';
 import {ic_delete} from 'react-icons-kit/md/ic_delete'
+
+import ReferentModal from '../ReferentModal';
 
 import './referent.css';
  
@@ -115,14 +117,20 @@ const ReferentType = ({ customerModel, selectedReferent, setSelectedReferent, va
                 alert.error("Errore: " + response.error + " - " + response.message);
                 console.log(response)
             });	  
-
 	}
+
+	//MODAL
+	const [show, setShow] = useState(false);
+
+	const handleClose = () => setShow(false);
+	const handleShow = () => setShow(true);
+	//MODAL
 
 	return (
 		<>
 			<Row>
 				<Col>
-					<Row><Col><h4>Referenti <a href={'/referents/new/' + customerModel.id} className="ld_microbtn" ><Icon icon={ic_add} xs={35} /></a></h4></Col></Row>
+					<Row><Col><h4>Referenti <Button variant="link" onClick={() => handleShow()} className="ld_microbtn" ><Icon icon={ic_add} xs={35} /></Button></h4></Col></Row>
 					<Row>
 					{customerModel.referents.map((value, index) => {
 						return(	
@@ -229,6 +237,23 @@ const ReferentType = ({ customerModel, selectedReferent, setSelectedReferent, va
 					</Row>
 				</Col>
 			</Row>
+
+			<Modal show={show} onHide={handleClose}>
+				<Modal.Header closeButton>
+					<Modal.Title>Aggiungi Referente</Modal.Title>
+				</Modal.Header>
+				<Modal.Body>
+					<ReferentModal />
+				</Modal.Body>
+				<Modal.Footer>
+					<Button variant="secondary" onClick={handleClose}>
+						Close
+					</Button>
+					<Button variant="primary" onClick={handleClose}>
+						Save Changes
+					</Button>
+				</Modal.Footer>
+			</Modal>
 		</>
 	);				
 	
