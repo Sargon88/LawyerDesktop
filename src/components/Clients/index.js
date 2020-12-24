@@ -6,7 +6,7 @@ import paginationFactory from 'react-bootstrap-table2-paginator';
 import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
 import 'react-bootstrap-table2-paginator/dist/react-bootstrap-table2-paginator.min.css';
 
-const Clients = ({ data, openCustomer }) => {
+const Clients = ({ data }) => {
 	const { setNavbarData } = useAppContext();
 
 	//https://react-bootstrap-table.github.io/react-bootstrap-table2/
@@ -23,27 +23,22 @@ const Clients = ({ data, openCustomer }) => {
 		},
 	};
 
-	const rowEvents = {
-		onDoubleClick: (e, row, rowIndex)=> {
-			openCustomer(row);
-		}
-	}
-
 	const columns = [
 		{
 		  dataField: 'id',
 		  text: ''
 		},
 		{
-		  dataField: 'surname',
-		  text: 'Cognome/Ragione Sociale',
-		  sort: true
-		},
-		{
-		  dataField: 'name',
-		  text: 'Nome',
-		  sort: true
-		},
+		  dataField: '',
+	      formatter: function(cell, row, rowindex){
+	      	console.log("DATA:", row);
+	      	return (
+	      		<a href={"/customers/" + row.id}>{row.surname}  {row.name}</a>
+	      	);
+	      },
+	      text: 'Cliente',
+	      sort: true
+	    },
 		{
 		  dataField: 'code',
 		  text: 'Codie Fiscale/Partita iva'
@@ -59,7 +54,7 @@ const Clients = ({ data, openCustomer }) => {
 		{
 		  dataField: 'contact.cnn_pec',
 		  text: 'Pec'
-		},
+		}
 	];
 
 	return (
@@ -75,7 +70,7 @@ const Clients = ({ data, openCustomer }) => {
 					condensed={true}
 					pagination={ paginationFactory() }
 					filterPosition='top'
-					rowEvents={ rowEvents } />	 
+					/>	 
 	      	</Col>  
 	    </Row>
 	);

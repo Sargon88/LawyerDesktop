@@ -39,13 +39,7 @@ const Clients = () => {
 
   function onChangeLP(e){
     setLPValue(!lpvalue);
-  }
-
-  function openCustomer(row){
-    console.log(row);
-    var id = row.id;
-    history.push("/customers/" + id)
-  }
+  } 
   
   if(isAuthenticated){
     return (
@@ -103,7 +97,7 @@ const Clients = () => {
 
                     let filteredClients = ppClients.concat(lpClients);
 
-                    return <Client data={ filteredClients } openCustomer={ openCustomer } />;
+                    return <Client data={ filteredClients } />;
                   }}
                 </Query>
               </Col>

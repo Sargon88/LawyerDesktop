@@ -23,10 +23,7 @@ const FoldersPreviewComponent = ({ data }) => {
     	var nav = navbarData;
     	nav.selectedId = row.id;
     	nav.edit = true;
-      	
       	setNavbarData(nav);
-
-
     } 
   };
 
