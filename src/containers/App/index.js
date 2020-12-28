@@ -2,13 +2,15 @@ import React, { useState, useEffect } from "react";
 import { AppContext } from "../../utils/contextLib";
 import { Switch, Route } from "react-router-dom";
 import { Row, Col  } from 'react-bootstrap';
+import moment from 'moment';
+import 'moment-timezone';
 import Clients from "../Clients";
 import Customer from "../Customer";
 import Folders from "../Folders";
 import FoldersPreview from "../FoldersPreview";
 import Login from "../Login";
 import NotFound from "../NotFound";
-import Home from "../Test";
+import Dashboard from "../Dashboard";
 import NavBar from "../../components/Nav";
 import SideBar from "../../components/Bootstrap/SideBar";
 
@@ -18,6 +20,7 @@ function App() {
   const [isAuthenticating, setIsAuthenticating] = useState(true);
   const [navbarData, setNavbarData] = useState({}); 
   const [sidebarOpen, setSidebarOpen] = useState(true); 
+  const [today, setToday] = useState(moment());
 
   useEffect(() => {
     onLoad();
@@ -45,7 +48,7 @@ function App() {
 
   if(!isAuthenticated){
     return( 
-      <AppContext.Provider value={{ isAuthenticated, userHasAuthenticated, navbarData, setNavbarData, sidebarOpen, setSidebarOpen }}>
+      <AppContext.Provider value={{ isAuthenticated, userHasAuthenticated, navbarData, setNavbarData, sidebarOpen, setSidebarOpen, today }}>
         <div className="App container-fluid">
           <NavBar />
           <Row className="content-container">
@@ -72,7 +75,7 @@ function App() {
             <SideBar />
             <Col>
               <Switch>
-                  <Route path="/" component={Home} exact />
+                  <Route path="/" component={Dashboard} exact />
                   <Route path="/clienti" exact render={(props) => <Clients {...props} /> } />
                   <Route path="/clienti/nuovo" exact render={(props) => <Customer  {...props} /> } />
                   <Route path="/referents/new/:societyId" exact render={(props) => <Customer  {...props} /> } />
