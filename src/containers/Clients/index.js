@@ -7,10 +7,6 @@ import Client from "../../components/Clients";
 import ALL_CLIENTS_PREVIEW_QUERY from "../../queries/clients/allclientspreview";
 import './clients.css';
 
-
-//history management workaround. to be verified
-var added = false;
-
 const Clients = () => {
   const { isAuthenticated } = useAppContext();
   const [ value, setValue ] = useState('');
@@ -25,12 +21,6 @@ const Clients = () => {
       selectedId: "",
       page:"clients",
     });
-
-    if(isAuthenticated && !added){
-      history.push("/clienti");
-
-      added = !added;    
-    }
   }, []);
 
   function onChangePP(e){
