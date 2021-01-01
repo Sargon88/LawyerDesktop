@@ -238,12 +238,12 @@ const ReferentType = ({ customerModel, selectedReferent, setSelectedReferent, va
 				</Col>
 			</Row>
 
-			<Modal show={show} onHide={handleClose}>
+			<Modal className="ld_referentmodal" show={show} onHide={handleClose} centered>
 				<Modal.Header closeButton>
 					<Modal.Title>Aggiungi Referente</Modal.Title>
 				</Modal.Header>
 				<Modal.Body>
-					<ReferentModal />
+					<ReferentModal customerModel={ customerModel } />
 				</Modal.Body>
 				<Modal.Footer>
 					<Button variant="secondary" onClick={handleClose}>

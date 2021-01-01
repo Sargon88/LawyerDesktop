@@ -10,25 +10,36 @@ const AutocompleteInput = ({ options, onSelectItem }) => {
         setSuggestion(event.target.value);
     }
 
-    function selectListItem(event){ 
-        console.log(filteredOptions[event.target.value])
-        debugger;
-        //setSuggestion(item);
-        //onSelectItem(item);
-    }
+    function selectListItem(event){
+        var item = filteredOptions[event.target.value]; 
+        console.log(item);
+        //debugger;
+
+        setSuggestion(item.name + " " + item.surname);
+        onSelectItem(item);
+    } 
 
     return(
-        <>
-            <Form.Control type="input" value={suggestion} onChange={handleChange} />
-                
-            <ListGroup as="ul" variant="flush">
-                {
-                    filteredOptions.map((item, index) => {
-                        return <ListGroup.Item as="li" action key={ item.id } onClick={ selectListItem } value={ index }>{item.surname + ' ' + item.name + ' - ' + item.code}</ListGroup.Item>
-                    })
-                }
-            </ListGroup>
-        </>
+        <Row className="ld_autocompleterow">
+            <Col>
+                <Row>
+                    <Col>
+                        <Form.Control type="input" value={suggestion} onChange={handleChange} />
+                    </Col>
+                </Row>
+                <Row>
+                    <Col >    
+                        <ListGroup as="ul" variant="flush">
+                            {
+                                filteredOptions.map((item, index) => {
+                                    return <ListGroup.Item as="li" action key={ item.id } onClick={ selectListItem } value={ index }>{item.surname + ' ' + item.name + ' - ' + item.code}</ListGroup.Item>
+                                })
+                            }
+                        </ListGroup>
+                    </Col>
+                </Row>
+            </Col>
+        </Row>
     );
   
 };
