@@ -108,18 +108,18 @@ const NavBar = () => {
         disabled: false
       },
       {
-        href: "/customers/" + navbarData.selectedId,
+        href: "/folder/" + navbarData.selectedId,
         icon: ic_mode_edit,
         size: 30,
         disabled: !navbarData.edit
       },
-      {
+/*      {
         href: "/folders/" + navbarData.selectedId,
         icon: folderOpen,
         size: 30,
         disabled: !navbarData.edit
       }
-    ]
+*/  ]
   }
 
  return(

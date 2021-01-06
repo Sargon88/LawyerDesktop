@@ -22,8 +22,8 @@ const FoldersPreviewComponent = ({ data }) => {
     onSelect: (row, isSelect, rowIndex, e) => {
     	var nav = navbarData;
     	nav.selectedId = row.id;
-    	nav.edit = true;
-      	setNavbarData(nav);
+      nav.edit = true;
+      setNavbarData(nav);
     } 
   };
 
@@ -45,6 +45,11 @@ const FoldersPreviewComponent = ({ data }) => {
     },
     {
       dataField: 'name',
+      formatter: function(cell, row, rowindex){
+        return (
+          <a href={"/folder/" + row.id}>{row.name}</a>
+        );
+      },
       text: 'Nome Pratica',
       sort: true
     },

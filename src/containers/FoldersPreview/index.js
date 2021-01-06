@@ -23,17 +23,12 @@ const FoldersPreview = ({ navbarData }) => {
         <br />
         <Row>
           <Col>
-              
             <Query query={ALL_FOLDERS_PREVIEW_QUERY} >
                 {({ loading, error, data: { issues } }) => {
-                  
                   return <FoldersPreviewComponent data={{ issues }}/>
-                  
                 }
               }
             </Query>
-
-
           </Col>
         </Row>
       </>

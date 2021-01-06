@@ -34,64 +34,59 @@ const Clients = () => {
   if(isAuthenticated){
     return (
       <>
+        <Row className="filters-row">
+          <Col>
+              
+            <Form>
+              <Form.Group as={Row} className="filters-form" controlId="clientsFilters">
+                <Col xs={4}>
+                    
+                  <InputGroup className="filters-inputgroup" size="sm">
+                    <InputGroup.Prepend>
+                      <InputGroup.Text>
+                        Filtra
+                      </InputGroup.Text>
+                    </InputGroup.Prepend>
+                    <FormControl type="text" value={value} onChange={e => setValue(e.target.value)} />
+                  </InputGroup>
+
+                </Col>
+                <Col>
+                  <div key="inline-checkbox" className="mb-3">
+                    <Form.Check inline type="checkbox" id="filter-pp" key="filter-pp" label="Persona Fisica" checked={ppvalue} onChange = {e => onChangePP(e)} />
+                    <Form.Check inline type="checkbox" id="filte-lp" key="filter-lp" label="Persona Giuridica" checked={lpvalue} onChange = {e => onChangeLP(e)} />
+                  </div>
+                </Col>
+              </Form.Group>
+            </Form>
+
+          </Col>
+        </Row>
+        <br />
         <Row>
           <Col>
-            <br />
-            <Row className="filters-row">
-              <Col>
-                  
-                <Form>
-                  <Form.Group as={Row} className="filters-form" controlId="clientsFilters">
-                    <Col xs={4}>
-                       
-                      <InputGroup className="filters-inputgroup" size="sm">
-                        <InputGroup.Prepend>
-                          <InputGroup.Text>
-                            Filtra
-                          </InputGroup.Text>
-                        </InputGroup.Prepend>
-                        <FormControl type="text" value={value} onChange={e => setValue(e.target.value)} />
-                      </InputGroup>
+            <Query query={ALL_CLIENTS_PREVIEW_QUERY}>
+              {({ data: { people } }) => {
 
-                    </Col>
-                    <Col>
-                      <div key="inline-checkbox" className="mb-3">
-                        <Form.Check inline type="checkbox" id="filter-pp" key="filter-pp" label="Persona Fisica" checked={ppvalue} onChange = {e => onChangePP(e)} />
-                        <Form.Check inline type="checkbox" id="filte-lp" key="filter-lp" label="Persona Giuridica" checked={lpvalue} onChange = {e => onChangeLP(e)} />
-                      </div>
-                    </Col>
-                  </Form.Group>
-                </Form>
+                let ppClients = [];
+                let lpClients = [];
 
-              </Col>
-            </Row>
-            <br />
-            <Row>
-              <Col>
-                <Query query={ALL_CLIENTS_PREVIEW_QUERY}>
-                  {({ data: { people } }) => {
+                if(ppvalue){
+                  ppClients = people.filter(i => i.type.toLowerCase()  === "fisico" ? true : false);
+                  ppClients = ppClients.filter(i => i.name.toLowerCase().includes(value.toLowerCase()) || 
+                                                    i.surname.toLowerCase().includes(value.toLowerCase()))
+                }
 
-                    let ppClients = [];
-                    let lpClients = [];
+                if(lpvalue){
+                  lpClients = people.filter(i => i.type.toLowerCase()  === "giuridico"  ? true : false);
+                  lpClients = lpClients.filter(i => i.surname.toLowerCase().includes(value.toLowerCase()))
+                }
 
-                    if(ppvalue){
-                      ppClients = people.filter(i => i.type.toLowerCase()  === "fisico" ? true : false);
-                      ppClients = ppClients.filter(i => i.name.toLowerCase().includes(value.toLowerCase()) || 
-                                                        i.surname.toLowerCase().includes(value.toLowerCase()))
-                    }
+                let filteredClients = ppClients.concat(lpClients);
 
-                    if(lpvalue){
-                      lpClients = people.filter(i => i.type.toLowerCase()  === "giuridico"  ? true : false);
-                      lpClients = lpClients.filter(i => i.surname.toLowerCase().includes(value.toLowerCase()))
-                    }
-
-                    let filteredClients = ppClients.concat(lpClients);
-
-                    return <Client data={ filteredClients } />;
-                  }}
-                </Query>
-              </Col>
-            </Row>
+                return <Client data={ filteredClients } />;
+              }}
+            </Query>
           </Col>
         </Row>
       </>

@@ -31,7 +31,6 @@ const Clients = ({ data }) => {
 		{
 		  dataField: '',
 	      formatter: function(cell, row, rowindex){
-	      	console.log("DATA:", row);
 	      	return (
 	      		<a href={"/customers/" + row.id}>{row.surname}  {row.name}</a>
 	      	);

@@ -8,6 +8,7 @@ import Query from "../../components/Query";
 import CUSTOMER_FOLDERS_QUERY from "../../queries/folders/customerfolders";
 
 const Folders = ({ navbarData }) => {  
+  const { isAuthenticated } = useAppContext();
   const { setNavbarData } = useAppContext();
   const history = useHistory();
   var c = useParams();
@@ -26,15 +27,8 @@ const Folders = ({ navbarData }) => {
       history.push("/folders/new");
     }
   }, []);	
-  
-  //manage user login
-	var appUser = null;
 
-	if(localStorage.getItem(process.env.REACT_APP_LOCALSTORAGE_APPUSER)){
-  	appUser = JSON.parse(localStorage.getItem(process.env.REACT_APP_LOCALSTORAGE_APPUSER));  
-	}
-
-	if(appUser){
+	if(isAuthenticated){
 
     return (
       <Container fluid>
