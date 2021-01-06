@@ -12,7 +12,8 @@ import Login from "../Login";
 import NotFound from "../NotFound";
 import Dashboard from "../Dashboard";
 import NavBar from "../../components/Nav";
-import SideBar from "../../components/Bootstrap/SideBar";
+//import SideBar from "../../components/Bootstrap/SideBar";
+import SideBar from "../../components/Sidebar/";
 
 
 function App() {
@@ -52,7 +53,6 @@ function App() {
         <div className="App container-fluid">
           <NavBar />
           <Row className="content-container">
-            <SideBar />
             <Col>
               <Switch>
                   <Route path="" component={Login} />
@@ -67,27 +67,27 @@ function App() {
 
     return( 
       !isAuthenticating && <AppContext.Provider value={{ isAuthenticated, userHasAuthenticated, navbarData, setNavbarData, sidebarOpen, setSidebarOpen }}>
-        <div className="App container-fluid full-height">
-          <Row>
-            <NavBar />
-          </Row>
-          <Row className="content-container">
+        <div className="App container-fluid ">
+          <NavBar />
+          <div className="content-area">
             <SideBar />
-            <Col>
-              <Switch>
-                  <Route path="/" component={Dashboard} exact />
-                  <Route path="/clienti" exact render={(props) => <Clients {...props} /> } />
-                  <Route path="/clienti/nuovo" exact render={(props) => <Customer  {...props} /> } />
-                  <Route path="/referents/new/:societyId" exact render={(props) => <Customer  {...props} /> } />
-                  <Route path="/customers/:customerId" exact render={(props) => <Customer {...props} /> } />
-                  <Route path="/folders" exact render={(props) => <FoldersPreview {...props} /> } />
-                  <Route path="/folders/new" exact render={(props) => <Folders {...props} /> } />
-                  <Route path="/folders/:customerId" exact render={(props) => <Folders {...props} /> } />
-                  <Route path="/login" component={Login} exact />
-                  <Route path="" component={NotFound} />
-              </Switch>
-            </Col>
-          </Row>
+            <Row className="content-container">
+              <Col>
+                <Switch>
+                    <Route path="/" component={Dashboard} exact />
+                    <Route path="/clienti" exact render={(props) => <Clients {...props} /> } />
+                    <Route path="/clienti/nuovo" exact render={(props) => <Customer  {...props} /> } />
+                    <Route path="/referents/new/:societyId" exact render={(props) => <Customer  {...props} /> } />
+                    <Route path="/customers/:customerId" exact render={(props) => <Customer {...props} /> } />
+                    <Route path="/folders" exact render={(props) => <FoldersPreview {...props} /> } />
+                    <Route path="/folders/new" exact render={(props) => <Folders {...props} /> } />
+                    <Route path="/folders/:customerId" exact render={(props) => <Folders {...props} /> } />
+                    <Route path="/login" component={Login} exact />
+                    <Route path="" component={NotFound} />
+                </Switch>
+              </Col>
+            </Row>
+          </div>
         </div>
       </AppContext.Provider>
     );

@@ -34,8 +34,8 @@ const Clients = () => {
   if(isAuthenticated){
     return (
       <>
-        <Row id="row_container">
-          <Col id="content-wrapper">
+        <Row>
+          <Col>
             <br />
             <Row className="filters-row">
               <Col>
