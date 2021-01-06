@@ -1,8 +1,10 @@
 .ld_navbar{
-    width: 8rem;
-    height: 92.5vh;
+    width: 5rem;
+    height: 93.1vh;
     position: fixed;
-    background-color:blueviolet;    
+    background-color: var(--bg-grey); 
+    transition: width 200ms ease;   
+    z-index: 100;
 }
 
 .ld_navbar-nav {
@@ -11,8 +13,45 @@
     flex-direction: column;
     align-items: center;
     height: 100%;
+    padding: 0;
 }
 
 .ld_nav-item {
     width: 100%;
+}
+
+.ld_nav-item:last-child {
+    margin-top: auto;
+}
+
+.ld_nav-link{
+    display: flex;
+    align-items: center;
+    height: 5rem;
+    text-decoration: none;
+    filter: grayscale(100%) opacity(0.7);
+    transition: var(--transition-speed);
+}
+
+.ld_nav-link:hover{
+    filter: grayscale(0%) opacity(1);
+    background: var(--bg-selected-grey) !important;
+}
+
+.ld_link-text {
+    display: none;
+    margin-left: 1rem;
+}
+
+.ld_nav-link svg {
+    min-width: 1.5rem;
+    margin: 0 1.5rem;
+}
+
+.ld_navbar:hover {
+    width: 16rem;
+}
+
+.ld_navbar:hover .ld_link-text {
+    display: block;
 }

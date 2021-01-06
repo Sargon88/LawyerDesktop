@@ -42,39 +42,39 @@ const SideBar = ({ page, sidebarData }) => {
                     <ul className="ld_navbar-nav">
                         <li className="ld_nav-item">
                             <Link to="/clienti" className="ld_nav-link">
-                                <span className="ld_link-text"><Icon icon={ic_supervisor_account} size={25} />Clienti</span>
+                                <Icon icon={ic_supervisor_account} /><span className="ld_link-text">Clienti</span>
                             </Link>
                         </li>
                     
                         <li className="ld_nav-item">
                             <Link to="/folders" className="ld_nav-link">
-                                <span className="ld_link-text"><Icon icon={folderOpen} size={25} />Pratiche</span>
+                                <Icon icon={folderOpen} /><span className="ld_link-text">Pratiche</span>
                             </Link>
                         </li>
                     
                         <li className="ld_nav-item">
                             <Link to="/contabilita" className="ld_nav-link">
-                                <span className="ld_link-text"><Icon icon={ic_assessment} size={25} />Contabilità</span>
+                                <Icon icon={ic_assessment} /><span className="ld_link-text">Contabilità</span>
                             </Link>
                         </li>
                     
                         <li className="ld_nav-item">
-                            <Link to="/dafare" className="ld_nav-link ld_sidebarlink">
-                                <span className="ld_link-text"><Icon icon={ic_assignment} size={25} />Da fare</span>
+                            <Link to="/dafare" className="ld_nav-link">
+                                <Icon icon={ic_assignment} /><span className="ld_link-text">Da fare</span>
                             </Link>
                         </li>
                     
                         <li className="ld_nav-item">
-                            <Link to="/ricerche" className="ld_nav-link ld_sidebarlink">
-                                <span className="ld_link-text"><Icon icon={ic_find_in_page} size={25} />Ricerche</span>
+                            <Link to="/ricerche" className="ld_nav-link">
+                                <Icon icon={ic_find_in_page} /><span className="ld_link-text">Ricerche</span>
                             </Link>
                         </li>
 
                         <hr className="solid lastDivider"/>
 
                         <li className="ld_nav-item">
-                            <Link onClick={handleLogout} className="ld_nav-link ld_sidebarlink">
-                                <span className="ld_link-text"><Icon icon={ic_exit_to_app} size={25} />Logout</span>
+                            <Link onClick={handleLogout} className="ld_nav-link">
+                                <Icon icon={ic_exit_to_app} /><span className="ld_link-text">Logout</span>
                             </Link>
                         </li>
                     </ul>
