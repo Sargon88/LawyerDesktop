@@ -28,6 +28,7 @@ const NavBar = () => {
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="mr-auto">
+          <Nav.Link className="ld-backbtn" onClick={() => history.goBack()}><Icon icon={ic_keyboard_backspace} size={30} /></Nav.Link>
           {
             !navbarContext[navbarData.page] 
             ?
