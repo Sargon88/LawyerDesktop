@@ -9,7 +9,7 @@ import {ic_save} from 'react-icons-kit/md/ic_save';
 import {eye} from 'react-icons-kit/fa/eye';
 
 
-export const models ={
+export const models = {
 
     sidebarContext: [
         {
