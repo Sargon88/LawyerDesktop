@@ -15,7 +15,10 @@ import './navbar.css';
 
 const NavBar = () => {    
   const { navbarData } = useAppContext();
+  const { applicationModel } = useAppContext();
   const history = useHistory();
+
+  const navbarContext = applicationModel.navbarContext;
 
  return(
     <Navbar className="ld-navbar" fixed="top" bg="light" expand="lg">
@@ -28,39 +31,17 @@ const NavBar = () => {
           <Nav.Link className="ld-backbtn" onClick={() => history.goBack()}><Icon icon={ic_keyboard_backspace} size={30} /></Nav.Link>
 
           {
-            navbarData.page === "clients" ? 
-              <>
-                <Nav.Link href="/clienti/nuovo"><Icon icon={ic_add} size={40} /></Nav.Link>
-                <Nav.Link href={"/customers/" + navbarData.selectedId} disabled={!navbarData.edit}><Icon icon={ic_mode_edit} size={30} /></Nav.Link>
-                <Nav.Link href={"/folders/" + navbarData.selectedId} disabled={!navbarData.edit}><Icon icon={folderOpen} size={30} /></Nav.Link>
-              </>
-              
+            !navbarContext[navbarData.page] 
+            ?
+              <></>
             :
-            navbarData.page === "folders" ?
-              <>
-                <Nav.Link href="/folders/new"><Icon icon={ic_add} size={40} /></Nav.Link>
-                <Nav.Link href={"/folders/edit" + navbarData.selectedId} disabled={!navbarData.edit}><Icon icon={ic_mode_edit} size={30} /></Nav.Link>
-                <Nav.Link href={"/folders/view" + navbarData.selectedId} disabled={!navbarData.edit}><Icon icon={eye} size={30} /></Nav.Link>
-              </>
-            :
-            navbarData.page === "newcustomer" || navbarData.page === "editcustomer"  ?
-              <>
-                <Nav.Link href="/clienti/nuovo"><Icon icon={ic_add} size={40} /></Nav.Link>
-                <Nav.Link href="#" onClick={navbarData.saveFunction}><Icon icon={ic_save} size={30} /></Nav.Link>
-                <Nav.Link href={"/folders/" + navbarData.selectedId} disabled={!navbarData.selectedId}><Icon icon={folderOpen} size={30} /></Nav.Link>
-              </>
-            :
-            navbarData.page === "folderspreview" ?
-              <>
-                <Nav.Link href="/folders/new"><Icon icon={ic_add} size={40} /></Nav.Link>
-                <Nav.Link href={"/customers/" + navbarData.selectedId} disabled={!navbarData.edit}><Icon icon={ic_mode_edit} size={30} /></Nav.Link>
-                <Nav.Link href={"/folders/" + navbarData.selectedId} disabled={!navbarData.edit}><Icon icon={folderOpen} size={30} /></Nav.Link>
-              </>
-            :
-              <>
-              </>
-              
-              
+              navbarContext[navbarData.page].map((context, index) => {
+                return(
+                  <Nav.Link href={context.href} 
+                            disabled={context.disabled ? !navbarData[context.disabled] : false}
+                            onClick={context.onClick ? navbarData[context.onClick] : ""}><Icon icon={context.icon} size={context.size} /></Nav.Link>  
+                );
+              })
           }
 
         </Nav>

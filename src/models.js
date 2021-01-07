@@ -1,51 +1,63 @@
+import {folderOpen} from 'react-icons-kit/fa/folderOpen';
+import {ic_supervisor_account} from 'react-icons-kit/md/ic_supervisor_account';
+import {ic_assessment} from 'react-icons-kit/md/ic_assessment';
+import {ic_assignment} from 'react-icons-kit/md/ic_assignment';
+import {ic_find_in_page} from 'react-icons-kit/md/ic_find_in_page';
+import {ic_add} from 'react-icons-kit/md/ic_add';
+import {ic_mode_edit} from 'react-icons-kit/md/ic_mode_edit';
+import {ic_save} from 'react-icons-kit/md/ic_save';
+import {eye} from 'react-icons-kit/fa/eye';
+
+
 export const models ={
+
     sidebarContext: [
         {
             href: "/clienti",
-            icon: "ic_supervisor_account",
+            icon: ic_supervisor_account,
             label: "Clienti",
         },
         {
             href: "/folders",
-            icon: "folderOpen",
+            icon: folderOpen,
             label: "Pratiche",
         },
         {
             href: "/contabilita",
-            icon: "ic_assessment",
+            icon: ic_assessment,
             label: "Contabilità",
         },
         {
             href: "/dafare",
-            icon: "ic_assignment",
+            icon: ic_assignment,
             label: "Da fare",
         },
         {
             href: "/ricerche",
-            icon: "ic_find_in_page",
+            icon: ic_find_in_page,
             label: "Ricerche",
         },
-    ],
-/*    
+    ],    
     navbarContext: {
         clients: [
           {
             href: "/clienti/nuovo",
             icon: ic_add,
             size: 40,
-            disabled: false
           },
           {
-            href: "/customers/" + navbarData.selectedId,
+            href: "/customers/",
+            param: "selectedId",
             icon: ic_mode_edit,
             size: 30,
-            disabled: !navbarData.edit
+            disabled: "edit"
           },
           {
-            href: "/folders/" + navbarData.selectedId,
+            href: "/folders/",
+            param: "selectedId",
             icon: folderOpen,
             size: 30,
-            disabled: !navbarData.edit
+            disabled: "edit"
           }
         ],
         folders: [
@@ -53,19 +65,20 @@ export const models ={
             href: "/folders/new",
             icon: ic_add,
             size: 40,
-            disabled: false
           },
           {
-            href: "/folders/edit" + navbarData.selectedId,
+            href: "/folders/edit/",
+            param: "selectedId",
             icon: ic_mode_edit,
             size: 30,
-            disabled: !navbarData.edit
+            disabled: "edit"
           },
           {
-            href: "/folders/view" + navbarData.selectedId,
+            href: "/folders/view/",
+            param: "selectedId",
             icon: eye,
             size: 30,
-            disabled: !navbarData.edit
+            disabled: "edit"
           }
         ],
         newcustomer: [
@@ -73,20 +86,19 @@ export const models ={
             href: "/clienti/nuovo",
             icon: ic_add,
             size: 40,
-            disabled: false
           },
           {
             href: "#",
             icon: ic_save,
             size: 30,
-            disabled: false,
-            onClick: navbarData.saveFunction
+            onClick: "saveFunction"
           },
           {
-            href: "/folders/" + navbarData.selectedId,
+            href: "/folders/",
+            param: "selectedId",
             icon: folderOpen,
             size: 30,
-            disabled: !navbarData.selectedId
+            disabled: "selectedId"
           }
         ],
         editcustomer: [
@@ -94,20 +106,19 @@ export const models ={
             href: "/clienti/nuovo",
             icon: ic_add,
             size: 40,
-            disabled: false
           },
           {
             href: "#",
             icon: ic_save,
             size: 30,
-            disabled: false,
-            onClick: navbarData.saveFunction
+            onClick: "saveFunction"
           },
           {
-            href: "/folders/" + navbarData.selectedId,
+            href: "/folders/",
+            param: "selectedId",
             icon: folderOpen,
             size: 30,
-            disabled: !navbarData.selectedId
+            disabled: "selectedId"
           }
         ],
         folderspreview: [
@@ -115,15 +126,14 @@ export const models ={
             href: "/folders/new",
             icon: ic_add,
             size: 40,
-            disabled: false
           },
           {
-            href: "/folder/" + navbarData.selectedId,
+            href: "/folder/",
+            param: "selectedId",
             icon: ic_mode_edit,
             size: 30,
-            disabled: !navbarData.edit
+            disabled: "edit"
           },  
         ]
-    },
-*/    
+    },   
 }
