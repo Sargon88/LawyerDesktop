@@ -8,7 +8,7 @@ import {ic_mode_edit} from 'react-icons-kit/md/ic_mode_edit';
 import {ic_save} from 'react-icons-kit/md/ic_save';
 import {eye} from 'react-icons-kit/fa/eye';
 import {folderOpen} from 'react-icons-kit/fa/folderOpen';
-import {ic_keyboard_backspace} from 'react-icons-kit/md/ic_keyboard_backspace'
+import {ic_keyboard_backspace} from 'react-icons-kit/md/ic_keyboard_backspace';
 
 import './navbar.css';
 

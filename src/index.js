@@ -9,6 +9,7 @@ import AlertTemplate from 'react-alert-template-basic'
 import "./index.css";
 import './bootstrap/bootstrap.min.css';
 
+
 // optional configuration
 const options = {
   // you can also just use 'bottom center'

@@ -12,15 +12,17 @@ import Login from "../Login";
 import NotFound from "../NotFound";
 import Dashboard from "../Dashboard";
 import NavBar from "../../components/Nav";
-import SideBar from "../../components/Bootstrap/SideBar";
+import SideBar from "../../components/Sidebar";
+
+import * as ApplicationModels from '../../models.js';
 
 
 function App() {
   const [isAuthenticated, userHasAuthenticated] = useState(false);
   const [isAuthenticating, setIsAuthenticating] = useState(true);
   const [navbarData, setNavbarData] = useState({}); 
-  const [sidebarOpen, setSidebarOpen] = useState(true); 
-  const [today, setToday] = useState(moment());
+  const [applicationModel] = useState(ApplicationModels.models); 
+  const [today] = useState(moment());
 
   useEffect(() => {
     onLoad();
@@ -48,7 +50,7 @@ function App() {
 
   if(!isAuthenticated){
     return( 
-      <AppContext.Provider value={{ isAuthenticated, userHasAuthenticated, navbarData, setNavbarData, sidebarOpen, setSidebarOpen, today }}>
+      <AppContext.Provider value={{ isAuthenticated, userHasAuthenticated, navbarData, setNavbarData, today, applicationModel }}>
         <div className="App container-fluid">
           <NavBar />
           <Row className="content-container">
@@ -66,13 +68,11 @@ function App() {
   } else {
 
     return( 
-      !isAuthenticating && <AppContext.Provider value={{ isAuthenticated, userHasAuthenticated, navbarData, setNavbarData, sidebarOpen, setSidebarOpen }}>
-        <div className="App container-fluid full-height">
-          <Row>
-            <NavBar />
-          </Row>
-          <Row className="content-container">
-            <SideBar />
+      !isAuthenticating && <AppContext.Provider value={{ isAuthenticated, userHasAuthenticated, navbarData, setNavbarData, applicationModel }}>
+        <div className="App container-fluid content-area">
+          <NavBar />
+          <SideBar />
+          <Row className="content-container">            
             <Col>
               <Switch>
                   <Route path="/" component={Dashboard} exact />
