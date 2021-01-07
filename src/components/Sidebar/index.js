@@ -46,7 +46,7 @@ const SideBar = ({ page, sidebarData }) => {
                         {
                             sidebarContext.map((context, index) => {
                                 return (
-                                    <li className="ld_nav-item">
+                                    <li key={index} className="ld_nav-item">
                                         <Link to={context.href} className="ld_nav-link">
                                             <Icon icon={context.icon} /><span className="ld_link-text">{context.label}</span>
                                         </Link>
@@ -57,7 +57,7 @@ const SideBar = ({ page, sidebarData }) => {
                         <hr className="solid lastDivider"/>
 
                         <li className="ld_nav-item">
-                            <Link onClick={handleLogout} className="ld_nav-link">
+                            <Link onClick={handleLogout} to="#" className="ld_nav-link">
                                 <Icon icon={ic_exit_to_app} /><span className="ld_link-text">Logout</span>
                             </Link>
                         </li>

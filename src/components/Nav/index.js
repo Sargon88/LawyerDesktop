@@ -35,7 +35,7 @@ const NavBar = () => {
             :
               navbarContext[navbarData.page].map((context, index) => {
                 return(
-                  <Nav.Link href={context.param ? context.href + navbarData[context.param] : context.href} 
+                  <Nav.Link key={index} href={context.param ? context.href + navbarData[context.param] : context.href} 
                             disabled={context.disabled ? !navbarData[context.disabled] : false}
                             onClick={context.onClick ? navbarData[context.onClick] : ""}><Icon icon={context.icon} size={context.size} /></Nav.Link>  
                 );
