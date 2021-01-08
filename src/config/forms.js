@@ -23,7 +23,8 @@ export const Address = {
 				"label": "Address_street",
 				"description": "",
 				"placeholder": "",
-				"visible": true,
+				"visible": true, 
+"visible_label": true,
 				"editable": true
 			},
 			"list": {
@@ -37,7 +38,8 @@ export const Address = {
 				"label": "Address_country",
 				"description": "",
 				"placeholder": "",
-				"visible": true,
+				"visible": true, 
+"visible_label": true,
 				"editable": true
 			},
 			"list": {
@@ -51,7 +53,8 @@ export const Address = {
 				"label": "Address_number",
 				"description": "",
 				"placeholder": "",
-				"visible": true,
+				"visible": true, 
+"visible_label": true,
 				"editable": true
 			},
 			"list": {
@@ -65,7 +68,8 @@ export const Address = {
 				"label": "Address_city",
 				"description": "",
 				"placeholder": "",
-				"visible": true,
+				"visible": true, 
+"visible_label": true,
 				"editable": true
 			},
 			"list": {
@@ -79,7 +83,8 @@ export const Address = {
 				"label": "Address_province",
 				"description": "",
 				"placeholder": "",
-				"visible": true,
+				"visible": true, 
+"visible_label": true,
 				"editable": true
 			},
 			"list": {
@@ -93,7 +98,8 @@ export const Address = {
 				"label": "Address_zipcode",
 				"description": "",
 				"placeholder": "",
-				"visible": true,
+				"visible": true, 
+"visible_label": true,
 				"editable": true
 			},
 			"list": {
@@ -158,7 +164,8 @@ export const Phonenumber = {
 				"label": "Phone_number",
 				"description": "",
 				"placeholder": "",
-				"visible": true,
+				"visible": true, 
+"visible_label": true,
 				"editable": true
 			},
 			"list": {
@@ -206,7 +213,8 @@ export const Contact = {
 				"label": "Cnn_mobile",
 				"description": "",
 				"placeholder": "",
-				"visible": true,
+				"visible": true, 
+"visible_label": true,
 				"editable": true
 			},
 			"list": {
@@ -220,7 +228,8 @@ export const Contact = {
 				"label": "Cnn_phone",
 				"description": "",
 				"placeholder": "",
-				"visible": true,
+				"visible": true, 
+"visible_label": true,
 				"editable": true
 			},
 			"list": {
@@ -234,7 +243,8 @@ export const Contact = {
 				"label": "Cnn_fax",
 				"description": "",
 				"placeholder": "",
-				"visible": true,
+				"visible": true, 
+"visible_label": true,
 				"editable": true
 			},
 			"list": {
@@ -248,7 +258,8 @@ export const Contact = {
 				"label": "Cnn_mail",
 				"description": "",
 				"placeholder": "",
-				"visible": true,
+				"visible": true, 
+"visible_label": true,
 				"editable": true
 			},
 			"list": {
@@ -262,7 +273,8 @@ export const Contact = {
 				"label": "Cnn_pec",
 				"description": "",
 				"placeholder": "",
-				"visible": true,
+				"visible": true, 
+"visible_label": true,
 				"editable": true
 			},
 			"list": {
@@ -325,7 +337,8 @@ export const Person = {
 				"label": "Nome",
 				"description": "",
 				"placeholder": "",
-				"visible": true,
+				"visible": true, 
+"visible_label": true,
 				"editable": true
 			},
 			"list": {
@@ -339,7 +352,8 @@ export const Person = {
 				"label": "Cognome",
 				"description": "",
 				"placeholder": "",
-				"visible": true,
+				"visible": true, 
+"visible_label": true,
 				"editable": true
 			},
 			"list": {
@@ -353,7 +367,8 @@ export const Person = {
 				"label": "Tipologia",
 				"description": "",
 				"placeholder": "",
-				"visible": true,
+				"visible": true, 
+"visible_label": true,
 				"editable": true
 			},
 			"list": {
@@ -367,7 +382,8 @@ export const Person = {
 				"label": "Codice Fiscale",
 				"description": "",
 				"placeholder": "",
-				"visible": true,
+				"visible": true, 
+"visible_label": true,
 				"editable": true
 			},
 			"list": {
@@ -381,7 +397,8 @@ export const Person = {
 				"label": "Contatti",
 				"description": "",
 				"placeholder": "",
-				"visible": true,
+				"visible": true, 
+"visible_label": true,
 				"editable": true
 			},
 			"list": {
@@ -395,7 +412,8 @@ export const Person = {
 				"label": "Indirizzo",
 				"description": "",
 				"placeholder": "",
-				"visible": true,
+				"visible": true, 
+"visible_label": true,
 				"editable": true
 			},
 			"list": {
@@ -409,7 +427,8 @@ export const Person = {
 				"label": "Referenti",
 				"description": "",
 				"placeholder": "",
-				"visible": true,
+				"visible": true, 
+"visible_label": true,
 				"editable": true
 			},
 			"list": {
@@ -572,7 +591,8 @@ export const Referent = {
 				"label": "Referent_role",
 				"description": "",
 				"placeholder": "",
-				"visible": true,
+				"visible": true, 
+"visible_label": true,
 				"editable": true
 			},
 			"list": {
@@ -586,7 +606,8 @@ export const Referent = {
 				"label": "Person",
 				"description": "",
 				"placeholder": "",
-				"visible": true,
+				"visible": true, 
+"visible_label": true,
 				"editable": true,
 				"mainField": "person_name"
 			},
@@ -638,7 +659,8 @@ export const Dossier = {
 				"label": "Dossier_name",
 				"description": "",
 				"placeholder": "",
-				"visible": true,
+				"visible": true, 
+"visible_label": true,
 				"editable": true
 			},
 			"list": {
@@ -652,7 +674,8 @@ export const Dossier = {
 				"label": "Dossier_customer",
 				"description": "",
 				"placeholder": "",
-				"visible": true,
+				"visible": true, 
+"visible_label": true,
 				"editable": true,
 				"mainField": "person_name"
 			},
@@ -667,7 +690,8 @@ export const Dossier = {
 				"label": "Dossier_counterpart",
 				"description": "",
 				"placeholder": "",
-				"visible": true,
+				"visible": true, 
+"visible_label": true,
 				"editable": true,
 				"mainField": "person_name"
 			},
@@ -682,7 +706,8 @@ export const Dossier = {
 				"label": "Dossier_counterpartlawyer",
 				"description": "",
 				"placeholder": "",
-				"visible": true,
+				"visible": true, 
+"visible_label": true,
 				"editable": true,
 				"mainField": "person_name"
 			},
@@ -697,7 +722,8 @@ export const Dossier = {
 				"label": "Dossier_issues",
 				"description": "",
 				"placeholder": "",
-				"visible": true,
+				"visible": true, 
+"visible_label": true,
 				"editable": true,
 				"mainField": "iss_name"
 			},
@@ -773,7 +799,8 @@ export const Issue = {
 				"label": "Iss_status",
 				"description": "",
 				"placeholder": "",
-				"visible": true,
+				"visible": true, 
+"visible_label": true,
 				"editable": true
 			},
 			"list": {
@@ -787,7 +814,8 @@ export const Issue = {
 				"label": "Iss_name",
 				"description": "",
 				"placeholder": "",
-				"visible": true,
+				"visible": true, 
+"visible_label": true,
 				"editable": true
 			},
 			"list": {
@@ -801,7 +829,8 @@ export const Issue = {
 				"label": "Iss_type",
 				"description": "",
 				"placeholder": "",
-				"visible": true,
+				"visible": true, 
+"visible_label": true,
 				"editable": true
 			},
 			"list": {
@@ -815,7 +844,8 @@ export const Issue = {
 				"label": "Iss_matter",
 				"description": "",
 				"placeholder": "",
-				"visible": true,
+				"visible": true, 
+"visible_label": true,
 				"editable": true
 			},
 			"list": {
@@ -829,7 +859,8 @@ export const Issue = {
 				"label": "Iss_description",
 				"description": "",
 				"placeholder": "",
-				"visible": true,
+				"visible": true, 
+"visible_label": true,
 				"editable": true
 			},
 			"list": {
@@ -843,7 +874,8 @@ export const Issue = {
 				"label": "Iss_feetype",
 				"description": "",
 				"placeholder": "",
-				"visible": true,
+				"visible": true, 
+"visible_label": true,
 				"editable": true
 			},
 			"list": {
@@ -857,7 +889,8 @@ export const Issue = {
 				"label": "Iss_fee",
 				"description": "",
 				"placeholder": "",
-				"visible": true,
+				"visible": true, 
+"visible_label": true,
 				"editable": true
 			},
 			"list": {
@@ -871,7 +904,8 @@ export const Issue = {
 				"label": "Iss_competence",
 				"description": "",
 				"placeholder": "",
-				"visible": true,
+				"visible": true, 
+"visible_label": true,
 				"editable": true
 			},
 			"list": {
@@ -885,7 +919,8 @@ export const Issue = {
 				"label": "Iss_territory",
 				"description": "",
 				"placeholder": "",
-				"visible": true,
+				"visible": true, 
+"visible_label": true,
 				"editable": true
 			},
 			"list": {
@@ -899,7 +934,8 @@ export const Issue = {
 				"label": "Iss_registro",
 				"description": "",
 				"placeholder": "",
-				"visible": true,
+				"visible": true, 
+"visible_label": true,
 				"editable": true
 			},
 			"list": {
@@ -913,7 +949,8 @@ export const Issue = {
 				"label": "Iss_rg",
 				"description": "",
 				"placeholder": "",
-				"visible": true,
+				"visible": true, 
+"visible_label": true,
 				"editable": true
 			},
 			"list": {
@@ -927,7 +964,8 @@ export const Issue = {
 				"label": "Iss_section",
 				"description": "",
 				"placeholder": "",
-				"visible": true,
+				"visible": true, 
+"visible_label": true,
 				"editable": true
 			},
 			"list": {
@@ -941,7 +979,8 @@ export const Issue = {
 				"label": "Iss_judge",
 				"description": "",
 				"placeholder": "",
-				"visible": true,
+				"visible": true, 
+"visible_label": true,
 				"editable": true
 			},
 			"list": {
@@ -955,7 +994,8 @@ export const Issue = {
 				"label": "Iss_value",
 				"description": "",
 				"placeholder": "",
-				"visible": true,
+				"visible": true, 
+"visible_label": true,
 				"editable": true
 			},
 			"list": {
@@ -969,7 +1009,8 @@ export const Issue = {
 				"label": "Iss_exempt",
 				"description": "",
 				"placeholder": "",
-				"visible": true,
+				"visible": true, 
+"visible_label": true,
 				"editable": true
 			},
 			"list": {
@@ -983,7 +1024,8 @@ export const Issue = {
 				"label": "Iss_payedunifiedcontribution",
 				"description": "",
 				"placeholder": "",
-				"visible": true,
+				"visible": true, 
+"visible_label": true,
 				"editable": true
 			},
 			"list": {
@@ -997,7 +1039,8 @@ export const Issue = {
 				"label": "Iss_unifiedcontibution",
 				"description": "",
 				"placeholder": "",
-				"visible": true,
+				"visible": true, 
+"visible_label": true,
 				"editable": true
 			},
 			"list": {
@@ -1011,7 +1054,8 @@ export const Issue = {
 				"label": "Iss_stamp",
 				"description": "",
 				"placeholder": "",
-				"visible": true,
+				"visible": true, 
+"visible_label": true,
 				"editable": true
 			},
 			"list": {
@@ -1025,7 +1069,8 @@ export const Issue = {
 				"label": "Iss_stampneeded",
 				"description": "",
 				"placeholder": "",
-				"visible": true,
+				"visible": true, 
+"visible_label": true,
 				"editable": true
 			},
 			"list": {
@@ -1039,7 +1084,8 @@ export const Issue = {
 				"label": "Iss_dossier",
 				"description": "",
 				"placeholder": "",
-				"visible": true,
+				"visible": true, 
+"visible_label": true,
 				"editable": true,
 				"mainField": "dossier_name"
 			},
@@ -1054,7 +1100,8 @@ export const Issue = {
 				"label": "Iss_deadline",
 				"description": "",
 				"placeholder": "",
-				"visible": true,
+				"visible": true, 
+"visible_label": true,
 				"editable": true
 			},
 			"list": {
@@ -1193,10 +1240,11 @@ export const Components = {
             },
             "cnn_mobile": {
                 "edit": {
-                    "label": "Cnn_mobile",
+                    "label": "Cellulare",
                     "description": "",
                     "placeholder": "",
-                    "visible": true,
+                    "visible": true, 
+					"visible_label": true,
                     "editable": true
                 },
                 "list": {
@@ -1207,10 +1255,11 @@ export const Components = {
             },
             "cnn_phone": {
                 "edit": {
-                    "label": "Cnn_phone",
+                    "label": "Telefono",
                     "description": "",
                     "placeholder": "",
-                    "visible": true,
+                    "visible": true, 
+					"visible_label": true,
                     "editable": true
                 },
                 "list": {
@@ -1221,10 +1270,11 @@ export const Components = {
             },
             "cnn_fax": {
                 "edit": {
-                    "label": "Cnn_fax",
+                    "label": "Fax",
                     "description": "",
                     "placeholder": "",
-                    "visible": true,
+                    "visible": true, 
+					"visible_label": true,
                     "editable": true
                 },
                 "list": {
@@ -1235,10 +1285,11 @@ export const Components = {
             },
             "cnn_mail": {
                 "edit": {
-                    "label": "Cnn_mail",
+                    "label": "Email",
                     "description": "",
                     "placeholder": "",
-                    "visible": true,
+                    "visible": true, 
+					"visible_label": true,
                     "editable": true
                 },
                 "list": {
@@ -1249,10 +1300,11 @@ export const Components = {
             },
             "cnn_pec": {
                 "edit": {
-                    "label": "Cnn_pec",
+                    "label": "Pec",
                     "description": "",
                     "placeholder": "",
-                    "visible": true,
+                    "visible": true, 
+					"visible_label": true,
                     "editable": true
                 },
                 "list": {
@@ -1267,11 +1319,15 @@ export const Components = {
             "edit": [
                 [{
                     "name": "cnn_phone",
-                    "size": 12
-                }],
-                [{
+                    "size": 4
+				}, 
+				{
+                    "name": "cnn_mobile",
+                    "size": 4
+				},
+				{
                     "name": "cnn_fax",
-                    "size": 12
+                    "size": 4
                 }],
                 [{
                     "name": "cnn_mail",
@@ -1280,10 +1336,6 @@ export const Components = {
                     "name": "cnn_pec",
                     "size": 6
                 }],
-                [{
-                    "name": "cnn_mobile",
-                    "size": 12
-                }]
             ],
             "editRelations": []
         },
@@ -1334,10 +1386,11 @@ export const Components = {
             },
             "address_street": {
                 "edit": {
-                    "label": "Address_street",
+                    "label": "Via",
                     "description": "",
                     "placeholder": "",
-                    "visible": true,
+                    "visible": true, 
+					"visible_label": true,
                     "editable": true
                 },
                 "list": {
@@ -1348,10 +1401,11 @@ export const Components = {
             },
             "address_country": {
                 "edit": {
-                    "label": "Address_country",
+                    "label": "Stato",
                     "description": "",
                     "placeholder": "",
-                    "visible": true,
+                    "visible": false, 
+					"visible_label": true,
                     "editable": true
                 },
                 "list": {
@@ -1362,10 +1416,11 @@ export const Components = {
             },
             "address_number": {
                 "edit": {
-                    "label": "Address_number",
+                    "label": "Civico",
                     "description": "",
                     "placeholder": "",
-                    "visible": true,
+                    "visible": true, 
+					"visible_label": true,
                     "editable": true
                 },
                 "list": {
@@ -1376,10 +1431,11 @@ export const Components = {
             },
             "address_city": {
                 "edit": {
-                    "label": "Address_city",
+                    "label": "Città",
                     "description": "",
                     "placeholder": "",
-                    "visible": true,
+                    "visible": true, 
+					"visible_label": true,
                     "editable": true
                 },
                 "list": {
@@ -1390,10 +1446,11 @@ export const Components = {
             },
             "address_province": {
                 "edit": {
-                    "label": "Address_province",
+                    "label": "Provincia",
                     "description": "",
                     "placeholder": "",
-                    "visible": true,
+                    "visible": true, 
+					"visible_label": true,
                     "editable": true
                 },
                 "list": {
@@ -1404,10 +1461,11 @@ export const Components = {
             },
             "address_zipcode": {
                 "edit": {
-                    "label": "Address_zipcode",
+                    "label": "CAP",
                     "description": "",
                     "placeholder": "",
-                    "visible": true,
+                    "visible": true, 
+					"visible_label": true,
                     "editable": true
                 },
                 "list": {
@@ -1422,25 +1480,30 @@ export const Components = {
             "edit": [
                 [{
                     "name": "address_street",
-                    "size": 6
-                }, {
-                    "name": "address_country",
-                    "size": 6
-                }],
-                [{
+                    "size": 10
+				}, 
+				{
                     "name": "address_number",
-                    "size": 4
-                }, {
+                    "size": 2
+				}
+				],
+                [{
                     "name": "address_city",
                     "size": 6
-                }],
-                [{
+				},
+				{
                     "name": "address_province",
-                    "size": 6
-                }, {
+                    "size": 2
+				},
+				{
                     "name": "address_zipcode",
                     "size": 4
-                }]
+				}
+				],
+                [{
+                    "name": "address_country",
+                    "size": 12
+				}]
             ],
             "editRelations": []
         },
@@ -1491,7 +1554,8 @@ export const Components = {
                     "label": "Referent_role",
                     "description": "",
                     "placeholder": "",
-                    "visible": true,
+                    "visible": true, 
+					"visible_label": true,
                     "editable": true
                 },
                 "list": {
@@ -1505,7 +1569,8 @@ export const Components = {
                     "label": "Person",
                     "description": "",
                     "placeholder": "",
-                    "visible": true,
+                    "visible": true, 
+					"visible_label": true,
                     "editable": true,
                     "mainField": "person_name"
                 },
@@ -1539,5 +1604,58 @@ export const Components = {
             }
         },
         "isComponent": true
-    },
+	},
+	"contacts.phone-number": {
+		"uid": "contacts.phone-number",
+		"settings": {
+			"bulkable": true,
+			"filterable": true,
+			"searchable": true,
+			"pageSize": 10,
+			"mainField": "id",
+			"defaultSortBy": "id",
+			"defaultSortOrder": "ASC"
+		},
+		"metadatas": {
+			"id": {
+				"edit": {},
+				"list": {
+					"label": "Id",
+					"searchable": false,
+					"sortable": false
+				}
+			},
+			"phone_number": {
+				"edit": {
+					"label": "Phone_number",
+					"description": "",
+					"placeholder": "",
+					"visible": true, 
+					"visible_label": false,
+					"editable": true
+				},
+				"list": {
+					"label": "Phone_number",
+					"searchable": true,
+					"sortable": true
+				}
+			}
+		},
+		"layouts": {
+			"list": ["id", "phone_number"],
+			"edit": [
+				[{
+					"name": "phone_number",
+					"size": 12
+				}]
+			],
+			"editRelations": []
+		},
+		"attributes": {
+			"phone_number": {
+				"type": "biginteger"
+			}
+		},
+		"isComponent": true
+	},
 }
