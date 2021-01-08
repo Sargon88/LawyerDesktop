@@ -1,4 +1,4 @@
-export const Address = {
+export const address = {
 	"uid": "address.address",
 	"settings": {
 		"bulkable": true,
@@ -139,7 +139,7 @@ export const Address = {
 	"isComponent": true
 }
 
-export const Phonenumber = {
+export const phonenumber = {
 	"uid": "contacts.phone-number",
 	"settings": {
 		"bulkable": true,
@@ -188,7 +188,7 @@ export const Phonenumber = {
 	"isComponent": true
 }
 
-export const Contact = {
+export const contact = {
 	"uid": "contacts.contacts",
 	"settings": {
 		"bulkable": true,
@@ -312,7 +312,7 @@ export const Contact = {
 	"isComponent": true
 }
 
-export const Person = {
+export const person = {
 	"uid": "application::person.person",
 	"settings": {
 		"bulkable": true,
@@ -368,7 +368,7 @@ export const Person = {
 				"description": "",
 				"placeholder": "",
 				"visible": true, 
-"visible_label": true,
+				"visible_label": true,
 				"editable": true
 			},
 			"list": {
@@ -383,7 +383,7 @@ export const Person = {
 				"description": "",
 				"placeholder": "",
 				"visible": true, 
-"visible_label": true,
+				"visible_label": true,
 				"editable": true
 			},
 			"list": {
@@ -398,7 +398,7 @@ export const Person = {
 				"description": "",
 				"placeholder": "",
 				"visible": true, 
-"visible_label": true,
+				"visible_label": true,
 				"editable": true
 			},
 			"list": {
@@ -413,7 +413,7 @@ export const Person = {
 				"description": "",
 				"placeholder": "",
 				"visible": true, 
-"visible_label": true,
+				"visible_label": true,
 				"editable": true
 			},
 			"list": {
@@ -428,7 +428,7 @@ export const Person = {
 				"description": "",
 				"placeholder": "",
 				"visible": true, 
-"visible_label": true,
+				"visible_label": true,
 				"editable": true
 			},
 			"list": {
@@ -566,7 +566,7 @@ export const Person = {
 	}
 }
 
-export const Referent = {
+export const referent = {
 	"uid": "referent.referent",
 	"settings": {
 		"bulkable": true,
@@ -634,7 +634,7 @@ export const Referent = {
 	"isComponent": true
 }
 
-export const Dossier = {
+export const dossier = {
 	"uid": "application::dossier.dossier",
 	"settings": {
 		"bulkable": true,
@@ -774,7 +774,7 @@ export const Dossier = {
 	}
 }
 
-export const Issue = {
+export const issue = {
 	"uid": "application::issue.issue",
 	"settings": {
 		"bulkable": true,

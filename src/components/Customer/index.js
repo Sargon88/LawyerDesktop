@@ -21,8 +21,8 @@ const CustomerComponent = ({ customerModel, errorModel, validateRules, customerI
 			<Row>
 				<Col><h3>{customerId != null ? (customerModel.surname + " " + customerModel.name) : isNewReferent ? "Nuovo Referente" : "Nuovo Cliente"}</h3></Col>
 			</Row>
-			<FormComponent entity={ FormModel.Person } customerModel={ customerModel } errorModel={ errorModel } />
-		</>
+			<FormComponent entity={ FormModel.person } customerModel={ customerModel } errorModel={ errorModel } children={true} />
+		</> 
 	);
 
 	

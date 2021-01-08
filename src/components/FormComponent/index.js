@@ -3,11 +3,12 @@ import { Row, Col, Form } from 'react-bootstrap';
 import * as FormModel from "../../config/forms";
 
 
-const FormComponent = ({ entity, customerModel, errorModel }) => {
-    console.log("ENTITY", entity)
+const FormComponent = ({ entity, customerModel, errorModel, children }) => {
     const [error, setError] = useState({});
 	const layout = entity && entity.layouts ? entity.layouts.edit : [];
     const components = FormModel.Components;
+
+    console.log("CHILDREN", children);
 
     function handleChange(event){
 		const target = event.target;
@@ -97,7 +98,11 @@ const FormComponent = ({ entity, customerModel, errorModel }) => {
                                                 onChange={ handleChange }
                                                 value={ customerModel[l.name] }
                                                 disabled={ !metadata['editable'] } />
-                                                    
+                                         
+                                        : attributes.model && children == true ?
+                                            
+                                            <FormComponent entity={ FormModel[attributes.model] } customerModel={ customerModel } errorModel={ errorModel } children={!children} />
+
                                         :
                                         <></>
                                     }
