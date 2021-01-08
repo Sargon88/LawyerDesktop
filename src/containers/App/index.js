@@ -14,7 +14,7 @@ import Dashboard from "../Dashboard";
 import NavBar from "../../components/Nav";
 import SideBar from "../../components/Sidebar";
 
-import * as ApplicationModels from '../../models.js';
+import * as ApplicationModels from '../../config/models.js';
 
 
 function App() {

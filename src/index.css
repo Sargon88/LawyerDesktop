@@ -17,3 +17,7 @@
 .ld-navbar{
   height: 6.77vh !important;
 }
+
+.ld_hideelement {
+  display: none;
+}
