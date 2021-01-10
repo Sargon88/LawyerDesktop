@@ -4,11 +4,11 @@ const CUSTOMER_DATA_QUERY = gql`
 	query Customer($customerId:ID!){
 		person(id:$customerId) {
 			id
-			type: person_type
-			surname: person_surname
-			name: person_name
-			code: person_code
-			contact: person_contact{
+			person_type
+			person_surname
+			person_name
+			person_code
+			person_contact{
 				cnn_phone{
 					id
 					phone_number
@@ -24,7 +24,7 @@ const CUSTOMER_DATA_QUERY = gql`
 				cnn_mail
 				cnn_pec
 			}
-			address:person_address{
+			person_address{
 				id
 				street: address_street
 				number: address_number
@@ -33,14 +33,14 @@ const CUSTOMER_DATA_QUERY = gql`
 				zipcode: address_zipcode
 				country: address_country
 			}
-			referents:person_referents{
-        		role: referent_role
-				person:person{
+			person_referents{
+        		referent_role
+				person{
 					id
-					name:person_name
-					surname:person_surname
-					code:person_code
-					contact: person_contact{
+					person_name
+					person_surname
+					person_code
+					person_contact{
 						cnn_phone{
 							id
 							phone_number

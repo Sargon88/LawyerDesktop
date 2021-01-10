@@ -12,11 +12,7 @@ const AutocompleteInput = ({ options, onSelectItem }) => {
 
     function selectListItem(event){
         var item = filteredOptions[event.target.value]; 
-        console.log(item);
-        //debugger;
-
         setSuggestion(item.name + " " + item.surname);
-        onSelectItem(item);
     } 
 
     return(

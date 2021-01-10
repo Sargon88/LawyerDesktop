@@ -185,8 +185,6 @@ const Dashboard = () => {
   const { today } = useAppContext();
   const history = useHistory();
 
-  console.log("TODAY 2", today);
-
   useEffect(() => {
     setNavbarData({
       edit: false,

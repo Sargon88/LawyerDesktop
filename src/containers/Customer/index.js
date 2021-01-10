@@ -109,14 +109,12 @@ const Customer = () => {
 
               } else {
                 alert.error("Errore:" + response.error);
-                console.log(response);
               }
               
               
             },
             response => {
                 alert.error("Errore: " + response.error + " - " + response.message);
-                console.log(response)
             });
 
       } else {
@@ -171,8 +169,6 @@ const Customer = () => {
 
                                 } else {
                                   alert.error("Errore:" + response.error);
-                                  console.log(response);
-
                                 }
 
                               });
@@ -187,14 +183,12 @@ const Customer = () => {
 
               } else {
                 alert.error("Errore:" + response.error);
-                console.log(response);
               }
               
               
             },
             response => {
                 alert.error("Errore: " + response.error + " - " + response.message);
-                console.log(response)
             });
       }
 
@@ -230,55 +224,12 @@ const Customer = () => {
                   <Query query={CUSTOMER_DATA_QUERY} variables={{ customerId: customerId }} >
                       {({ loading, error, data: { person } }) => {
 
-                        customerModel.name = person.name ? person.name : "";
-                        customerModel.surname = person.surname ? person.surname : "";
-                        customerModel.code = person.code ? person.code : "";
-                        customerModel.society = person.surname ? person.surname : "";
-                        customerModel.vat = person.code ? person.code : "";
-                        customerModel.province = person.address ? person.address.province : "";
-                        customerModel.cap = person.address ? person.address.zipcode : "";
-                        customerModel.country = person.address ? person.address.country : "";
-                        customerModel.mobile = person.contact ? person.contact.cnn_mobile.phone_number : "";
-                        customerModel.mobile_id = person.contact ? person.contact.cnn_mobile.id : "";
-                        customerModel.phone = person.contact ? person.contact.cnn_phone.phone_number : "";
-                        customerModel.phone_id = person.contact ? person.contact.cnn_phone.id : "";
-                        customerModel.fax = person.contact ? person.contact.cnn_fax.phone_number : "";
-                        customerModel.fax_id = person.contact ? person.contact.cnn_fax.id : "";
-                        customerModel.mail = person.contact ? person.contact.cnn_mail : "";
-                        customerModel.pec = person.contact ? person.contact.cnn_pec : "";
-                        customerModel.street = person.address ? person.address.street : "";
-                        customerModel.number = person.address ? person.address.number : "";
-                        customerModel.city = person.address ? person.address.city : "";
-                        customerModel.address_id = person.address ? person.address.id : "";
-                        customerModel.contact_id = person.contact ? person.contact.id : "";
-                        customerModel.id = customerId;
-                        customerModel.person_id = person ? person.id : "";
-                        customerModel.type = person.type.toLowerCase() === "fisico" ? "pp" : "lp";
-                        customerModel.referents = [];
-
-                        if(person.referents.length > 0){
-                          for(var i = 0; i < person.referents.length; i++){
-                            var c = person.referents[i].person;
-                            customerModel.referents.push({
-                              role: person.referents[i].role,
-                              name: c.name,
-                              surname: c.surname,
-                              code: c.code,
-                              mobile: c.contact && c.contact.cnn_mobile ? c.contact.cnn_mobile.phone_number : "",
-                              phone: c.contact && c.contact.cnn_phone ? c.contact.cnn_phone.phone_number : "",
-                              fax: c.contact && c.contact.cnn_fax ? c.contact.cnn_fax.phone_number : "",
-                              mail: c.contact && c.contact.cnn_mail ? c.contact.cnn_mail : "",
-                              pec: c.contact && c.contact.cnn_pec ? c.contact.cnn_pec : "",
-                              id: c.id,
-                            });
-                          }
-                          
+                        for(var k in person){
+                          customerModel[k] = person[k];
                         }
-
+                        
                         if (loading) return null;
                         if (error) return `Error! ${error}`;
-
-                        console.log("MODEL", customerModel);
 
                         return <CustomerComponent customerModel={customerModel}
                                                   errorModel={errorModel}

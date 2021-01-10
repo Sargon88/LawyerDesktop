@@ -12,10 +12,7 @@ const CustomerComponent = ({ customerModel, errorModel, validateRules, customerI
 	}
 
 	function selectReferentType(event){
-		console.log("REFERENT", event.target.value);
-		debugger;
 		setReferentType(event.target.value);
-		console.log("REFERENT 2", referentType);
 	}
 
 	return (

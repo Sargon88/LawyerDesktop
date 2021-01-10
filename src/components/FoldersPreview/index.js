@@ -11,7 +11,6 @@ import 'react-bootstrap-table2-paginator/dist/react-bootstrap-table2-paginator.m
 const FoldersPreviewComponent = ({ data }) => {
   const { setNavbarData } = useAppContext();
   const { navbarData } = useAppContext();
-  console.log("DATA", data);
 
   //https://react-bootstrap-table.github.io/react-bootstrap-table2/
   const selectRow = {

@@ -338,7 +338,7 @@ export const person = {
 				"description": "",
 				"placeholder": "",
 				"visible": true, 
-"visible_label": true,
+				"visible_label": true,
 				"editable": true
 			},
 			"list": {
@@ -353,7 +353,7 @@ export const person = {
 				"description": "",
 				"placeholder": "",
 				"visible": true, 
-"visible_label": true,
+				"visible_label": true,
 				"editable": true
 			},
 			"list": {
@@ -479,7 +479,7 @@ export const person = {
 				"sortable": true
 			}
 		}
-	},
+	}, 
 	"layouts": {
 		"list": ["id", "person_name", "person_surname", "person_type"],
 		"edit": [
@@ -543,7 +543,7 @@ export const person = {
 		"person_referents": {
 			"type": "component",
 			"repeatable": true,
-			"component": "referent.referent"
+			"component": "referent.referent",
 		},
 		"person_active": {
 			"type": "boolean",
@@ -592,7 +592,7 @@ export const referent = {
 				"description": "",
 				"placeholder": "",
 				"visible": true, 
-"visible_label": true,
+				"visible_label": true,
 				"editable": true
 			},
 			"list": {
@@ -607,7 +607,7 @@ export const referent = {
 				"description": "",
 				"placeholder": "",
 				"visible": true, 
-"visible_label": true,
+				"visible_label": true,
 				"editable": true,
 				"mainField": "person_name"
 			},
@@ -1529,82 +1529,6 @@ export const Components = {
         },
         "isComponent": true
     },
-    "referent.referent":{
-        "uid": "referent.referent",
-        "settings": {
-            "bulkable": true,
-            "filterable": true,
-            "searchable": true,
-            "pageSize": 10,
-            "mainField": "id",
-            "defaultSortBy": "id",
-            "defaultSortOrder": "ASC"
-        },
-        "metadatas": {
-            "id": {
-                "edit": {},
-                "list": {
-                    "label": "Id",
-                    "searchable": false,
-                    "sortable": false
-                }
-            },
-            "referent_role": {
-                "edit": {
-                    "label": "Referent_role",
-                    "description": "",
-                    "placeholder": "",
-                    "visible": true, 
-					"visible_label": true,
-                    "editable": true
-                },
-                "list": {
-                    "label": "Referent_role",
-                    "searchable": true,
-                    "sortable": true
-                }
-            },
-            "person": {
-                "edit": {
-                    "label": "Person",
-                    "description": "",
-                    "placeholder": "",
-                    "visible": true, 
-					"visible_label": true,
-                    "editable": true,
-                    "mainField": "person_name"
-                },
-                "list": {
-                    "label": "Person",
-                    "searchable": false,
-                    "sortable": false
-                }
-            }
-        },
-        "layouts": {
-            "list": ["id", "referent_role", "person"],
-            "edit": [
-                [{
-                    "name": "referent_role",
-                    "size": 6
-                }, {
-                    "name": "person",
-                    "size": 6
-                }]
-            ],
-            "editRelations": []
-        },
-        "attributes": {
-            "referent_role": {
-                "type": "enumeration",
-                "enum": ["amministratore", "dirigente", "legale"]
-            },
-            "person": {
-                "model": "person"
-            }
-        },
-        "isComponent": true
-	},
 	"contacts.phone-number": {
 		"uid": "contacts.phone-number",
 		"settings": {

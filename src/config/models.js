@@ -15,7 +15,7 @@ export const models = {
         {
             href: "/clienti",
             icon: ic_supervisor_account,
-            label: "Clienti",
+            label: "Customers",
         },
         {
             href: "/folders",

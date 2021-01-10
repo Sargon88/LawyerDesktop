@@ -25,7 +25,6 @@ const ReferentType = ({ customerModel, selectedReferent, setSelectedReferent, va
 	}
 
 	function saveReferent(index){
-		console.log("selectedReferent", selectedReferent);
 
 		var person = {
 			id: selectedReferent.id,
@@ -52,14 +51,12 @@ const ReferentType = ({ customerModel, selectedReferent, setSelectedReferent, va
 
               } else {
                 alert.error("Errore:" + response.error);
-                console.log(response);
               }
               
               
             },
             response => {
                 alert.error("Errore: " + response.error + " - " + response.message);
-                console.log(response)
             });	  		
 	}
 
@@ -108,14 +105,12 @@ const ReferentType = ({ customerModel, selectedReferent, setSelectedReferent, va
 
               } else {
                 alert.error("Errore:" + response.error);
-                console.log(response);
               }
               
               
             },
             response => {
                 alert.error("Errore: " + response.error + " - " + response.message);
-                console.log(response)
             });	  
 	}
 

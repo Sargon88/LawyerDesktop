@@ -3,113 +3,92 @@ import { Row, Col, Form } from 'react-bootstrap';
 import * as FormModel from "../../config/forms";
 
 
-const FormComponent = ({ entity, customerModel, errorModel, children }) => {
+const FormComponent = ({ entity, customerModel, errorModel, children, hiddenFields }) => {
     const [error, setError] = useState({});
 	const layout = entity && entity.layouts ? entity.layouts.edit : [];
     const components = FormModel.Components;
-
-    console.log("CHILDREN", children);
 
     function handleChange(event){
 		const target = event.target;
     	const name = target.name;
     	const value = target.value;
-/*
-    	var e = error;
-    	var rule = validateRules.find(x => x.field === name);
 
-		if(rule.isMandatory && value.length === 0){
-			errorModel.[name] = "Campo obbligatorio";
-			
-		} else if(rule.isMandatory && value.length > 0 && rule.regex && !rule.regex.test(value)){
-			errorModel.[name] = "Valore non valido";
-
-		} else {
-			errorModel.[name] = "";
-
-		} 	
-*/    	  
-    	customerModel[name]=value;  
-/*    	customerModel.type = type;
-    	e.[name] = errorModel.[name];  	
-
-    	setError({
-    		...error,
-            e});
-*/            
-	}
+    	customerModel[name]=value;              
+    }
+    
+    console.log("CUSTOMERMODEL", customerModel);
 
 	return (
 		<>		
 		{
 			layout.map((lys, j) => {
 				return(
-					<Row>
+					<Row key={"layout"+j}>
 						{
 							lys.map((l, i) => {
 								var metadata = entity.metadatas[l.name].edit;
                                 var attributes = entity.attributes[l.name];
                                 
-                                return(
-                                    <Col xs={l.size} 
-                                        key={"att"+j+"_"+i} 
-                                        className={metadata['visible'] ? "" : "ld_hideelement"}  >
-                                            <Form.Group controlId={l.name}>
-                                                <Form.Label className={metadata['visible_label'] ? "" : "ld_hideelement"} >{metadata['label']}</Form.Label>
-                                    {                                                    
-                                        attributes.type == "string" ?
-                                            <Form.Control type="text"  
-                                                name={ l.name } 
-                                                onChange={ handleChange }
-                                                value={ customerModel[l.name] }
-                                                disabled={ !metadata['editable'] } />
-                                                    
-                                        : attributes.type == "enumeration" ?
-
-                                            <Form.Control as="select" 
-                                                          name={ l.name } 
-                                                          onChange={ handleChange } 
-                                                          disabled={ !metadata['editable'] } 
-                                                          value={ customerModel[l.name] }>
-                                                              <option value=""></option>
-                                                              {
-                                                                  attributes.enum.map((e, i) => {
-                                                                      return(
-                                                                        <option key={"opt" + i} value={e}>{e}</option>
-                                                                      )
-                                                                  })
-                                                              }
-                                            </Form.Control>
-                                        
-                                        : attributes.type == "component" ?
+                                if(!hiddenFields || hiddenFields.filter(x => x === l.name).length === 0){
+                                    return(
+                                        <Col xs={l.size} 
+                                            key={"att"+j+"_"+i} 
+                                            className={metadata['visible'] ? "" : "ld_hideelement"}  >
+                                                <Form.Group controlId={l.name}>
+                                                    <Form.Label className={metadata['visible_label'] ? "" : "ld_hideelement"} >{metadata['label']}</Form.Label>
+                                        {                                                    
+                                            attributes.type === "string" ?
+                                                <Form.Control type="text"  
+                                                    name={ l.name } 
+                                                    onChange={ handleChange }
+                                                    value={ customerModel[l.name] }
+                                                    disabled={ !metadata['editable'] } />
+                                                        
+                                            : attributes.type === "enumeration" ?
+    
+                                                <Form.Control as="select" 
+                                                            name={ l.name } 
+                                                            onChange={ handleChange } 
+                                                            disabled={ !metadata['editable'] } 
+                                                            value={ customerModel[l.name] }>
+                                                                <option value=""></option>
+                                                                {
+                                                                    attributes.enum.map((e, i) => {
+                                                                        return(
+                                                                            <option key={"opt" + i} value={e}>{e}</option>
+                                                                        )
+                                                                    })
+                                                                }
+                                                </Form.Control>
                                             
-                                            <FormComponent entity={ components[attributes.component] } customerModel={ customerModel } errorModel={ errorModel } />
-                                        
-                                        : attributes.type == "biginteger" ?
-                                            <Form.Control type="text"  
-                                                name={ l.name } 
-                                                onChange={ handleChange }
-                                                value={ customerModel[l.name] }
-                                                disabled={ !metadata['editable'] } />
-                                        
-                                        : attributes.type == "email" ?
-                                            <Form.Control type="email"  
-                                                name={ l.name } 
-                                                onChange={ handleChange }
-                                                value={ customerModel[l.name] }
-                                                disabled={ !metadata['editable'] } />
-                                         
-                                        : attributes.model && children == true ?
+                                            : attributes.type === "component" ?
+                                                
+                                                <FormComponent entity={ components[attributes.component] } customerModel={ customerModel[l.name] } errorModel={ errorModel } children={children} hiddenFields={[]} />
                                             
-                                            <FormComponent entity={ FormModel[attributes.model] } customerModel={ customerModel } errorModel={ errorModel } children={!children} />
-
-                                        :
-                                        <></>
-                                    }
-                                        <small className="text-danger">{error[l.name]}</small>
-                                        </Form.Group>
-                                    </Col>
-                                );
+                                            : attributes.type === "biginteger" ?
+                                                <Form.Control type="text"  
+                                                    name={ l.name } 
+                                                    onChange={ handleChange }
+                                                    value={ customerModel[l.name] }
+                                                    disabled={ !metadata['editable'] } />
+                                            
+                                            : attributes.type === "email" ?
+                                                <Form.Control type="email"  
+                                                    name={ l.name } 
+                                                    onChange={ handleChange }
+                                                    value={ customerModel[l.name] }
+                                                    disabled={ !metadata['editable'] } />
+                                            
+                                            : attributes.model && children === true ?
+                                                <></>
+                                            :
+                                            <></>
+                                        }
+                                            <small className="text-danger">{error[l.name]}</small>
+                                            </Form.Group>
+                                        </Col>
+                                    );
+                                }                            
 							})
 						}
 					</Row>
