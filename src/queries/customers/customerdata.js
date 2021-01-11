@@ -26,12 +26,12 @@ const CUSTOMER_DATA_QUERY = gql`
 			}
 			person_address{
 				id
-				street: address_street
-				number: address_number
-				city: address_city
-				province: address_province
-				zipcode: address_zipcode
-				country: address_country
+				address_street
+				address_number
+				address_city
+				address_province
+				address_zipcode
+				address_country
 			}
 			person_referents{
         		referent_role

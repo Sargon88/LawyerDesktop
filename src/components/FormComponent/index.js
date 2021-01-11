@@ -31,35 +31,41 @@ const FormComponent = ({ entity, customerModel, errorModel, children, hiddenFiel
                                 
                                 if(!hiddenFields || hiddenFields.filter(x => x === l.name).length === 0){
                                     return(
-                                        <Col xs={l.size} 
+                                        <Col xs={eval(l.size)} 
                                             key={"att"+j+"_"+i} 
-                                            className={metadata['visible'] ? "" : "ld_hideelement"}  >
+                                            className={eval(metadata['visible']) ? "" : "ld_hideelement"}  >
                                                 <Form.Group controlId={l.name}>
-                                                    <Form.Label className={metadata['visible_label'] ? "" : "ld_hideelement"} >{metadata['label']}</Form.Label>
+                                                    <Form.Label className={metadata['visible_label'] ? "" : "ld_hideelement"} >{eval(metadata['label'])}</Form.Label>
                                         {                                                    
                                             attributes.type === "string" ?
                                                 <Form.Control type="text"  
                                                     name={ l.name } 
                                                     onChange={ handleChange }
                                                     value={ customerModel[l.name] }
-                                                    disabled={ !metadata['editable'] } />
+                                                    disabled={ typeof(metadata['editable']) === "string" ? !eval(metadata['editable']) :  !metadata['editable'] } />
                                                         
                                             : attributes.type === "enumeration" ?
-    
-                                                <Form.Control as="select" 
-                                                            name={ l.name } 
-                                                            onChange={ handleChange } 
-                                                            disabled={ !metadata['editable'] } 
-                                                            value={ customerModel[l.name] }>
-                                                                <option value=""></option>
-                                                                {
-                                                                    attributes.enum.map((e, i) => {
-                                                                        return(
-                                                                            <option key={"opt" + i} value={e}>{e}</option>
-                                                                        )
-                                                                    })
-                                                                }
-                                                </Form.Control>
+                                                <>
+                                                {
+                                                    console.log("EDITABLE", metadata['editable'])
+                                                }
+                                                        <Form.Control as="select" 
+                                                                    name={ l.name } 
+                                                                    onChange={ handleChange } 
+                                                                    disabled={ typeof(metadata['editable']) === "string" ? !eval(metadata['editable']) :  !metadata['editable']} 
+                                                                    value={ customerModel[l.name] }>
+                                                                        <option value=""></option>
+                                                                        {
+                                                                            attributes.enum.map((e, i) => {
+                                                                                return(
+                                                                                    <option key={"opt" + i} value={e}>{e}</option>
+                                                                                )
+                                                                            })
+                                                                        }
+                                                        </Form.Control>
+                                                    
+                                                
+                                                </>
                                             
                                             : attributes.type === "component" ?
                                                 
@@ -70,14 +76,14 @@ const FormComponent = ({ entity, customerModel, errorModel, children, hiddenFiel
                                                     name={ l.name } 
                                                     onChange={ handleChange }
                                                     value={ customerModel[l.name] }
-                                                    disabled={ !metadata['editable'] } />
+                                                    disabled={ typeof(metadata['editable']) === "string" ? !eval(metadata['editable']) :  !metadata['editable'] } />
                                             
                                             : attributes.type === "email" ?
                                                 <Form.Control type="email"  
                                                     name={ l.name } 
                                                     onChange={ handleChange }
                                                     value={ customerModel[l.name] }
-                                                    disabled={ !metadata['editable'] } />
+                                                    disabled={ typeof(metadata['editable']) === "string" ? !eval(metadata['editable']) :  !metadata['editable'] } />
                                             
                                             : attributes.model && children === true ?
                                                 <></>
