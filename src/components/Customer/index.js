@@ -3,6 +3,8 @@ import { Row, Col, Form } from 'react-bootstrap';
 import FormComponent from "../FormComponent";
 import * as FormModel from "../../config/forms";
 
+import "./customer.css";
+
 
 const CustomerComponent = ({ customerModel, errorModel, validateRules, customerId, isNewReferent, referentType, setReferentType }) => {
 	const [customerType, setCustomerType] = useState(customerModel.person_type != null ? customerModel.person_type : null);
@@ -16,7 +18,6 @@ const CustomerComponent = ({ customerModel, errorModel, validateRules, customerI
 		setReferentType(event.target.value);
 	}
 
-	console.log("REFERENT", customerModel)
 	return (
 		<>
 			<Row>
@@ -25,22 +26,27 @@ const CustomerComponent = ({ customerModel, errorModel, validateRules, customerI
 			
 			<Row>
 				<Col>
-					<FormComponent entity={ FormModel.person } customerModel={ customerModel } errorModel={ errorModel } children={true} hiddenFields={["person_referents"]} />
+					<FormComponent entity={ FormModel.person } customerModel={ customerModel } errorModel={ errorModel } hiddenFields={["person_referents"]} />
 				</Col>
 			</Row>
 
-			{customerModel.person_type === 'giuridico' ?
+			{customerModel.person_type === 'giuridico' && customerModel.id ?
 				<>
+				<Row>
+					<Col>Referenti</Col>
+				</Row>
+				<Row>
 				{
-					
 					customerModel.person_referents.map(element => {
 						return(
-							<></>
-						//<FormComponent entity={ FormModel.person } customerModel={ element.person } errorModel={ errorModel } children={true} hiddenFields={["person_referents", "person_type"]} />	
+							<Col xs="5" className="referentsArea dataArea">
+								<FormComponent entity={ FormModel.referent } customerModel={ element } errorModel={ errorModel } hiddenFields={[]} />	
+							</Col>
 						)
 					})
 					
 				}
+				</Row>
 				</>
 				:
 				<></>

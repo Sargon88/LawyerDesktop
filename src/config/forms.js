@@ -13,7 +13,7 @@ export const person = {
 				"label": "'Nome'",
 				"description": "",
 				"placeholder": "",
-				"visible": "customerModel['person_type'] === 'fisico'", 
+				"visible": "{customerModel['person_type'] !== 'giuridico'}", 
 				"visible_label": true,
 				"editable": true
 			},
@@ -25,7 +25,7 @@ export const person = {
 		},
 		"person_surname": {
 			"edit": {
-				"label": "customerModel['person_type'] === 'fisico' ? 'Cognome' : 'Ragione Sociale'",
+				"label": "customerModel['person_type'] !== 'giuridico' ? 'Cognome' : 'Ragione Sociale'",
 				"description": "",
 				"placeholder": "",
 				"visible": true, 
@@ -45,7 +45,7 @@ export const person = {
 				"placeholder": "",
 				"visible": true, 
 				"visible_label": true,
-				"editable": "customerModel[l.name] === null"
+				"editable": "{customerModel[l.name] === null}"
 			},
 			"list": {
 				"label": "'Person_type",
@@ -55,7 +55,7 @@ export const person = {
 		},
 		"person_code": {
 			"edit": {
-				"label": "'Codice Fiscale'",
+				"label": "customerModel['person_type'] !== 'giuridico' ? 'Codice Fiscale' : 'Partita iva'",
 				"description": "",
 				"placeholder": "",
 				"visible": true, 
@@ -97,21 +97,6 @@ export const person = {
 				"searchable": false,
 				"sortable": false
 			}
-		},
-		"person_referents": {
-			"edit": {
-				"label": "'Referenti'",
-				"description": "",
-				"placeholder": "",
-				"visible": true, 
-				"visible_label": true,
-				"editable": true
-			},
-			"list": {
-				"label": "'Person_referents'",
-				"searchable": false,
-				"sortable": false
-			}
 		}
 	}, 
 	"layouts": {
@@ -122,7 +107,7 @@ export const person = {
 				"size": 6
 			}, {
 				"name": "person_surname",
-				"size": "customerModel['person_type'] === 'fisico' ? 6 : 12",
+				"size": "{customerModel['person_type'] !== 'giuridico' ? 6 : 12}",
 			}],
 			[{
 				"name": "person_type",
@@ -137,10 +122,6 @@ export const person = {
 			}],
 			[{
 				"name": "person_address",
-				"size": 12
-			}],
-			[{
-				"name": "person_referents",
 				"size": 12
 			}]
 		]
@@ -168,26 +149,11 @@ export const person = {
 			"type": "component",
 			"repeatable": false,
 			"component": "address.address"
-		},
-		"person_referents": {
-			"type": "component",
-			"repeatable": true,
-			"component": "referent.referent",
 		}
 	}
 }
 
 export const referent = {
-	"uid": "referent.referent",
-	"settings": {
-		"bulkable": true,
-		"filterable": true,
-		"searchable": true,
-		"pageSize": 10,
-		"mainField": "id",
-		"defaultSortBy": "id",
-		"defaultSortOrder": "ASC"
-	},
 	"metadatas": {
 		"id": {
 			"edit": {},
@@ -199,7 +165,7 @@ export const referent = {
 		},
 		"referent_role": {
 			"edit": {
-				"label": "'Referent_role",
+				"label": "'Ruolo'",
 				"description": "",
 				"placeholder": "",
 				"visible": true, 
@@ -207,55 +173,50 @@ export const referent = {
 				"editable": true
 			},
 			"list": {
-				"label": "'Referent_role",
+				"label": "'Referent_role'",
 				"searchable": true,
 				"sortable": true
 			}
 		},
 		"person": {
 			"edit": {
-				"label": "'Person",
+				"label": "'Person'",
 				"description": "",
 				"placeholder": "",
 				"visible": true, 
-				"visible_label": true,
-				"editable": true,
-				"mainField": "person_name"
+				"visible_label": false,
+				"editable": true
 			},
-			"list": {
-				"label": "'Person",
-				"searchable": false,
-				"sortable": false
-			}
-		}
+			"list": {}
+		},
 	},
 	"layouts": {
 		"list": ["id", "referent_role", "person"],
 		"edit": [
 			[{
 				"name": "referent_role",
-				"size": 6
-			}, {
+				"size": 12
+			}],
+			[{
 				"name": "person",
-				"size": 6
+				"size": 12
 			}]
-		],
-		"editRelations": []
+		]
 	},
-	"isComponent": true
+	"attributes": {
+		"referent_role": {
+			"type": "enumeration",
+			"enum": ["legale", "amministratore", "tecnico"]
+		},
+		"person": {
+			"type": "component",
+			"repeatable": false,
+			"component": "referent.person"
+		}
+	}
 }
 
 export const dossier = {
-	"uid": "application::dossier.dossier",
-	"settings": {
-		"bulkable": true,
-		"filterable": true,
-		"searchable": true,
-		"pageSize": 10,
-		"mainField": "dossier_name",
-		"defaultSortBy": "dossier_name",
-		"defaultSortOrder": "ASC"
-	},
 	"metadatas": {
 		"id": {
 			"edit": {},
@@ -271,7 +232,7 @@ export const dossier = {
 				"description": "",
 				"placeholder": "",
 				"visible": true, 
-"visible_label": true,
+				"visible_label": true,
 				"editable": true
 			},
 			"list": {
@@ -286,7 +247,7 @@ export const dossier = {
 				"description": "",
 				"placeholder": "",
 				"visible": true, 
-"visible_label": true,
+				"visible_label": true,
 				"editable": true,
 				"mainField": "person_name"
 			},
@@ -302,7 +263,7 @@ export const dossier = {
 				"description": "",
 				"placeholder": "",
 				"visible": true, 
-"visible_label": true,
+				"visible_label": true,
 				"editable": true,
 				"mainField": "person_name"
 			},
@@ -318,7 +279,7 @@ export const dossier = {
 				"description": "",
 				"placeholder": "",
 				"visible": true, 
-"visible_label": true,
+				"visible_label": true,
 				"editable": true,
 				"mainField": "person_name"
 			},
@@ -334,7 +295,7 @@ export const dossier = {
 				"description": "",
 				"placeholder": "",
 				"visible": true, 
-"visible_label": true,
+				"visible_label": true,
 				"editable": true,
 				"mainField": "iss_name"
 			},
@@ -1162,4 +1123,92 @@ export const Components = {
 		},
 		"isComponent": true
 	},
+	"referent.person": {
+		"metadatas": {
+			"id": {
+				"edit": {},
+				"list": {
+					"label": "'Id'",
+					"searchable": true,
+					"sortable": true
+				}
+			},
+			"person_name": {
+				"edit": {
+					"label": "'Nome'",
+					"description": "",
+					"placeholder": "",
+					"visible": "{customerModel['person_type'] !== 'giuridico'}", 
+					"visible_label": true,
+					"editable": true
+				}
+			},
+			"person_surname": {
+				"edit": {
+					"label": "customerModel['person_type'] !== 'giuridico' ? 'Cognome' : 'Ragione Sociale'",
+					"description": "",
+					"placeholder": "",
+					"visible": true, 
+					"visible_label": true,
+					"editable": true
+				}
+			},
+			"person_code": {
+				"edit": {
+					"label": "customerModel['person_type'] !== 'giuridico' ? 'Codice Fiscale' : 'Partita iva'",
+					"description": "",
+					"placeholder": "",
+					"visible": true, 
+					"visible_label": true,
+					"editable": true
+				}
+			},
+			"person_contact": {
+				"edit": {
+					"label": "'Contatti'",
+					"description": "",
+					"placeholder": "",
+					"visible": true, 
+					"visible_label": true,
+					"editable": true
+				}
+			}
+		}, 
+		"layouts": {
+			"list": ["id", "person_name", "person_surname", "person_type"],
+			"edit": [
+				[{
+					"name": "person_name",
+					"size": 4
+				}, {
+					"name": "person_surname",
+					"size": 4,
+				},
+				{
+					"name": "person_code",
+					"size": 4
+				}],
+				[{
+					"name": "person_contact",
+					"size": 12
+				}]
+			]
+		},
+		"attributes": {
+			"person_name": {
+				"type": "string"
+			},
+			"person_surname": {
+				"type": "string"
+			},
+			"person_code": {
+				"type": "string"
+			},
+			"person_contact": {
+				"type": "component",
+				"repeatable": false,
+				"component": "contacts.contacts"
+			}
+		}
+	}
 }

@@ -3,20 +3,20 @@ import { Row, Col, Form } from 'react-bootstrap';
 import * as FormModel from "../../config/forms";
 
 
-const FormComponent = ({ entity, customerModel, errorModel, children, hiddenFields }) => {
+const FormComponent = ({ entity, customerModel, errorModel, hiddenFields }) => {
     const [error, setError] = useState({});
+    const [reload, setReload] = useState(false);
 	const layout = entity && entity.layouts ? entity.layouts.edit : [];
     const components = FormModel.Components;
 
     function handleChange(event){
 		const target = event.target;
     	const name = target.name;
-    	const value = target.value;
-
-    	customerModel[name]=value;              
+        const value = target.value;
+        
+        customerModel[name]=value;
+        setReload(!reload);
     }
-    
-    console.log("CUSTOMERMODEL", customerModel);
 
 	return (
 		<>		
@@ -45,31 +45,25 @@ const FormComponent = ({ entity, customerModel, errorModel, children, hiddenFiel
                                                     disabled={ typeof(metadata['editable']) === "string" ? !eval(metadata['editable']) :  !metadata['editable'] } />
                                                         
                                             : attributes.type === "enumeration" ?
-                                                <>
-                                                {
-                                                    console.log("EDITABLE", metadata['editable'])
-                                                }
-                                                        <Form.Control as="select" 
-                                                                    name={ l.name } 
-                                                                    onChange={ handleChange } 
-                                                                    disabled={ typeof(metadata['editable']) === "string" ? !eval(metadata['editable']) :  !metadata['editable']} 
-                                                                    value={ customerModel[l.name] }>
-                                                                        <option value=""></option>
-                                                                        {
-                                                                            attributes.enum.map((e, i) => {
-                                                                                return(
-                                                                                    <option key={"opt" + i} value={e}>{e}</option>
-                                                                                )
-                                                                            })
-                                                                        }
-                                                        </Form.Control>
-                                                    
                                                 
-                                                </>
-                                            
+                                                <Form.Control as="select" 
+                                                            name={ l.name } 
+                                                            onChange={ handleChange } 
+                                                            disabled={ typeof(metadata['editable']) === "string" ? !eval(metadata['editable']) :  !metadata['editable']} 
+                                                            value={ customerModel[l.name] }>
+                                                                <option value=""></option>
+                                                                {
+                                                                    attributes.enum.map((e, i) => {
+                                                                        return(
+                                                                            <option key={"opt" + i} value={e}>{e}</option>
+                                                                        )
+                                                                    })
+                                                                }
+                                                </Form.Control>
+                                                
                                             : attributes.type === "component" ?
                                                 
-                                                <FormComponent entity={ components[attributes.component] } customerModel={ customerModel[l.name] } errorModel={ errorModel } children={children} hiddenFields={[]} />
+                                                <FormComponent entity={ components[attributes.component] } customerModel={ customerModel[l.name] } errorModel={ errorModel } hiddenFields={[]} />
                                             
                                             : attributes.type === "biginteger" ?
                                                 <Form.Control type="text"  
@@ -85,7 +79,7 @@ const FormComponent = ({ entity, customerModel, errorModel, children, hiddenFiel
                                                     value={ customerModel[l.name] }
                                                     disabled={ typeof(metadata['editable']) === "string" ? !eval(metadata['editable']) :  !metadata['editable'] } />
                                             
-                                            : attributes.model && children === true ?
+                                            : attributes.model ?
                                                 <></>
                                             :
                                             <></>

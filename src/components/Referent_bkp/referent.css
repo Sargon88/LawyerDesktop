@@ -1,0 +1,19 @@
+.ld_microbtn{
+    padding-right: 0.5px !important;
+    padding-left: 0.5px !important;
+    padding-top: 0px !important;
+    border: 0px !important;
+}
+
+.ld_referentmodal .modal-content {
+    max-height: 70vh;
+}
+
+.ld_autocompletesection {
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.ld_autocompleterow {
+    max-height: 10em;
+}

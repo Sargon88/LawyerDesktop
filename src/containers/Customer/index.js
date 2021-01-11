@@ -28,11 +28,40 @@ var validateRules = [
   {type:"", field: "city", isMandatory: true, regex: /^[\w ]+$/}
 ];
 
+var customer = {
+  person_name: null,
+  person_surname: null,
+  person_code: null,
+  person_type: null,
+  person_address: {
+    address_city: null,
+    address_country: null,
+    address_number: null,
+    address_province: null,
+    address_street: null,
+    address_zipcode: null,
+  },
+  person_contact:{
+    cnn_fax:{
+      phone_number: null	
+    },
+    cnn_mobile:{
+      phone_number: null	
+    },
+    cnn_phone: {
+      phone_number: null	
+    },
+    cnn_mail: null,
+    cnn_pec: null
+  },
+  person_referents: [],
+}
+
 const Customer = () => {  
   const { setNavbarData } = useAppContext();
   const { isAuthenticated } = useAppContext();
   const alert = useAlert()
-  const [customerModel] = useState({});
+  const [customerModel] = useState(customer);
   var errorModel = useState({});
   var c = useParams();
   const [customerId] = useState(c.customerId != null ? c.customerId : null);
@@ -43,7 +72,7 @@ const Customer = () => {
   function save(){ 
     var isValid = true;
     var typerules = validateRules.filter(x => x.type === customerModel.type || x.type === "");
-
+    /*
     for(var rule of typerules){
       if(errorModel.[rule.field]){
         isValid = false;
@@ -60,11 +89,12 @@ const Customer = () => {
         break;
       }
     }
+    */
 
     if(isValid){
 
 
-
+      /*
       var person = {
         id: customerModel.id,
         person_type: customerModel.type.toLowerCase() === "pp" ? "fisico" : "giuridico",
@@ -94,6 +124,9 @@ const Customer = () => {
             address_zipcode:customerModel.cap,
           },
       }
+      */
+
+      var person = customerModel;
 
       if(customerModel.id){
         //update an entry
