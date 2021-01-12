@@ -1138,19 +1138,19 @@ export const Components = {
 					"label": "'Nome'",
 					"description": "",
 					"placeholder": "",
-					"visible": "{customerModel['person_type'] !== 'giuridico'}", 
+					"visible": false, 
 					"visible_label": true,
-					"editable": true
+					"editable": false
 				}
 			},
 			"person_surname": {
 				"edit": {
-					"label": "customerModel['person_type'] !== 'giuridico' ? 'Cognome' : 'Ragione Sociale'",
+					"label": "'Cognome'",
 					"description": "",
 					"placeholder": "",
-					"visible": true, 
+					"visible": false, 
 					"visible_label": true,
-					"editable": true
+					"editable": false
 				}
 			},
 			"person_code": {
@@ -1169,24 +1169,17 @@ export const Components = {
 					"description": "",
 					"placeholder": "",
 					"visible": true, 
-					"visible_label": true,
-					"editable": true
+					"visible_label": false,
+					"editable": false
 				}
 			}
 		}, 
 		"layouts": {
-			"list": ["id", "person_name", "person_surname", "person_type"],
 			"edit": [
-				[{
-					"name": "person_name",
-					"size": 4
-				}, {
-					"name": "person_surname",
-					"size": 4,
-				},
+				[
 				{
 					"name": "person_code",
-					"size": 4
+					"size": 12
 				}],
 				[{
 					"name": "person_contact",
@@ -1207,8 +1200,108 @@ export const Components = {
 			"person_contact": {
 				"type": "component",
 				"repeatable": false,
-				"component": "contacts.contacts"
+				"component": "referent.contacts"
 			}
 		}
-	}
+	},
+	"referent.contacts": {
+        "metadatas": {
+            "id": {
+                "edit": {},
+                "list": {
+                    "label": "'Id'",
+                    "searchable": false,
+                    "sortable": false
+                }
+            },
+            "cnn_mobile": {
+                "edit": {
+                    "label": "'Cellulare'",
+                    "visible": true, 
+					"visible_label": true,
+                    "editable": true
+                }
+            },
+            "cnn_phone": {
+                "edit": {
+                    "label": "'Telefono'",
+                    "visible": true, 
+					"visible_label": true,
+                    "editable": true
+                }
+            },
+            "cnn_fax": {
+                "edit": {
+                    "label": "'Fax'",
+                    "visible": true, 
+					"visible_label": true,
+                    "editable": true
+                }
+            },
+            "cnn_mail": {
+                "edit": {
+                    "label": "'Email'",
+                    "visible": true, 
+					"visible_label": true,
+                    "editable": true
+                }
+            },
+            "cnn_pec": {
+                "edit": {
+                    "label": "'Pec'",
+                    "visible": true, 
+					"visible_label": true,
+                    "editable": true
+                }
+            }
+        },
+        "layouts": {
+            "edit": [
+                [{
+                    "name": "cnn_phone",
+                    "size": 12
+				}], 
+				[{
+                    "name": "cnn_mobile",
+                    "size": 12
+				}],
+				[{
+                    "name": "cnn_fax",
+                    "size": 12
+                }],
+                [{
+                    "name": "cnn_mail",
+                    "size": 12
+				}], 
+				[{
+                    "name": "cnn_pec",
+                    "size": 12
+                }],
+            ],
+        },
+        "attributes": {
+            "cnn_mobile": {
+                "type": "component",
+                "repeatable": false,
+                "component": "contacts.phone-number"
+            },
+            "cnn_phone": {
+                "type": "component",
+                "repeatable": false,
+                "component": "contacts.phone-number"
+            },
+            "cnn_fax": {
+                "type": "component",
+                "repeatable": false,
+                "component": "contacts.phone-number"
+            },
+            "cnn_mail": {
+                "type": "email"
+            },
+            "cnn_pec": {
+                "type": "email"
+            }
+        },
+        "isComponent": true
+    },
 }

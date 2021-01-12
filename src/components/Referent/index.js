@@ -12,16 +12,31 @@ import {ic_clear} from 'react-icons-kit/md/ic_clear';
 import {ic_delete} from 'react-icons-kit/md/ic_delete'
 
 import ReferentModal from '../ReferentModal';
+import * as FormModel from "../../config/forms";
+import FormComponent from "../FormComponent";
 
 import './referent.css';
  
-const ReferentType = ({ customerModel, selectedReferent, setSelectedReferent, validateRules }) => {
+const ReferentType = ({ customerModel, errorModel }) => {
 	const [error, setError] = useState({});
+	const [selectedReferent, setSelectedReferent] = useState();
 	const alert = useAlert();
 	const history = useHistory();
 	
 	function editReferent(referent){
+		
+		customerModel.person_referents.map(element => {
+			for(var att in element){
+				att.editable = false;
+			}
+		});
+
+		for(var att in referent){
+			att.editable = true;
+		}
+	
 		setSelectedReferent(referent);
+		
 	}
 
 	function saveReferent(index){
@@ -77,12 +92,14 @@ const ReferentType = ({ customerModel, selectedReferent, setSelectedReferent, va
 
 	function removeReferent(index){
 		var customerId = customerModel.id;
-		var referents = customerModel.referents;
+		var referents = customerModel.person_referents;
 
 		referents.splice(index, 1);
 		var ref = [];
+
 		referents.forEach(function(item, index){
-			ref.push({person:{id: item.id}});
+			console.log("ITEM", item);
+			ref.push({person:{id: item.person.id}});
 		});
 
 
@@ -100,7 +117,7 @@ const ReferentType = ({ customerModel, selectedReferent, setSelectedReferent, va
 
               if(response.status === 200){
                 alert.success("Salvato");
-                customerModel.referents = referents;
+                customerModel.person_referents = referents;
                 setSelectedReferent({});                          
 
               } else {
@@ -127,108 +144,24 @@ const ReferentType = ({ customerModel, selectedReferent, setSelectedReferent, va
 				<Col>
 					<Row><Col><h4>Referenti <Button variant="link" onClick={() => handleShow()} className="ld_microbtn" ><Icon icon={ic_add} xs={35} /></Button></h4></Col></Row>
 					<Row>
-					{customerModel.referents.map((value, index) => {
-						return(	
-							<Col xs={3} key={index}>
-								<Row>
-									<Col className="dataArea">
-										<Row>
-											<Col xs={10}>
-												<a href={"/customers/" + value.id}><h6>{value.name} {value.surname}</h6></a>
-											</Col>
-											<Col xs={2}>
-												{selectedReferent.id !== value.id ?
-													<>
-													<Button variant="link" className="ld_microbtn" onClick={() => editReferent(value)} ><Icon icon={ic_mode_edit} xs={35} /></Button>
-													<Button variant="link" className="ld_microbtn" onClick={() => removeReferent(index)} ><Icon icon={ic_delete} xs={35} /></Button>
-													</>
-													:
-													<>
-													<Button variant="link" className="ld_microbtn" onClick={() => saveReferent(index)} ><Icon icon={ic_save} xs={35} /></Button>
-													<Button variant="link" className="ld_microbtn" onClick={() => setSelectedReferent({})} ><Icon icon={ic_clear} xs={35} /></Button>
-													</>
-												}
-											</Col>
-										</Row>
-										<Row><Col>Ruolo: {value.role}</Col></Row>
-										{selectedReferent.id !== value.id ?
-											(<>
-											<Row><Col>Cellulare: {value.mobile}</Col></Row>
-											<Row><Col>Telefono: {value.phone}</Col></Row>
-											<Row><Col>Fax {value.fax}</Col></Row>
-											<Row><Col>Mail {value.mail}</Col></Row>
-											<Row><Col>Pec {value.pec}</Col></Row>
-											</>)
-											:
-											(<>
-											<Row>
-												<Col>
-													<Form.Group controlId="newCustomerCountry">
-													    <Form.Label>Cellulare</Form.Label>
-												    	<Form.Control type="text"
-												    				  name="mobile" 
-												    				  onChange={handleReferentChange}
-												    				  value={selectedReferent.mobile} />
-												    	<small className="text-danger">{error.mobile}</small>
-												  	</Form.Group>
-												</Col>
-											</Row>
-											<Row>
-												<Col>
-													<Form.Group controlId="newCustomerCountry">
-													    <Form.Label>Telefono</Form.Label>
-												    	<Form.Control type="text"
-												    				  name="phone" 
-												    				  onChange={handleReferentChange}
-												    				  value={selectedReferent.phone} />
-												    	<small className="text-danger">{error.phone}</small>
-												  	</Form.Group>
-												</Col>
-											</Row>
-											<Row>
-												<Col>
-													<Form.Group controlId="newCustomerCountry">
-													    <Form.Label>fax</Form.Label>
-												    	<Form.Control type="text"
-												    				  name="fax" 
-												    				  onChange={handleReferentChange}
-												    				  value={selectedReferent.fax} />
-												    	<small className="text-danger">{error.fax}</small>
-												  	</Form.Group>
-												</Col>
-											</Row>
-											<Row>
-												<Col>
-													<Form.Group controlId="newCustomerCountry">
-													    <Form.Label>Mail</Form.Label>
-												    	<Form.Control type="text"
-												    				  name="mail" 
-												    				  onChange={handleReferentChange}
-												    				  value={selectedReferent.mail} />
-												    	<small className="text-danger">{error.mail}</small>
-												  	</Form.Group>
-												</Col>
-											</Row>
-											<Row>
-												<Col>
-													<Form.Group controlId="newCustomerCountry">
-													    <Form.Label>Pec</Form.Label>
-												    	<Form.Control type="text"
-												    				  name="pec" 
-												    				  onChange={handleReferentChange}
-												    				  value={selectedReferent.pec} />
-												    	<small className="text-danger">{error.pec}</small>
-												  	</Form.Group>
-												</Col>
-											</Row>
-											</>)		
-										}
-										
-									</Col>
-								</Row>
-							</Col>
-						);
-					})}
+					{
+						customerModel.person_referents.map((element, index) => {
+							return(
+								<Col xs="3" className="referentsArea dataArea">
+									<Row>
+										<Col xs={10}>
+											<a href={"/customers/" + element.person.id}><h5>{element.person.person_name} {element.person.person_surname}</h5></a>
+										</Col>
+										<Col xs={2}>
+											<Button variant="link" className="ld_microbtn" onClick={() => saveReferent(index)} ><Icon icon={ic_save} xs={45} /></Button>
+											<Button variant="link" className="ld_microbtn" onClick={() => removeReferent(index)} ><Icon icon={ic_delete} xs={45} /></Button>
+										</Col>
+									</Row>
+									<FormComponent entity={ FormModel.referent } customerModel={ element } errorModel={ errorModel } hiddenFields={[]} />	
+								</Col>
+							)
+						})
+					}
 					</Row>
 				</Col>
 			</Row>

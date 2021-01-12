@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Row, Col, Form } from 'react-bootstrap';
 import FormComponent from "../FormComponent";
+import ReferentType from "../Referent"
 import * as FormModel from "../../config/forms";
 
 import "./customer.css";
@@ -32,11 +33,10 @@ const CustomerComponent = ({ customerModel, errorModel, validateRules, customerI
 
 			{customerModel.person_type === 'giuridico' && customerModel.id ?
 				<>
+				<ReferentType customerModel={ customerModel } errorModel={ errorModel }/>
 				<Row>
-					<Col>Referenti</Col>
-				</Row>
-				<Row>
-				{
+
+				{/*
 					customerModel.person_referents.map(element => {
 						return(
 							<Col xs="5" className="referentsArea dataArea">
@@ -44,7 +44,7 @@ const CustomerComponent = ({ customerModel, errorModel, validateRules, customerI
 							</Col>
 						)
 					})
-					
+					*/
 				}
 				</Row>
 				</>
