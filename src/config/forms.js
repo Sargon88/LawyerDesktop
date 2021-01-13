@@ -789,6 +789,189 @@ export const issue = {
 	}
 }
 
+export const event = {
+	"metadatas": {
+		"event_allday": {
+			"edit": {
+				"label": "Event_allday",
+				"description": "",
+				"placeholder": "",
+				"visible": true,
+				"editable": true
+			},
+			"list": {
+				"label": "Event_allday",
+				"searchable": true,
+				"sortable": true
+			}
+		},
+		"event_customer": {
+			"edit": {
+				"label": "Event_customer",
+				"description": "",
+				"placeholder": "",
+				"visible": true,
+				"editable": true,
+				"mainField": "person_name"
+			},
+			"list": {
+				"label": "Event_customer",
+				"searchable": false,
+				"sortable": false
+			}
+		},
+		"event_dossier": {
+			"edit": {
+				"label": "Event_dossier",
+				"description": "",
+				"placeholder": "",
+				"visible": true,
+				"editable": true,
+				"mainField": "dossier_name"
+			},
+			"list": {
+				"label": "Event_dossier",
+				"searchable": false,
+				"sortable": false
+			}
+		},
+		"event_title": {
+			"edit": {
+				"label": "Event_title",
+				"description": "",
+				"placeholder": "",
+				"visible": true,
+				"editable": true
+			},
+			"list": {
+				"label": "Event_title",
+				"searchable": true,
+				"sortable": true
+			}
+		},
+		"event_end": {
+			"edit": {
+				"label": "Event_end",
+				"description": "",
+				"placeholder": "",
+				"visible": true,
+				"editable": true
+			},
+			"list": {
+				"label": "Event_end",
+				"searchable": true,
+				"sortable": true
+			}
+		},
+		"event_description": {
+			"edit": {
+				"label": "Event_description",
+				"description": "",
+				"placeholder": "",
+				"visible": true,
+				"editable": true
+			},
+			"list": {
+				"label": "Event_description",
+				"searchable": true,
+				"sortable": true
+			}
+		},
+		"id": {
+			"edit": {},
+			"list": {
+				"label": "Id",
+				"searchable": true,
+				"sortable": true
+			}
+		},
+		"event_start": {
+			"edit": {
+				"label": "Event_start",
+				"description": "",
+				"placeholder": "",
+				"visible": true,
+				"editable": true
+			},
+			"list": {
+				"label": "Event_start",
+				"searchable": true,
+				"sortable": true
+			}
+		},
+		"event_type": {
+			"edit": {
+				"label": "Event_type",
+				"description": "",
+				"placeholder": "",
+				"visible": true,
+				"editable": true
+			},
+			"list": {
+				"label": "Event_type",
+				"searchable": true,
+				"sortable": true
+			}
+		}
+	},
+	"layouts": {
+		"edit": [
+			[{
+				"name": "event_title",
+				"size": 6
+			}],
+			[{
+				"name": "event_type",
+				"size": 6
+			}, {
+				"name": "event_allday",
+				"size": 4
+			}],
+			[{
+				"name": "event_start",
+				"size": 6
+			}, {
+				"name": "event_end",
+				"size": 6
+			}],
+			[{
+				"name": "event_description",
+				"size": 6
+			}]
+		]
+	},
+	"attributes": {
+		"event_title": {
+			"type": "string"
+		},
+		"event_start": {
+			"type": "datetime"
+		},
+		"event_end": {
+			"type": "datetime"
+		},
+		"event_description": {
+			"type": "text"
+		},
+		"event_allday": {
+			"type": "boolean",
+			"default": false
+		},
+		"event_type": {
+			"type": "enumeration",
+			"enum": ["appuntamento", "scadenza"]
+		},
+		"event_customer": {
+			"model": "person",
+			"via": "person_events"
+		},
+		"event_dossier": {
+			"model": "dossier",
+			"via": "dossier_events"
+		}
+	}
+}
+
 export const Components = {
     "contacts.contacts": {
         "metadatas": {

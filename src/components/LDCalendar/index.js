@@ -2,9 +2,8 @@ import React, { useState,useEffect } from "react";
 import { Calendar, momentLocalizer } from 'react-big-calendar'
 import moment from 'moment';
 import { Row, Col, Fade, Button } from 'react-bootstrap'
-//import CalendarFilter from "../../containers/CalendarFilter";
 
-const LDCalendar = ({ eventslist }) => {
+const LDCalendar = ({ eventslist, height }) => {
   var appUser = null;
   const [events, setEvents] = useState([]);
   const localizer = momentLocalizer(moment);
@@ -33,7 +32,7 @@ const LDCalendar = ({ eventslist }) => {
       events={events}
       startAccessor="start"
       endAccessor="end"
-      style={{ height: 500 }}
+      style={{ height: height }}
     />
           
   );

@@ -98,7 +98,6 @@ const ReferentType = ({ customerModel, errorModel }) => {
 		var ref = [];
 
 		referents.forEach(function(item, index){
-			console.log("ITEM", item);
 			ref.push({person:{id: item.person.id}});
 		});
 
