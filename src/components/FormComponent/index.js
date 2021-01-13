@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Row, Col, Form } from 'react-bootstrap';
+var DateTimeField = require('react-bootstrap-datetimepicker');
 import * as FormModel from "../../config/forms";
 
 
@@ -13,6 +14,15 @@ const FormComponent = ({ entity, customerModel, errorModel, hiddenFields }) => {
 		const target = event.target;
     	const name = target.name;
         const value = target.value;
+        
+        customerModel[name]=value;
+        setReload(!reload);
+    }
+
+    function handleChecked(event){
+		const target = event.target;
+    	const name = target.name;
+        const value = target.checked;
         
         customerModel[name]=value;
         setReload(!reload);
@@ -35,7 +45,7 @@ const FormComponent = ({ entity, customerModel, errorModel, hiddenFields }) => {
                                             key={"att"+j+"_"+i} 
                                             className={eval(metadata['visible']) ? "" : "ld_hideelement"}  >
                                                 <Form.Group controlId={l.name}>
-                                                    <Form.Label className={metadata['visible_label'] ? "" : "ld_hideelement"} >{eval(metadata['label'])}</Form.Label>
+                                                    <Form.Label className={metadata['visible_label'] == null || metadata['visible_label'] === true  ? "" : "ld_hideelement"} >{eval(metadata['label'])}</Form.Label>
                                         {                                                    
                                             attributes.type === "string" ?
                                                 <Form.Control type="text"  
@@ -72,8 +82,31 @@ const FormComponent = ({ entity, customerModel, errorModel, hiddenFields }) => {
                                                     value={ customerModel[l.name] }
                                                     disabled={ typeof(metadata['editable']) === "string" ? !eval(metadata['editable']) :  !metadata['editable'] } />
                                             
+                                            : attributes.type === "datetime" ?
+                                                <Form.Control type="text"  
+                                                    name={ l.name } 
+                                                    onChange={ handleChange }
+                                                    value={ customerModel[l.name] }
+                                                    disabled={ typeof(metadata['editable']) === "string" ? !eval(metadata['editable']) :  !metadata['editable'] } />
+
+                                            : attributes.type === "boolean" ?                                                    
+                                                <Form.Switch
+                                                    id={'switch_' + l.name}
+                                                    name={ l.name } 
+                                                    onChange={ handleChecked }
+                                                    checked = { customerModel[l.name] }
+                                                    label={eval(metadata['label'])}
+                                                    disabled={ typeof(metadata['editable']) === "string" ? !eval(metadata['editable']) :  !metadata['editable'] } />
+                                                
                                             : attributes.type === "email" ?
                                                 <Form.Control type="email"  
+                                                    name={ l.name } 
+                                                    onChange={ handleChange }
+                                                    value={ customerModel[l.name] }
+                                                    disabled={ typeof(metadata['editable']) === "string" ? !eval(metadata['editable']) :  !metadata['editable'] } />
+                                            
+                                            : attributes.type === "text" ?
+                                                <Form.Control as="textarea"  
                                                     name={ l.name } 
                                                     onChange={ handleChange }
                                                     value={ customerModel[l.name] }

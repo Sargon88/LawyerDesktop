@@ -793,88 +793,58 @@ export const event = {
 	"metadatas": {
 		"event_allday": {
 			"edit": {
-				"label": "Event_allday",
+				"label": "'Giornaliero'",
 				"description": "",
 				"placeholder": "",
 				"visible": true,
-				"editable": true
-			},
-			"list": {
-				"label": "Event_allday",
-				"searchable": true,
-				"sortable": true
+				"editable": true,
+				"visible_label": false
 			}
 		},
 		"event_customer": {
 			"edit": {
-				"label": "Event_customer",
+				"label": "'Cliente'",
 				"description": "",
 				"placeholder": "",
 				"visible": true,
 				"editable": true,
 				"mainField": "person_name"
-			},
-			"list": {
-				"label": "Event_customer",
-				"searchable": false,
-				"sortable": false
 			}
 		},
 		"event_dossier": {
 			"edit": {
-				"label": "Event_dossier",
+				"label": "'Pratica'",
 				"description": "",
 				"placeholder": "",
 				"visible": true,
 				"editable": true,
 				"mainField": "dossier_name"
-			},
-			"list": {
-				"label": "Event_dossier",
-				"searchable": false,
-				"sortable": false
 			}
 		},
 		"event_title": {
 			"edit": {
-				"label": "Event_title",
+				"label": "'Titolo'",
 				"description": "",
 				"placeholder": "",
 				"visible": true,
 				"editable": true
-			},
-			"list": {
-				"label": "Event_title",
-				"searchable": true,
-				"sortable": true
 			}
 		},
 		"event_end": {
 			"edit": {
-				"label": "Event_end",
+				"label": "'Fine'",
 				"description": "",
 				"placeholder": "",
 				"visible": true,
-				"editable": true
-			},
-			"list": {
-				"label": "Event_end",
-				"searchable": true,
-				"sortable": true
-			}
-		},
+				"editable": "{!customerModel['event_allday']}"
+			}		},
 		"event_description": {
 			"edit": {
-				"label": "Event_description",
+				"label": "'Descrizione'",
 				"description": "",
 				"placeholder": "",
 				"visible": true,
 				"editable": true
-			},
-			"list": {
-				"label": "Event_description",
-				"searchable": true,
-				"sortable": true
 			}
 		},
 		"id": {
@@ -887,30 +857,20 @@ export const event = {
 		},
 		"event_start": {
 			"edit": {
-				"label": "Event_start",
+				"label": "'Inizio'",
 				"description": "",
 				"placeholder": "",
 				"visible": true,
-				"editable": true
-			},
-			"list": {
-				"label": "Event_start",
-				"searchable": true,
-				"sortable": true
+				"editable": "{!customerModel['event_allday']}"
 			}
 		},
 		"event_type": {
 			"edit": {
-				"label": "Event_type",
+				"label": "'Tipologia'",
 				"description": "",
 				"placeholder": "",
 				"visible": true,
 				"editable": true
-			},
-			"list": {
-				"label": "Event_type",
-				"searchable": true,
-				"sortable": true
 			}
 		}
 	},
@@ -918,12 +878,13 @@ export const event = {
 		"edit": [
 			[{
 				"name": "event_title",
-				"size": 6
+				"size": 12
 			}],
 			[{
 				"name": "event_type",
-				"size": 6
-			}, {
+				"size": 8
+			}], 
+			[{
 				"name": "event_allday",
 				"size": 4
 			}],
@@ -936,7 +897,7 @@ export const event = {
 			}],
 			[{
 				"name": "event_description",
-				"size": 6
+				"size": 12
 			}]
 		]
 	},
