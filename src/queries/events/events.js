@@ -2,7 +2,7 @@ import gql from "graphql-tag";
 
 const GET_EVENTS_QUERY = gql`
 	query Events{
-		events {
+		events(where:{event_isvalid:true}) {
 			id
 			title:event_title
 	start:event_start

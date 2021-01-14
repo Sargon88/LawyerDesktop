@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { Row, Col, Form } from 'react-bootstrap';
-var DateTimeField = require('react-bootstrap-datetimepicker');
 import * as FormModel from "../../config/forms";
+
+//var DateTimeField = require('react-bootstrap-datetimepicker');
 
 
 const FormComponent = ({ entity, customerModel, errorModel, hiddenFields }) => {
