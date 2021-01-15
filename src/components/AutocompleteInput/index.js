@@ -1,19 +1,8 @@
 import React, { useState } from "react";
 import { Form, ListGroup, Row, Col } from 'react-bootstrap'
 
-const AutocompleteInput = ({ options, onSelectItem }) => {
-    const [suggestion, setSuggestion] = useState('');
-
-    let filteredOptions = options.filter(i => i.name.toLowerCase().includes(suggestion.toLowerCase() || i.surname.toLowerCase().includes(suggestion.toLowerCase())));
-
-    function handleChange(event){
-        setSuggestion(event.target.value);
-    }
-
-    function selectListItem(event){
-        var item = filteredOptions[event.target.value]; 
-        setSuggestion(item.name + " " + item.surname);
-    } 
+const AutocompleteInput = ({ options, onSelectItem, filteredoptions, handleChange, selectListItem, suggestion }) => {
+    let filteredOptions = filteredoptions;
 
     return(
         <Row className="ld_autocompleterow">
