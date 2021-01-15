@@ -16,6 +16,7 @@ const Dashboard = () => {
   const { isAuthenticated } = useAppContext();
   const { setNavbarData } = useAppContext();
   const [newEvent, setNewEvent] = useState({});
+  const [reload, setReload] = useState(false);
   const alert = useAlert()
 
   useEffect(() => {
@@ -74,9 +75,8 @@ const Dashboard = () => {
   
             if(response.status === 200){
               alert.success("Salvato");
-              
               setShow(false);
-                
+                              
             } else {
               alert.error("Errore:" + response.error);
             }
@@ -93,9 +93,8 @@ const Dashboard = () => {
   
             if(response.status === 200){
               alert.success("Salvato");
-              
               setShow(false);
-  
+              
             } else {
               alert.error("Errore:" + response.error);
             }
@@ -133,7 +132,7 @@ const Dashboard = () => {
       <>
         <Row>
           <Col>
-            <Query query={GET_EVENTS_QUERY} fetchPolicy={'network-only'}>
+            <Query query={GET_EVENTS_QUERY} fetchPolicy={'network-only'} pollInterval={1000}>
               {({ data: { events } }) => {
                 return <LDCalendar eventslist={events} 
                                    height={'90vh'}
