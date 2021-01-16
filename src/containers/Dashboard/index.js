@@ -3,12 +3,14 @@ import { Row, Col, Button, Modal } from 'react-bootstrap';
 import { useAppContext } from "../../utils/contextLib";
 import { useAlert } from 'react-alert';
 import FormComponent from "../../components/FormComponent";
+import AutocompleteInput from "../../components/AutocompleteInput";
 import * as FormModel from "../../config/forms";
 import Query from "../../components/Query";
 import LDCalendar from "../../components/LDCalendar";
 import axios from 'axios';
 
 import GET_EVENTS_QUERY from "../../queries/events/events";
+
 
 const now = new Date();
 
@@ -150,6 +152,7 @@ const Dashboard = () => {
           </Modal.Header>
           <Modal.Body>
             <FormComponent entity={ FormModel.event } customerModel={ newEvent } errorModel={ {} } hiddenFields={[]} />
+            <AutocompleteInput />
           </Modal.Body>
           <Modal.Footer>
             <Button variant="secondary" onClick={handleClose}>

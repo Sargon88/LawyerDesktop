@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Form, ListGroup, Row, Col } from 'react-bootstrap'
 
 const AutocompleteInput = ({ options, onSelectItem, filteredoptions, handleChange, selectListItem, suggestion }) => {
