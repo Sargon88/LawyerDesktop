@@ -10,7 +10,7 @@ const LDCalendar = ({ eventslist, height, handleSelectSlot, handleSelectEvent })
     setEvents(eventslist);
   }, [eventslist]);
 
-  function eventStyleGetter (event, start, end, isSelected) {
+  function eventStyleGetter (event) {
     var backgroundColor = event.color;
     var style = {
       backgroundColor: backgroundColor,

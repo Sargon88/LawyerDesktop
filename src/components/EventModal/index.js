@@ -76,18 +76,19 @@ const EventModal = ({ newEvent, setNewEvent, show, setShow }) => {
     //MODAL
 
     //AUTOCOMPLETE
-    const [suggestion, setSuggestion] = useState('');
+    const [suggestionCustomer, setSuggestionCustomer] = useState('');
+    const [suggestionDossier, setSuggestionDossier] = useState('');
     let filteredOptions =[];
 
     function handleChange(event){
-        setSuggestion(event.target.value);
+        setSuggestionCustomer(event.target.value);
     }
 
     function selectListItem(event){
         console.log("SELECTED", event.target)
         var item = filteredOptions[event.target.value]; 
         console.log(item);
-        setSuggestion(item.name + " " + item.surname);
+        setSuggestionCustomer(item.name + " " + item.surname);
     } 
     //AUTOCOMPLETE
 
@@ -105,14 +106,13 @@ const EventModal = ({ newEvent, setNewEvent, show, setShow }) => {
                     <Query query={ALL_PHYSICAL_PERSON_PREVIEW_QUERY} >
                         {({ loading, error, data: { people } }) => {
 
-                            filteredOptions = people.filter(i => i.name.toLowerCase().includes(suggestion.toLowerCase() || i.surname.toLowerCase().includes(suggestion.toLowerCase())));
-                            console.log("OPITIONS", filteredOptions);
+                            filteredOptions = people.filter(i => i.name.toLowerCase().includes(suggestionCustomer.toLowerCase() || i.surname.toLowerCase().includes(suggestionCustomer.toLowerCase())));
 
-                            return <AutocompleteInput 
+                            return  <AutocompleteInput 
                                         filteredoptions={ filteredOptions }
                                         handleChange={ handleChange }
                                         selectListItem={ selectListItem }
-                                        suggestion={ suggestion }
+                                        suggestion={ suggestionCustomer }
                                         />
 
                         }}
@@ -126,14 +126,13 @@ const EventModal = ({ newEvent, setNewEvent, show, setShow }) => {
                     <Query query={ALL_PHYSICAL_PERSON_PREVIEW_QUERY} >
                         {({ loading, error, data: { people } }) => {
 
-                            filteredOptions = people.filter(i => i.name.toLowerCase().includes(suggestion.toLowerCase() || i.surname.toLowerCase().includes(suggestion.toLowerCase())));
-                            console.log("OPITIONS", filteredOptions);
+                            filteredOptions = people.filter(i => i.name.toLowerCase().includes(suggestionDossier.toLowerCase() || i.surname.toLowerCase().includes(suggestionDossier.toLowerCase())));
 
-                            return <AutocompleteInput 
+                            return  <AutocompleteInput 
                                         filteredoptions={ filteredOptions }
                                         handleChange={ handleChange }
                                         selectListItem={ selectListItem }
-                                        suggestion={ suggestion }
+                                        suggestion={ suggestionDossier }
                                         />
 
                         }}

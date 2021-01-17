@@ -65,9 +65,7 @@ const Dashboard = () => {
                     e.color = 'green'
                   }
                 });
-
-                console.log("EVENT", events);
-
+                
                 return <LDCalendar 
                           eventslist={events} 
                           height={'90vh'}
