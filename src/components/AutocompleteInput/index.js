@@ -1,7 +1,7 @@
 import React from "react";
 import { Form, ListGroup, Row, Col } from 'react-bootstrap'
 
-const AutocompleteInput = ({ options, onSelectItem, filteredoptions, handleChange, selectListItem, suggestion }) => {
+const AutocompleteInput = ({ filteredoptions, handleChange, selectListItem, suggestion }) => {
     let filteredOptions = filteredoptions;
 
     return(
