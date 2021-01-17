@@ -57,11 +57,23 @@ const Dashboard = () => {
           <Col>
             <Query query={GET_EVENTS_QUERY} fetchPolicy={'cache'} pollInterval={1000}>
               {({ data: { events } }) => {
-                return <LDCalendar eventslist={events} 
-                                   height={'90vh'}
-                                   handleSelectSlot={handleSelectSlot}
-                                   handleSelectEvent={handleSelectEvent}
-                                   />;
+
+                events.map((e) => {
+                  if(e.type == 'appuntamento'){
+                    e.color = 'red'
+                  } else if(e.type == 'udienza'){
+                    e.color = 'green'
+                  }
+                });
+
+                console.log("EVENT", events);
+
+                return <LDCalendar 
+                          eventslist={events} 
+                          height={'90vh'}
+                          handleSelectSlot={handleSelectSlot}
+                          handleSelectEvent={handleSelectEvent}
+                          />;
               }}
             </Query>  
           </Col>

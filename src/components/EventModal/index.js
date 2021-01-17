@@ -6,13 +6,14 @@ import ALL_PHYSICAL_PERSON_PREVIEW_QUERY from "../../queries/customers/allphysic
 import axios from 'axios';
 import FormComponent from "../FormComponent";
 import * as FormModel from "../../config/forms";
+import { useAlert } from 'react-alert';
 
  
 //https://github.com/affinipay/react-bootstrap-autosuggest/blob/gh-pages/apidocs/Autosuggest.md
 const EventModal = ({ newEvent, setNewEvent, show, setShow }) => {
-    
-    //MODAL
+    const alert = useAlert();
 
+    //MODAL
     const handleClose = () => {
         setShow(false);
         setNewEvent({});

@@ -10,6 +10,16 @@ const LDCalendar = ({ eventslist, height, handleSelectSlot, handleSelectEvent })
     setEvents(eventslist);
   }, [eventslist]);
 
+  function eventStyleGetter (event, start, end, isSelected) {
+    var backgroundColor = event.color;
+    var style = {
+      backgroundColor: backgroundColor,
+    };
+    return {
+      style: style
+    };
+  }
+
   return (
     <>
       <Calendar
@@ -21,6 +31,7 @@ const LDCalendar = ({ eventslist, height, handleSelectSlot, handleSelectEvent })
         style={{ height: height }}
         onSelectEvent={event => handleSelectEvent(event)}
         onSelectSlot={handleSelectSlot}
+        eventPropGetter={(eventStyleGetter)}
       />
     </>
           
