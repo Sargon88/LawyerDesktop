@@ -38,15 +38,31 @@ const Dashboard = () => {
   const handleSelectEvent = (event) => {
     console.log("EVENT", event);
     
-    setNewEvent({
+    var newEvent = {
       id: event.id,
       event_start: event.start,
       event_end: event.end,
       event_description: event.description,
       event_allday: event.allDay,
       event_title: event.title,
-      event_type: event.type
-    });
+      event_type: event.type,
+      event_customer: null,
+      event_dossier: null
+    }
+
+    if(event.event_customer && event.event_customer.id){
+      newEvent.event_customer = event.event_customer;
+    } else {
+      newEvent.event_customer = null;
+    }
+
+    if(event.event_dossier && event.event_dossier.id){
+      newEvent.event_dossier = event.event_dossier;
+    } else {
+      newEvent.event_dossier = null;
+    }
+
+    setNewEvent(newEvent);
     setShow(true);
   }
   

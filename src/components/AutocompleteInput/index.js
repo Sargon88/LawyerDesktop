@@ -1,7 +1,7 @@
 import React from "react";
 import { Form, ListGroup, Row, Col } from 'react-bootstrap'
 
-const AutocompleteInput = ({ filteredoptions, handleChange, selectListItem, suggestion }) => {
+const AutocompleteInput = ({ filteredoptions, handleChange, selectListItem, suggestion, suggestionView }) => {
     let filteredOptions = filteredoptions;
 
     return(
@@ -17,7 +17,7 @@ const AutocompleteInput = ({ filteredoptions, handleChange, selectListItem, sugg
                         <ListGroup as="ul" variant="flush">
                             {
                                 filteredOptions.map((item, index) => {
-                                    return <ListGroup.Item as="li" action key={ item.id } onClick={ selectListItem } value={ index }>{item.surname + ' ' + item.name + ' - ' + item.code}</ListGroup.Item>
+                                    return <ListGroup.Item as="li" action key={ item.id } onClick={ selectListItem } value={ index }>{eval(suggestionView)}</ListGroup.Item>
                                 })
                             }
                         </ListGroup>
