@@ -10,12 +10,12 @@ const GET_EVENTS_QUERY = gql`
 			description:event_description
 			allDay:event_allday
 			type:event_type
-			customer: event_customer {
+			event_customer {
 				id
 				person_name
 				person_surname
 			}
-			dossier: event_dossier{
+			event_dossier {
 				id
 				dossier_name
 			}

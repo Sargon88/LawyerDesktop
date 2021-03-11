@@ -347,16 +347,6 @@ export const dossier = {
 }
 
 export const issue = {
-	"uid": "application::issue.issue",
-	"settings": {
-		"bulkable": true,
-		"filterable": true,
-		"searchable": true,
-		"pageSize": 10,
-		"mainField": "iss_name",
-		"defaultSortBy": "iss_name",
-		"defaultSortOrder": "ASC"
-	},
 	"metadatas": {
 		"id": {
 			"edit": {},
@@ -837,7 +827,8 @@ export const event = {
 				"placeholder": "",
 				"visible": true,
 				"editable": "{!customerModel['event_allday']}"
-			}		},
+			}		
+		},
 		"event_description": {
 			"edit": {
 				"label": "'Descrizione'",
@@ -920,7 +911,7 @@ export const event = {
 		},
 		"event_type": {
 			"type": "enumeration",
-			"enum": ["appuntamento", "scadenza"]
+			"enum": ["appuntamento", "scadenza", "udienza"]
 		},
 		"event_customer": {
 			"model": "person",

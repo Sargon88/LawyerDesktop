@@ -8,6 +8,19 @@ import ALL_PHYSICAL_PERSON_PREVIEW_QUERY from "../../queries/customers/allphysic
 //https://github.com/affinipay/react-bootstrap-autosuggest/blob/gh-pages/apidocs/Autosuggest.md
 const ReferentModal = ({ customerModel }) => {
 	const[selectedReferent, setSelectedReferent] =  useState(null);
+	const [suggestion, setSuggestion] = useState('');
+	let filteredOptions =[];
+
+    function handleChange(event){
+        setSuggestion(event.target.value);
+    }
+
+    function selectListItem(event){
+		console.log("SELECTED", event.target)
+		var item = filteredOptions[event.target.value]; 
+		console.log(item);
+        setSuggestion(item.name + " " + item.surname);
+    } 
 
 	return(
 		<>
@@ -17,9 +30,16 @@ const ReferentModal = ({ customerModel }) => {
 					<Form.Label>Scegli un referente</Form.Label>
 					<Query query={ALL_PHYSICAL_PERSON_PREVIEW_QUERY} >
 						{({ loading, error, data: { people } }) => {
+
+							filteredOptions = people.filter(i => i.name.toLowerCase().includes(suggestion.toLowerCase() || i.surname.toLowerCase().includes(suggestion.toLowerCase())));
+
 							return <AutocompleteInput 
 										options={ people }
 										onSelectItem={ setSelectedReferent }
+										filteredoptions={ filteredOptions }
+										handleChange={ handleChange }
+										selectListItem={ selectListItem }
+										suggestion={ suggestion }
 										/>
 							
 						}}

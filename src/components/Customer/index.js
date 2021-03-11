@@ -34,19 +34,6 @@ const CustomerComponent = ({ customerModel, errorModel, validateRules, customerI
 			{customerModel.person_type === 'giuridico' && customerModel.id ?
 				<>
 				<ReferentType customerModel={ customerModel } errorModel={ errorModel }/>
-				<Row>
-
-				{/*
-					customerModel.person_referents.map(element => {
-						return(
-							<Col xs="5" className="referentsArea dataArea">
-								<FormComponent entity={ FormModel.referent } customerModel={ element } errorModel={ errorModel } hiddenFields={[]} />	
-							</Col>
-						)
-					})
-					*/
-				}
-				</Row>
 				</>
 				:
 				<></>

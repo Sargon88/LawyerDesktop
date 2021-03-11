@@ -1,19 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import { Form, ListGroup, Row, Col } from 'react-bootstrap'
 
-const AutocompleteInput = ({ options, onSelectItem }) => {
-    const [suggestion, setSuggestion] = useState('');
-
-    let filteredOptions = options.filter(i => i.name.toLowerCase().includes(suggestion.toLowerCase() || i.surname.toLowerCase().includes(suggestion.toLowerCase())));
-
-    function handleChange(event){
-        setSuggestion(event.target.value);
-    }
-
-    function selectListItem(event){
-        var item = filteredOptions[event.target.value]; 
-        setSuggestion(item.name + " " + item.surname);
-    } 
+const AutocompleteInput = ({ filteredoptions, handleChange, selectListItem, suggestion, suggestionView }) => {
+    let filteredOptions = filteredoptions;
 
     return(
         <Row className="ld_autocompleterow">
@@ -28,7 +17,7 @@ const AutocompleteInput = ({ options, onSelectItem }) => {
                         <ListGroup as="ul" variant="flush">
                             {
                                 filteredOptions.map((item, index) => {
-                                    return <ListGroup.Item as="li" action key={ item.id } onClick={ selectListItem } value={ index }>{item.surname + ' ' + item.name + ' - ' + item.code}</ListGroup.Item>
+                                    return <ListGroup.Item as="li" action key={ item.id } onClick={ selectListItem } value={ index }>{eval(suggestionView)}</ListGroup.Item>
                                 })
                             }
                         </ListGroup>
